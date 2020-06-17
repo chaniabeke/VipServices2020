@@ -111,13 +111,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+    <ProjectReference Include="..\DataLayer\DataLibrary.csproj">
       <Project>{cda38241-0923-4d14-8ab3-3a31c3f25036}</Project>
-      <Name>DataLayer</Name>
+      <Name>DataLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DomainLayer\DomainLayer.csproj">
+    <ProjectReference Include="..\DomainLayer\DomainLibrary.csproj">
       <Project>{ce36d299-0719-4653-a337-b849008e1be1}</Project>
-      <Name>DomainLayer</Name>
+      <Name>DomainLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -49,24 +49,23 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+    <ProjectReference Include="..\DataLayer\DataLibrary.csproj">
       <Project>{cda38241-0923-4d14-8ab3-3a31c3f25036}</Project>
-      <Name>DataLayer</Name>
+      <Name>DataLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DomainLayer\DomainLayer.csproj">
+    <ProjectReference Include="..\DomainLayer\DomainLibrary.csproj">
       <Project>{ce36d299-0719-4653-a337-b849008e1be1}</Project>
-      <Name>DomainLayer</Name>
+      <Name>DomainLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WPFUILayer\WPFUILayer.csproj">
+    <ProjectReference Include="..\WPFUILayer\WpfAppUI.csproj">
       <Project>{67c322df-98ce-46a9-bcfb-b6188c2cea5d}</Project>
-      <Name>WPFUILayer</Name>
+      <Name>WpfAppUI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
