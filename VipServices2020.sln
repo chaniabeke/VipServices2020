@@ -3,25 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainLibrary", "DomainLayer\DomainLibrary.csproj", "{CE36D299-0719-4653-A337-B849008E1BE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VipServices2020.Domain", "VipServices2020.Domain\VipServices2020.Domain.csproj", "{9F61CA73-AD40-4045-8A93-57AF40E8DE63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLibrary", "DataLayer\DataLibrary.csproj", "{CDA38241-0923-4D14-8AB3-3A31C3F25036}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CE36D299-0719-4653-A337-B849008E1BE1} = {CE36D299-0719-4653-A337-B849008E1BE1}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VipServices2020.EF", "VipServices2020.EF\VipServices2020.EF.csproj", "{FFBD62F1-6FAD-4836-B1DA-88D5EE988378}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppUI", "WPFUILayer\WpfAppUI.csproj", "{67C322DF-98CE-46A9-BCFB-B6188C2CEA5D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CDA38241-0923-4D14-8AB3-3A31C3F25036} = {CDA38241-0923-4D14-8AB3-3A31C3F25036}
-		{CE36D299-0719-4653-A337-B849008E1BE1} = {CE36D299-0719-4653-A337-B849008E1BE1}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VipServices2020.WPF", "VipServices2020.WPF\VipServices2020.WPF.csproj", "{BBD6135C-FEF2-41BA-91D1-2FDE6FB8F231}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VipServices2020.Tests", "VipServices2020.Tests\VipServices2020.Tests.csproj", "{C86E413E-B9FC-4071-9289-1946C9F32665}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CDA38241-0923-4D14-8AB3-3A31C3F25036} = {CDA38241-0923-4D14-8AB3-3A31C3F25036}
-		{CE36D299-0719-4653-A337-B849008E1BE1} = {CE36D299-0719-4653-A337-B849008E1BE1}
-		{67C322DF-98CE-46A9-BCFB-B6188C2CEA5D} = {67C322DF-98CE-46A9-BCFB-B6188C2CEA5D}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VipServices2020.Tests", "VipServices2020.Tests\VipServices2020.Tests.csproj", "{AB592F6A-EAA7-4A1A-82D1-424E97DB006E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VipServices2020.ConsoleUI", "VipServices2020.ConsoleUI\VipServices2020.ConsoleUI.csproj", "{C34FEE5B-AC7D-4C8F-8EE4-FB46BB20A545}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,22 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CE36D299-0719-4653-A337-B849008E1BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE36D299-0719-4653-A337-B849008E1BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE36D299-0719-4653-A337-B849008E1BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE36D299-0719-4653-A337-B849008E1BE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDA38241-0923-4D14-8AB3-3A31C3F25036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDA38241-0923-4D14-8AB3-3A31C3F25036}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDA38241-0923-4D14-8AB3-3A31C3F25036}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDA38241-0923-4D14-8AB3-3A31C3F25036}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67C322DF-98CE-46A9-BCFB-B6188C2CEA5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67C322DF-98CE-46A9-BCFB-B6188C2CEA5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67C322DF-98CE-46A9-BCFB-B6188C2CEA5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67C322DF-98CE-46A9-BCFB-B6188C2CEA5D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C86E413E-B9FC-4071-9289-1946C9F32665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C86E413E-B9FC-4071-9289-1946C9F32665}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C86E413E-B9FC-4071-9289-1946C9F32665}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C86E413E-B9FC-4071-9289-1946C9F32665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F61CA73-AD40-4045-8A93-57AF40E8DE63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F61CA73-AD40-4045-8A93-57AF40E8DE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F61CA73-AD40-4045-8A93-57AF40E8DE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F61CA73-AD40-4045-8A93-57AF40E8DE63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFBD62F1-6FAD-4836-B1DA-88D5EE988378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFBD62F1-6FAD-4836-B1DA-88D5EE988378}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFBD62F1-6FAD-4836-B1DA-88D5EE988378}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFBD62F1-6FAD-4836-B1DA-88D5EE988378}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD6135C-FEF2-41BA-91D1-2FDE6FB8F231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD6135C-FEF2-41BA-91D1-2FDE6FB8F231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD6135C-FEF2-41BA-91D1-2FDE6FB8F231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD6135C-FEF2-41BA-91D1-2FDE6FB8F231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB592F6A-EAA7-4A1A-82D1-424E97DB006E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB592F6A-EAA7-4A1A-82D1-424E97DB006E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB592F6A-EAA7-4A1A-82D1-424E97DB006E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB592F6A-EAA7-4A1A-82D1-424E97DB006E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34FEE5B-AC7D-4C8F-8EE4-FB46BB20A545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34FEE5B-AC7D-4C8F-8EE4-FB46BB20A545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34FEE5B-AC7D-4C8F-8EE4-FB46BB20A545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34FEE5B-AC7D-4C8F-8EE4-FB46BB20A545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

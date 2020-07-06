@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFUILayer {
+namespace VipServices2020.WPF {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
