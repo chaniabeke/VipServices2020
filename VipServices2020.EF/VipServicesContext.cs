@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using VipServices2020.Domain.Model;
 
 namespace VipServices2020.EF {
     public class VipServicesContext : DbContext {
@@ -18,7 +19,7 @@ namespace VipServices2020.EF {
 
         private void SetConnectionString(string db = "Production") {
             var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("appsettings.json", optional: false);
+            builder.AddJsonFile("AppSettings.json", optional: false);
 
             var configuration = builder.Build();
             switch (db) {
@@ -31,8 +32,13 @@ namespace VipServices2020.EF {
             }
         }
 
-        //public DbSet<CyclingSession> CyclingSessions { get; set; }
-        //public DbSet<RunningSession> RunningSessions { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Customer>().OwnsOne(c => c.Category);
+            modelBuilder.Entity<Customer>().OwnsOne(c => c.Address);
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             if (_connectionString == null) {

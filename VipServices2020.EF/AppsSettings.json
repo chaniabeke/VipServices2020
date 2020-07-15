@@ -1,6 +1,0 @@
-{
-  "ConnectionStrings": {
-    "ProdSQLconnection": "Data Source=laptop-e1tfnmj3\\sqlexpress;Initial Catalog=trainingDB;Integrated Security=True",
-    "TestSQLconnection": "Data Source=laptop-e1tfnmj3\\sqlexpress;Initial Catalog=trainingDBtest;Integrated Security=True"
-  }
-}

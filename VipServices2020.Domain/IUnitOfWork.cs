@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VipServices2020.Domain.Repositories;
 
 namespace VipServices2020.Domain {
     public interface IUnitOfWork : IDisposable {
-        //ICyclingRepository CyclingTrainings { get; }
-        //IRunningRepository RunningTrainings { get; }
+        ICategoryRepository Categories { get; }
+        ICustomerRepository Customers { get; }
         int Complete();
     }
 }
