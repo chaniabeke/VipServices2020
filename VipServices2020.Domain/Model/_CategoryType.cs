@@ -1,5 +1,5 @@
-﻿namespace VipServices2020.Domain.Domain {
-    public enum CustomerCategoryType {
+﻿namespace VipServices2020.Domain.Model {
+    private enum _CategoryType {
         Particulier, 
         Organisatie, 
         Vip, 

@@ -1,4 +1,4 @@
-﻿namespace VipServices2020.Domain.Domain {
+﻿namespace VipServices2020.Domain.Model {
     public class Limousine {
         public int Id { get; set; }
         public string Name { get; set; }
