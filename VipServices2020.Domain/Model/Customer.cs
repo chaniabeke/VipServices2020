@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace VipServices2020.Domain.Model {
-    public class Customer { 
+namespace VipServices2020.Domain.Model
+{
+    public class Customer
+    {
 
         public int Id { get; set; }
         public string Name { get; set; }

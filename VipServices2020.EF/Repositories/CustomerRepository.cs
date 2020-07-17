@@ -7,14 +7,14 @@ using VipServices2020.Domain.Repositories;
 namespace VipServices2020.EF.Repositories {
     public class CustomerRepository : ICustomerRepository {
 
-        private VipServicesContext _context;
+        private VipServicesContext context;
 
         public CustomerRepository(VipServicesContext context) {
-            this._context = context;
+            this.context = context;
         }
 
         public void AddCustomer(Customer customer) {
-            _context.Customers.Add(customer);
+            context.Customers.Add(customer);
         }
     }
 }

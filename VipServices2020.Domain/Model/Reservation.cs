@@ -2,8 +2,10 @@
 using System;
 using System.Data.Common;
 
-namespace VipServices2020.Domain.Model {
-    public class Reservation {
+namespace VipServices2020.Domain.Model
+{
+    public class Reservation
+    {
         public Customer Customer { get; set; }
         public DateTime ReservationCreated { get; set; }
         public int Id { get; set; }

@@ -7,12 +7,12 @@ using VipServices2020.EF.Repositories;
 
 namespace VipServices2020.EF {
     public class UnitOfWork : IUnitOfWork {
-        VipServicesContext _context;
+        private VipServicesContext context;
 
         public UnitOfWork(VipServicesContext context) {
-            this._context = context;
-            Categories = new CategoryRepository(_context);
-            Customers = new CustomerRepository(_context);
+            this.context = context;
+            Categories = new CategoryRepository(this.context);
+            Customers = new CustomerRepository(this.context);
         }
 
         public ICategoryRepository Categories { get; private set; }
@@ -21,16 +21,18 @@ namespace VipServices2020.EF {
 
         public int Complete() {
             try {
-                return _context.SaveChanges();
+                return context.SaveChanges();
             } catch (Exception ex)
               //TODO : SqlExceptions
               {
+                Console.WriteLine(ex.InnerException.Message);
                 throw;
+              
             }
         }
 
         public void Dispose() {
-            _context.Dispose(); ;
+            context.Dispose(); ;
         }
     }
 }
