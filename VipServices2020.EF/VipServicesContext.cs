@@ -24,7 +24,7 @@ namespace VipServices2020.EF
         private void SetConnectionString(string db = "Production")
         {
             var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("AppSettings.json", optional: false);
+            builder.AddJsonFile("appsettings.json", optional: false);
 
             var configuration = builder.Build();
             switch (db)
@@ -40,11 +40,13 @@ namespace VipServices2020.EF
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>().OwnsOne(c => c.Category);
-            modelBuilder.Entity<Customer>().OwnsOne(c => c.Address);
+            modelBuilder.Entity<Customer>().HasOne(c => c.Category);
+            modelBuilder.Entity<Customer>().HasOne(c => c.Address);
+            modelBuilder.Entity<Customer>().HasKey(c => c.CustomerNumber);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

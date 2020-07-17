@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <StartupObject></StartupObject>
+    <StartupObject>VipServices2020.WPF.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

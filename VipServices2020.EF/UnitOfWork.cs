@@ -13,11 +13,14 @@ namespace VipServices2020.EF {
             this.context = context;
             Categories = new CategoryRepository(this.context);
             Customers = new CustomerRepository(this.context);
+            Addresses = new AddressRepository(this.context);
         }
 
         public ICategoryRepository Categories { get; private set; }
 
         public ICustomerRepository Customers { get; private set; }
+
+        public IAddressRepository Addresses { get; private set; }
 
         public int Complete() {
             try {
