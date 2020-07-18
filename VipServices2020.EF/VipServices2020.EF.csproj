@@ -10,6 +10,12 @@
     <Compile Remove="Migrations\20200715164620_initcreate.Designer.cs" />
     <Compile Remove="Migrations\20200717172233_ff.cs" />
     <Compile Remove="Migrations\20200717172233_ff.Designer.cs" />
+    <Compile Remove="Migrations\20200717172317_initcreate.cs" />
+    <Compile Remove="Migrations\20200717172317_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200717180139_address.cs" />
+    <Compile Remove="Migrations\20200717180139_address.Designer.cs" />
+    <Compile Remove="Migrations\20200718103104_limousnes.cs" />
+    <Compile Remove="Migrations\20200718103104_limousnes.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

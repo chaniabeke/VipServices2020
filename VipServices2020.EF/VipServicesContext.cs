@@ -41,6 +41,7 @@ namespace VipServices2020.EF
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Limousine> Limousines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

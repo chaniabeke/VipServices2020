@@ -27,5 +27,11 @@ namespace VipServices2020.Domain {
             uow.Addresses.AddAddress(new Address(streetName, streetNumber, town));
             uow.Complete();
         }
+        public void AddLimousines(string brand, string model, string color, int firstHourPrice, int nightLifePrice, int weddingPrice, int welnessPrice)
+        {
+            uow.Limousines.AddLimousine(new Limousine(brand, model, color, firstHourPrice, nightLifePrice, weddingPrice, welnessPrice));
+            uow.Complete();
+
+        }
     }
 }

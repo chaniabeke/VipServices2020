@@ -13,9 +13,9 @@ namespace VipServices2020.ConsoleUI
             Console.WriteLine("Initialiseer Databank");
             VipServicesManager vipServicesManger = new VipServicesManager(new UnitOfWork(new VipServicesContext("Production")));
             //CategoryRepository categoryRepository = new CategoryRepository(vipServicesContext);
-            VipServicesReader.InitializeCategories(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\categories.txt", vipServicesManger);
-            //VipServicesReader.InitializeCustomers(@"C: \Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt");
-            //VipServicesReader.InitializeLimousine(@"C: \Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt");
+            //VipServicesReader.InitializeCategories(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\categories.txt", vipServicesManger);
+            //VipServicesReader.InitializeCustomers(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt");
+            VipServicesReader.InitializeLimousine(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
             Console.WriteLine("Einde Databank");
         }
     }

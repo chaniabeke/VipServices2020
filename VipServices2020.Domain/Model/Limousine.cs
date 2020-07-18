@@ -10,5 +10,16 @@
         public int NightLifePrice { get; set; }
         public int WeddingPrice { get; set; }
         public int WelnessPrice { get; set; }
+
+        public Limousine(string brand, string model, string color, int firstHourPrice, int nightLifePrice, int weddingPrice, int welnessPrice)
+        {
+            Brand = brand;
+            Model = model;
+            Color = color;
+            FirstHourPrice = firstHourPrice;
+            NightLifePrice = nightLifePrice;
+            WeddingPrice = weddingPrice;
+            WelnessPrice = welnessPrice;
+        }
     }
 }

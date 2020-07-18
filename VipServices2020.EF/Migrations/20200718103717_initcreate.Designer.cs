@@ -10,7 +10,7 @@ using VipServices2020.EF;
 namespace VipServices2020.EF.Migrations
 {
     [DbContext(typeof(VipServicesContext))]
-    [Migration("20200717172317_initcreate")]
+    [Migration("20200718103717_initcreate")]
     partial class initcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace VipServices2020.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("VipServices2020.Domain.Model.Category", b =>
@@ -59,7 +59,7 @@ namespace VipServices2020.EF.Migrations
 
             modelBuilder.Entity("VipServices2020.Domain.Model.Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerNumber")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -76,13 +76,46 @@ namespace VipServices2020.EF.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CustomerNumber");
 
                     b.HasIndex("AddressId");
 
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("VipServices2020.Domain.Model.Limousine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FirstHourPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NightLifePrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeddingPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WelnessPrice")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Limousines");
                 });
 
             modelBuilder.Entity("VipServices2020.Domain.Model.Customer", b =>

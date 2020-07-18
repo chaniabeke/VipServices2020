@@ -83,6 +83,39 @@ namespace VipServices2020.EF.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("VipServices2020.Domain.Model.Limousine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FirstHourPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NightLifePrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeddingPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WelnessPrice")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Limousines");
+                });
+
             modelBuilder.Entity("VipServices2020.Domain.Model.Customer", b =>
                 {
                     b.HasOne("VipServices2020.Domain.Model.Address", "Address")
