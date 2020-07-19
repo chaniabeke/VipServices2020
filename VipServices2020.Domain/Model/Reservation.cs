@@ -6,12 +6,14 @@ namespace VipServices2020.Domain.Model
 {
     public class Reservation
     {
+        public int Id { get; set; }
         public Customer Customer { get; set; }
         public DateTime ReservationCreated { get; set; }
-        public int Id { get; set; }
+        public Address LimousineExpectedPlace { get; set; }
 
-        public LocationType StartLocation { get; set; }
-        public LocationType ArrivalLocation { get; set; }
+
+        public Location StartLocation { get; set; }
+        public Location ArrivalLocation { get; set; }
         public ArrangementType ArrangementType { get; set; }
         public DateTime ReservationDate { get; set; }
         public TimeSpan StartTime { get; set; }

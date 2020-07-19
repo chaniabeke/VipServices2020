@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="DomainLayer\Model\" />
-    <Folder Include="DomainLayer\Manager\" />
     <Folder Include="EFLayer\Reader\" />
   </ItemGroup>
 
