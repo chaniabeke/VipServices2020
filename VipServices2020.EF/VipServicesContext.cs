@@ -47,7 +47,6 @@ namespace VipServices2020.EF
         {
             modelBuilder.Entity<Customer>().HasOne(c => c.Category);
             modelBuilder.Entity<Customer>().HasOne(c => c.Address);
-            modelBuilder.Entity<Customer>().HasKey(c => c.CustomerNumber);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

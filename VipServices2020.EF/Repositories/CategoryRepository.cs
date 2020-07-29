@@ -16,5 +16,10 @@ namespace VipServices2020.EF.Repositories {
         public void AddCategory(Category category) {
             context.Categories.Add(category);
         }
+        public Category SelectCategory(string categoryName)
+        {
+            return context.Categories.Find(categoryName);
+        }
     }
 }
+//var justOneBook = unitOfWork.BookRepository.Entities  .First(n => n.ID == 1);

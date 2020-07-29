@@ -15,7 +15,10 @@ namespace VipServices2020.Domain {
             uow.Categories.AddCategory(new Category(categoryName));
             uow.Complete();
         }
-
+        public Category FindCategory(string categoryName)
+        {
+            return uow.Categories.SelectCategory(categoryName);
+        }
         public void AddCustomers(int customerNumber, string name, Category category, string BtwNumber, Address address)
         {
             uow.Customers.AddCustomer(new Customer(customerNumber, name, BtwNumber, address, category));

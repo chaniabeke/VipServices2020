@@ -12,9 +12,9 @@ namespace VipServices2020.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StreetName = table.Column<string>(nullable: true),
-                    StreetNumber = table.Column<string>(nullable: true),
-                    Town = table.Column<string>(nullable: true)
+                    StreetName = table.Column<string>(maxLength: 100, nullable: false),
+                    StreetNumber = table.Column<string>(maxLength: 5, nullable: false),
+                    Town = table.Column<string>(maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,7 +27,7 @@ namespace VipServices2020.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(nullable: true)
+                    CategoryName = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,9 +40,9 @@ namespace VipServices2020.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Brand = table.Column<string>(nullable: true),
-                    Model = table.Column<string>(nullable: true),
-                    Color = table.Column<string>(nullable: true),
+                    Brand = table.Column<string>(maxLength: 50, nullable: false),
+                    Model = table.Column<string>(maxLength: 50, nullable: false),
+                    Color = table.Column<string>(maxLength: 50, nullable: false),
                     FirstHourPrice = table.Column<int>(nullable: false),
                     NightLifePrice = table.Column<int>(nullable: false),
                     WeddingPrice = table.Column<int>(nullable: false),
@@ -57,12 +57,11 @@ namespace VipServices2020.EF.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    CustomerNumber = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    BtwNumber = table.Column<string>(nullable: true),
-                    AddressId = table.Column<int>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: true)
+                    CustomerNumber = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    BtwNumber = table.Column<string>(maxLength: 16, nullable: true),
+                    AddressId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,13 +71,13 @@ namespace VipServices2020.EF.Migrations
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Customers_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

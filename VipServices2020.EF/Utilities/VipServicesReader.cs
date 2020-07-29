@@ -22,20 +22,17 @@ namespace VipServices2020.EF.Utilities
                 {
                     string[] ss = line.Split(',').Select(x => x.Trim()).ToArray();
                     categoryName = ss[0];
-                    //Category category = new Category(categoryName);
-                    //categorySet.Add(category);
                     manager.AddCategory(categoryName);
                 }
             }
         }
         public static void InitializeCustomers(string path, VipServicesManager manager)
         {
-            HashSet<Customer> customerSet = new HashSet<Customer>();
             using (StreamReader r = new StreamReader(path))
             {
                 string line;
                 int customerNumber; string name; string categoryName;
-                string BtwNumber; string address;
+                string BtwNumber; string addressString;
                 string streetName; string streetNumber; string town;
                 while ((line = r.ReadLine()) != null)
                 {
@@ -44,20 +41,17 @@ namespace VipServices2020.EF.Utilities
                     name = ss[1];
 
                     categoryName = ss[2];
-                    //category zoeken en die toevoegen
-                    //Category category = Categories;
-
+                    //Category category = manager.FindCategory(categoryName);
+                    //duplicate categories select id based on name
                     BtwNumber = ss[3];
-                    address = ss[4];
-                    //address zoeken
-                    string[] aa = address.Split(' ').Select(x => x.Trim()).ToArray();
-                    streetName = aa[0];
-                    streetNumber = aa[1];
-                    town = aa[3];
+                    addressString = ss[4];
+                    string[] addresItems = addressString.Split(' ').Select(x => x.Trim()).ToArray();
+                    streetName = addresItems[0];
+                    streetNumber = addresItems[1];
+                    town = addresItems[3];
+                    Address address = new Address(streetName, streetNumber, town);
 
-                    //Category category = new Category(categoryName);
-                    //categorySet.Add(category);
-                    //manager.AddCategory(categoryName);
+                    manager.AddCustomers(customerNumber, name, new Category(categoryName), BtwNumber, address);
                 }
             }
         }
@@ -67,21 +61,27 @@ namespace VipServices2020.EF.Utilities
             using (StreamReader r = new StreamReader(path))
             {
                 string line;
-                string brand; string model; string color;
-                int firstHourPrice; int nightLifePrice; int weddingPrice; int welnessPrice;
                 while ((line = r.ReadLine()) != null)
                 {
+                    string brand; string model; string color;
+                    int firstHourPrice; int nightLifePrice = 0; int weddingPrice = 0; int welnessPrice = 0;
                     string[] ss = line.Split(';').Select(x => x.Trim()).ToArray();
                     brand = ss[0];
                     model = ss[1];
                     color = ss[2];
                     firstHourPrice = int.Parse(ss[3]);
-                    nightLifePrice = int.Parse(ss[4]);
-                    weddingPrice = int.Parse(ss[5]);
-                    welnessPrice = int.Parse(ss[6]);
+                    if(ss[4].Length != 0) {
+                        nightLifePrice = int.Parse(ss[4]);
+                    }
+                    if (ss[5].Length != 0)
+                    {
+                        weddingPrice = int.Parse(ss[5]);
+                    }
+                    if (ss[6].Length != 0)
+                    {
+                        welnessPrice = int.Parse(ss[6]);
+                    }
 
-                    //Limousine limousine = new Limousine(brand, model, color, firstHourPrice, nightLifePrice, weddingPrice, welnessPrice);
-                    //limousineSet.Add(limousine);
                     manager.AddLimousines(brand, model, color, firstHourPrice, nightLifePrice, weddingPrice, welnessPrice);
                 }
             }
