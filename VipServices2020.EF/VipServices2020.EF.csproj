@@ -24,6 +24,32 @@
     <Compile Remove="Migrations\20200729191050_d.Designer.cs" />
     <Compile Remove="Migrations\20200729191229_gfgv.cs" />
     <Compile Remove="Migrations\20200729191229_gfgv.Designer.cs" />
+    <Compile Remove="Migrations\20200729201930_initcreate.cs" />
+    <Compile Remove="Migrations\20200729201930_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200730134742_location.cs" />
+    <Compile Remove="Migrations\20200730134742_location.Designer.cs" />
+    <Compile Remove="Migrations\20200730155503_reservation.cs" />
+    <Compile Remove="Migrations\20200730155503_reservation.Designer.cs" />
+    <Compile Remove="Migrations\20200730155926_resrvation.cs" />
+    <Compile Remove="Migrations\20200730155926_resrvation.Designer.cs" />
+    <Compile Remove="Migrations\20200730160847_reservation.cs" />
+    <Compile Remove="Migrations\20200730160847_reservation.Designer.cs" />
+    <Compile Remove="Migrations\20200730181232_reservation.cs" />
+    <Compile Remove="Migrations\20200730181232_reservation.Designer.cs" />
+    <Compile Remove="Migrations\20200730182209_reservation.cs" />
+    <Compile Remove="Migrations\20200730182209_reservation.Designer.cs" />
+    <Compile Remove="Migrations\20200730182805_initcreate.cs" />
+    <Compile Remove="Migrations\20200730182805_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200730183838_initcreate.cs" />
+    <Compile Remove="Migrations\20200730183838_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200730184125_initcreate.cs" />
+    <Compile Remove="Migrations\20200730184125_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200730184542_id.cs" />
+    <Compile Remove="Migrations\20200730184542_id.Designer.cs" />
+    <Compile Remove="Migrations\20200730184732_initcreate.cs" />
+    <Compile Remove="Migrations\20200730184732_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200730192234_initcreate.cs" />
+    <Compile Remove="Migrations\20200730192234_initcreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

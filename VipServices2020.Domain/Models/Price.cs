@@ -13,7 +13,7 @@ namespace VipServices2020.Domain.Model {
         public int FixedPrice { get; set; } = 0;
         [Required]
         public decimal SubTotal { get; set; }
-        public StaffelDiscount StaffelDiscount { get; set; }
+        //public StaffelDiscount StaffelDiscount { get; set; }
         [Required]
         public decimal ExclusiveBtw { get; set; }
         [NotMapped]

@@ -21,10 +21,10 @@ namespace VipServices2020.EF.Repositories
         {
             context.Customers.Add(customer);
         }
-
+        
         public IEnumerable<Customer> FindAllCustomers()
         {
-            return context.Customers.OrderBy(c => c.CustomerNumber).AsEnumerable<Customer>();
+            return context.Customers.OrderBy(c => c.Name).AsEnumerable<Customer>();
         }
     }
 }

@@ -43,6 +43,8 @@ namespace VipServices2020.EF
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Limousine> Limousines { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Price> Prices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

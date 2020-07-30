@@ -64,7 +64,7 @@ namespace VipServices2020.EF.Utilities
                     town = addresItems[3];
                     Address address = new Address(streetName, streetNumber, town);
 
-                    manager.AddCustomers(customerNumber, name, new Category(categoryName), BtwNumber, address);
+                    manager.AddCustomer(customerNumber, name, new Category(categoryName), BtwNumber, address);
                 }
             }
         }
@@ -95,7 +95,7 @@ namespace VipServices2020.EF.Utilities
                         welnessPrice = int.Parse(ss[6]);
                     }
 
-                    manager.AddLimousines(brand, model, color, firstHourPrice, nightLifePrice, weddingPrice, welnessPrice);
+                    manager.AddLimousine(brand, model, color, firstHourPrice, nightLifePrice, weddingPrice, welnessPrice);
                 }
             }
         }

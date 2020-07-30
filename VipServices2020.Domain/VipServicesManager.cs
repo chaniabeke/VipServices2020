@@ -25,7 +25,7 @@ namespace VipServices2020.Domain {
             uow.Locations.AddLocation(new Location(locationName));
             uow.Complete();
         }
-        public void AddCustomers(int customerNumber, string name, Category category, string BtwNumber, Address address)
+        public void AddCustomer(int customerNumber, string name, Category category, string BtwNumber, Address address)
         {
             uow.Customers.AddCustomer(new Customer(customerNumber, name, BtwNumber, address, category));
             uow.Complete();
@@ -34,16 +34,23 @@ namespace VipServices2020.Domain {
         {
             return uow.Customers.FindAllCustomers().ToList();
         }
-        public void AddAddresses(string streetName, string streetNumber, string town)
+        public void AddAddress(string streetName, string streetNumber, string town)
         {
             uow.Addresses.AddAddress(new Address(streetName, streetNumber, town));
             uow.Complete();
         }
-        public void AddLimousines(string brand, string model, string color, int firstHourPrice, int nightLifePrice, int weddingPrice, int welnessPrice)
+        public void AddLimousine(string brand, string model, string color, int firstHourPrice, int nightLifePrice, int weddingPrice, int welnessPrice)
         {
             uow.Limousines.AddLimousine(new Limousine(brand, model, color, firstHourPrice, nightLifePrice, weddingPrice, welnessPrice));
             uow.Complete();
-
+        }
+        public void AddWeddingReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
+            DateTime reservationDate, TimeSpan startTime, TimeSpan endTime, Limousine limousine)
+        {
+            Price price = new Price();
+            uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
+                ArrangementType.Wedding, reservationDate, startTime, endTime, limousine, price));
+            uow.Complete();
         }
     }
 }

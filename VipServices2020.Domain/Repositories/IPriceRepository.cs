@@ -5,8 +5,8 @@ using VipServices2020.Domain.Model;
 
 namespace VipServices2020.Domain.Repositories
 {
-    public interface IReservationRepository
+    public interface IPriceRepository
     {
-        void AddReservation(Reservation reservation);
+        void AddPrice(Price price);
     }
 }
