@@ -9,6 +9,7 @@ namespace VipServices2020.Domain {
         ICustomerRepository Customers { get; }
         IAddressRepository Addresses { get; }
         ILimousineRepository Limousines { get; }
+        ILocationRepository Locations { get; }
         int Complete();
     }
 }

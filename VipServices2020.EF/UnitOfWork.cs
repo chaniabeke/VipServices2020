@@ -15,6 +15,7 @@ namespace VipServices2020.EF {
             Customers = new CustomerRepository(this.context);
             Addresses = new AddressRepository(this.context);
             Limousines = new LimousineRepository(this.context);
+            Locations = new LocationRepository(this.context);
         }
 
         public ICategoryRepository Categories { get; private set; }
@@ -23,6 +24,7 @@ namespace VipServices2020.EF {
 
         public IAddressRepository Addresses { get; private set; }
         public ILimousineRepository Limousines { get; private set; }
+        public ILocationRepository Locations { get; private set; }
 
         public int Complete() {
             try {

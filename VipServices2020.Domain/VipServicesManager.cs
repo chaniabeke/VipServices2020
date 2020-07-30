@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using VipServices2020.Domain.Model;
 
@@ -15,16 +16,24 @@ namespace VipServices2020.Domain {
             uow.Categories.AddCategory(new Category(categoryName));
             uow.Complete();
         }
-        public Category FindCategory(string categoryName)
+        //public Category FindCategory(string categoryName)
+        //{
+        //    return uow.Categories.SelectCategory(categoryName);
+        //}
+        public void AddLocation(string locationName)
         {
-            return uow.Categories.SelectCategory(categoryName);
+            uow.Locations.AddLocation(new Location(locationName));
+            uow.Complete();
         }
         public void AddCustomers(int customerNumber, string name, Category category, string BtwNumber, Address address)
         {
             uow.Customers.AddCustomer(new Customer(customerNumber, name, BtwNumber, address, category));
             uow.Complete();
         }
-
+        public List<Customer> GetAllCustomers()
+        {
+            return uow.Customers.FindAllCustomers().ToList();
+        }
         public void AddAddresses(string streetName, string streetNumber, string town)
         {
             uow.Addresses.AddAddress(new Address(streetName, streetNumber, town));

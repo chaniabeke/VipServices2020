@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VipServices2020.Domain;
 using VipServices2020.EF;
 using VipServices2020.EF.Repositories;
@@ -12,10 +13,11 @@ namespace VipServices2020.ConsoleUI
         {
             Console.WriteLine("Initialiseer Databank");
             VipServicesManager vipServicesManger = new VipServicesManager(new UnitOfWork(new VipServicesContext("Production")));
-   
+
             //VipServicesReader.InitializeCategories(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\categories.txt", vipServicesManger);
+            //VipServicesReader.InitializeLocations(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\locaties.txt", vipServicesManger);
             //VipServicesReader.InitializeCustomers(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt", vipServicesManger);
-            VipServicesReader.InitializeLimousine(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
+            //VipServicesReader.InitializeLimousine(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
             Console.WriteLine("Einde Databank");
         }
     }

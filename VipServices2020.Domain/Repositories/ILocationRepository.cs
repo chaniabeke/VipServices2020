@@ -5,9 +5,8 @@ using VipServices2020.Domain.Model;
 
 namespace VipServices2020.Domain.Repositories
 {
-    public interface ICustomerRepository
+    public interface ILocationRepository
     {
-        void AddCustomer(Customer customer);
-        IEnumerable<Customer> FindAllCustomers();
+        void AddLocation(Location location);
     }
 }

@@ -10,6 +10,7 @@ namespace VipServices2020.Domain.Model
         [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(30, MinimumLength = 3)]
         public string Town { get; set; }
 
         public Location(string town)

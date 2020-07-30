@@ -13,7 +13,6 @@ namespace VipServices2020.EF.Utilities
     {
         public static void InitializeCategories(string path, VipServicesManager manager)
         {
-            //HashSet<Category> categorySet = new HashSet<Category>();
             using (StreamReader r = new StreamReader(path))
             {
                 string line;
@@ -23,6 +22,20 @@ namespace VipServices2020.EF.Utilities
                     string[] ss = line.Split(',').Select(x => x.Trim()).ToArray();
                     categoryName = ss[0];
                     manager.AddCategory(categoryName);
+                }
+            }
+        }
+        public static void InitializeLocations(string path, VipServicesManager manager)
+        {
+            using (StreamReader r = new StreamReader(path))
+            {
+                string line;
+                string locationName;
+                while ((line = r.ReadLine()) != null)
+                {
+                    string[] ss = line.Split(',').Select(x => x.Trim()).ToArray();
+                    locationName = ss[0];
+                    manager.AddLocation(locationName);
                 }
             }
         }
