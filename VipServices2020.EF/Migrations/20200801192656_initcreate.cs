@@ -80,7 +80,7 @@ namespace VipServices2020.EF.Migrations
                     FixedPrice = table.Column<int>(nullable: false),
                     SubTotal = table.Column<decimal>(nullable: false),
                     ExclusiveBtw = table.Column<decimal>(nullable: false),
-                    InclusiveBtw = table.Column<decimal>(nullable: false),
+                    BtwPrice = table.Column<decimal>(nullable: false),
                     Total = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -92,7 +92,8 @@ namespace VipServices2020.EF.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    CustomerNumber = table.Column<int>(nullable: false),
+                    CustomerNumber = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     BtwNumber = table.Column<string>(maxLength: 16, nullable: true),
                     AddressId = table.Column<int>(nullable: false),
@@ -127,9 +128,9 @@ namespace VipServices2020.EF.Migrations
                     StartLocationId = table.Column<int>(nullable: true),
                     ArrivalLocationId = table.Column<int>(nullable: true),
                     ArrangementType = table.Column<int>(nullable: false),
-                    ReservationDate = table.Column<DateTime>(nullable: false),
-                    StartTime = table.Column<TimeSpan>(nullable: false),
-                    EndTime = table.Column<TimeSpan>(nullable: false),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    TotalHours = table.Column<TimeSpan>(nullable: false),
                     LimousineId = table.Column<int>(nullable: true),
                     PriceId = table.Column<int>(nullable: true)
                 },

@@ -9,7 +9,6 @@ namespace VipServices2020.Domain.Model
     public class Customer
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CustomerNumber { get; set; }
         [Required]
         [StringLength(50, MinimumLength = 1)]
@@ -22,16 +21,14 @@ namespace VipServices2020.Domain.Model
         [Required]
         public Category Category { get; set; }
 
-        public Customer(int customerNumber, string name, string btwNumber)
+        public Customer(string name, string btwNumber)
         {
-            CustomerNumber = customerNumber;
             Name = name;
             BtwNumber = btwNumber;
         }
 
-        public Customer(int customerNumber, string name, string btwNumber, Address address, Category category)
+        public Customer(string name, string btwNumber, Address address, Category category)
         {
-            CustomerNumber = customerNumber;
             Name = name;
             BtwNumber = btwNumber;
             Address = address;

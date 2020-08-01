@@ -66,7 +66,9 @@ namespace VipServices2020.EF.Migrations
             modelBuilder.Entity("VipServices2020.Domain.Model.Customer", b =>
                 {
                     b.Property<int>("CustomerNumber")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
@@ -155,6 +157,9 @@ namespace VipServices2020.EF.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<decimal>("BtwPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal>("ExclusiveBtw")
                         .HasColumnType("decimal(18,2)");
 
@@ -163,9 +168,6 @@ namespace VipServices2020.EF.Migrations
 
                     b.Property<int>("FixedPrice")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("InclusiveBtw")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("NightHourPrice")
                         .HasColumnType("int");
@@ -203,8 +205,8 @@ namespace VipServices2020.EF.Migrations
                     b.Property<int?>("CustomerNumber")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("EndTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("LimousineExpectedAddressId")
                         .HasColumnType("int");
@@ -218,13 +220,13 @@ namespace VipServices2020.EF.Migrations
                     b.Property<DateTime>("ReservationCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ReservationDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("StartLocationId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("StartTime")
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("TotalHours")
                         .HasColumnType("time");
 
                     b.HasKey("Id");

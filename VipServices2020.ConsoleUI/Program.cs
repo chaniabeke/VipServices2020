@@ -22,10 +22,10 @@ namespace VipServices2020.ConsoleUI
 
             //Address address = new Address("Bldfostreet", "5g", "fdv");
             //Category category = new Category("category");
-            //Customer customer = new Customer(5, "Han", "", address, category);
+            //Customer customer = new Customer("Dan", "", address, category);
             //Location location = new Location("gent");
             //Limousine limousine = new Limousine("bluu", "df", "sddd", 555, 555, 45, 0);
-            //vipServicesManger.AddWeddingReservation(customer, address, location, location, new DateTime(2019, 05, 22), new TimeSpan(05, 00, 00), new TimeSpan(06, 00, 00), limousine);
+            //vipServicesManger.AddWelnessReservation(customer, address, location, location, new DateTime(2020, 09, 22, 10, 0, 0), new DateTime(2020, 09, 22, 20, 0, 0), limousine);
             Console.WriteLine("Einde Databank");
         }
     }

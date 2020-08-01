@@ -19,7 +19,7 @@ namespace VipServices2020.Domain.Model {
         [NotMapped]
         public readonly int Btw = 6;
         [Required]
-        public decimal InclusiveBtw { get; set; }
+        public decimal BtwPrice { get; set; }
         [Required]
         public decimal Total { get; set; }
     }

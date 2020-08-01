@@ -25,13 +25,13 @@ namespace VipServices2020.Domain.Model
         public ArrangementType ArrangementType { get; set; }
 
         [Required]
-        public DateTime ReservationDate { get; set; }
+        public DateTime StartTime { get; set; }
 
         [Required]
-        public TimeSpan StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         [Required]
-        public TimeSpan EndTime { get; set; }
+        public TimeSpan TotalHours { get; set; }
 
         public Limousine Limousine { get; set; }
 
@@ -39,7 +39,7 @@ namespace VipServices2020.Domain.Model
 
 
         public Reservation(Customer customer, DateTime reservationCreated, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
-            ArrangementType arrangementType, DateTime reservationDate, TimeSpan startTime, TimeSpan endTime, Limousine limousine, Price price)
+            ArrangementType arrangementType, DateTime startTime, DateTime endTime, TimeSpan totalHours, Limousine limousine, Price price)
         {
             Customer = customer;
             ReservationCreated = reservationCreated;
@@ -47,21 +47,18 @@ namespace VipServices2020.Domain.Model
             StartLocation = startLocation;
             ArrivalLocation = arrivalLocation;
             ArrangementType = arrangementType;
-            ReservationDate = reservationDate;
             StartTime = startTime;
             EndTime = endTime;
+            TotalHours = totalHours;
             Limousine = limousine;
             Price = price;
         }
-        public Reservation(DateTime reservationCreated, DateTime reservationDate, TimeSpan startTime, TimeSpan endTime)
+        public Reservation(DateTime reservationCreated, DateTime startTime, DateTime endTime, TimeSpan totalHours)
         {
             ReservationCreated = reservationCreated;
-            ReservationDate = reservationDate;
             StartTime = startTime;
             EndTime = endTime;
+            TotalHours = totalHours;
         }
     }
 }
-//price vSTE PRIJS EN EEN TEBEREKEN PRIJS
-// add method different weddingreservation, nightlifereservation,...
-//istaffeldiscount, empty, vip, planner

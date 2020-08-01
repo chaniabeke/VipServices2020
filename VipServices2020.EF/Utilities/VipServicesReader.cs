@@ -50,7 +50,7 @@ namespace VipServices2020.EF.Utilities
                 while ((line = r.ReadLine()) != null)
                 {
                     string[] ss = line.Split(',').Select(x => x.Trim()).ToArray();
-                    customerNumber = int.Parse(ss[0]);
+                    //customerNumber = int.Parse(ss[0]);
                     name = ss[1];
 
                     categoryName = ss[2];
@@ -64,13 +64,12 @@ namespace VipServices2020.EF.Utilities
                     town = addresItems[3];
                     Address address = new Address(streetName, streetNumber, town);
 
-                    manager.AddCustomer(customerNumber, name, new Category(categoryName), BtwNumber, address);
+                    manager.AddCustomer(name, new Category(categoryName), BtwNumber, address);
                 }
             }
         }
         public static void InitializeLimousine(string path, VipServicesManager manager)
         {
-            //HashSet<Limousine> limousineSet = new HashSet<Limousine>();
             using (StreamReader r = new StreamReader(path))
             {
                 string line;

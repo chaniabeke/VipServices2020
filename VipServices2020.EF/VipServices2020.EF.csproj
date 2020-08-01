@@ -50,6 +50,10 @@
     <Compile Remove="Migrations\20200730184732_initcreate.Designer.cs" />
     <Compile Remove="Migrations\20200730192234_initcreate.cs" />
     <Compile Remove="Migrations\20200730192234_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200730192446_initcreate.cs" />
+    <Compile Remove="Migrations\20200730192446_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200801192351_reservationdate.cs" />
+    <Compile Remove="Migrations\20200801192351_reservationdate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
