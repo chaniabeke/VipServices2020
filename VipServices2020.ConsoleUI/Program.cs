@@ -20,12 +20,12 @@ namespace VipServices2020.ConsoleUI
             //VipServicesReader.InitializeCustomers(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt", vipServicesManger);
             //VipServicesReader.InitializeLimousine(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
 
-            //Address address = new Address("Bldfostreet", "5g", "fdv");
-            //Category category = new Category("category");
-            //Customer customer = new Customer("Dan", "", address, category);
-            //Location location = new Location("gent");
-            //Limousine limousine = new Limousine("bluu", "df", "sddd", 555, 555, 45, 0);
-            //vipServicesManger.AddWelnessReservation(customer, address, location, location, new DateTime(2020, 09, 22, 10, 0, 0), new DateTime(2020, 09, 22, 20, 0, 0), limousine);
+            Address address = new Address("Bldfostreet", "5g", "fdv");
+            Category category = new Category("category");
+            Customer customer = new Customer("Dan", "", address, category);
+            Location location = new Location("gent");
+            Limousine limousine = new Limousine("bluu", "df", "sddd", 300, 1500, 1400, 1350);
+            vipServicesManger.AddWeddingReservation(customer, address, location, location, new DateTime(2020, 09, 22, 10, 0, 0), new DateTime(2020, 09, 22, 20, 0, 0), limousine);
             Console.WriteLine("Einde Databank");
         }
     }

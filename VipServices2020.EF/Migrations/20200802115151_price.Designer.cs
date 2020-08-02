@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VipServices2020.EF;
 
 namespace VipServices2020.EF.Migrations
 {
     [DbContext(typeof(VipServicesContext))]
-    partial class VipServicesContextModelSnapshot : ModelSnapshot
+    [Migration("20200802115151_price")]
+    partial class price
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,14 +180,14 @@ namespace VipServices2020.EF.Migrations
                     b.Property<int>("OvertimeCount")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("OvertimePrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("OvertimePrice")
+                        .HasColumnType("int");
 
                     b.Property<int>("SecondHourCount")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("SecondHourPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("SecondHourPrice")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(18,2)");

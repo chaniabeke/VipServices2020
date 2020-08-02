@@ -61,7 +61,7 @@ namespace VipServices2020.Domain
             if (startTime < DateTime.Now) throw new DomainException("Een reservatie mag niet in het verleden zijn.");
             if (startTime.Hour< 7) if (startTime.Hour > 12) throw new DomainException("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
             TimeSpan totalHours = endTime - startTime;
-            if (totalHours.Hours != 10) throw new DomainException("Een Welnessreservatie moet altijd 10 uur zijn.");
+            if (totalHours.Hours != 10) throw new DomainException("Een Welness reservatie moet altijd 10 uur zijn.");
 
             //Pricecalculator
             Price price = new Price();
@@ -84,6 +84,7 @@ namespace VipServices2020.Domain
             if (startTime.Hour < 20) if (startTime.Hour > 24) throw new DomainException("Een NightLife reservatie moet starten tussen 20u00 en 24u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
+            if (totalHours.Hours < 7) throw new DomainException("Een NigtLife reservatie moet minstens 7uur zijn.");
 
             //Pricecalculator
             Price price = new Price();
@@ -106,9 +107,10 @@ namespace VipServices2020.Domain
             if (startTime.Hour < 7) if (startTime.Hour > 15) throw new DomainException("Een Wedding reservatie moet starten tussen 07u00 en 15u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
+            if (totalHours.Hours < 7) throw new DomainException("Een Wedding reservatie moet minstens 7uur zijn.");
 
             //Pricecalculator
-            Price price = new Price();
+            Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime);
 
             uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price));

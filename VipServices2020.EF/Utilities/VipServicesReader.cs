@@ -44,7 +44,7 @@ namespace VipServices2020.EF.Utilities
             using (StreamReader r = new StreamReader(path))
             {
                 string line;
-                int customerNumber; string name; string categoryName;
+                 string name; string categoryName;
                 string BtwNumber; string addressString;
                 string streetName; string streetNumber; string town;
                 while ((line = r.ReadLine()) != null)
