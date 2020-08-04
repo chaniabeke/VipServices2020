@@ -49,7 +49,10 @@ namespace VipServices2020.Domain
             uow.Limousines.AddLimousine(new Limousine(brand, model, color, firstHourPrice, nightLifePrice, weddingPrice, welnessPrice));
             uow.Complete();
         }
-
+        public List<Reservation> GetAllReservations()
+        {
+            return uow.Reservations.FindAll().ToList();
+        }
         public void AddWelnessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine)
         {
@@ -64,7 +67,7 @@ namespace VipServices2020.Domain
             if (totalHours.Hours != 10) throw new DomainException("Een Welness reservatie moet altijd 10 uur zijn.");
 
             //Pricecalculator
-            Price price = new Price();
+            Price price = PriceCalculator.WelnessCalculator(limousine, totalHours, startTime, endTime);
 
             uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Wellness, startTime, endTime, totalHours, limousine, price));
@@ -81,13 +84,13 @@ namespace VipServices2020.Domain
             //voor NightLife is dat met een start vanaf 20u00 tot en met middernacht(24u00 ofte 00u00).
             //NightLife arrangementen kunnen ook geboekt worden met overuren met een maximum van 4 overuren
             if (startTime < DateTime.Now) throw new DomainException("Een reservatie mag niet in het verleden zijn.");
-            if (startTime.Hour < 20) if (startTime.Hour > 24) throw new DomainException("Een NightLife reservatie moet starten tussen 20u00 en 24u00.");
+            if (startTime.Hour < 20) throw new DomainException("Een NightLife reservatie moet starten tussen 20u00 en 24u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
             if (totalHours.Hours < 7) throw new DomainException("Een NigtLife reservatie moet minstens 7uur zijn.");
 
             //Pricecalculator
-            Price price = new Price();
+            Price price = PriceCalculator.NightLifeCalculator(limousine, totalHours, startTime, endTime);
 
             uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.NightLife, startTime, endTime, totalHours, limousine, price));
@@ -130,7 +133,7 @@ namespace VipServices2020.Domain
             if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
 
             //Pricecalculator
-            Price price = new Price();
+            Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime);
 
             uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Airport, startTime, endTime, totalHours, limousine, price));
@@ -150,7 +153,7 @@ namespace VipServices2020.Domain
             //if (totalHours.Minutes > 0) if (totalHours.Seconds > 0) if (totalHours.Milliseconds > 0) throw new DomainException("Een reservatie moet altijd exact op het uur beginnen.");
 
             //Pricecalculator
-            Price price = new Price();
+            Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime);
 
             uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Business, startTime, endTime, totalHours, limousine, price));

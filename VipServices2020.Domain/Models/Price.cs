@@ -10,7 +10,7 @@ namespace VipServices2020.Domain.Model {
         public int SecondHourCount { get; set; } = 0;
         public decimal SecondHourPrice { get; set; } = 0;
         public int NightHourCount { get; set; } = 0;
-        public int NightHourPrice { get; set; } = 0;
+        public decimal NightHourPrice { get; set; } = 0;
         public int OvertimeCount { get; set; } = 0;
         public decimal OvertimePrice { get; set; } = 0;
         public int FixedPrice { get; set; } = 0;

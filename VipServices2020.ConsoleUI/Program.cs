@@ -24,8 +24,8 @@ namespace VipServices2020.ConsoleUI
             Category category = new Category("category");
             Customer customer = new Customer("Dan", "", address, category);
             Location location = new Location("gent");
-            Limousine limousine = new Limousine("bluu", "df", "sddd", 300, 1500, 1400, 1350);
-            vipServicesManger.AddWeddingReservation(customer, address, location, location, new DateTime(2020, 09, 22, 10, 0, 0), new DateTime(2020, 09, 22, 20, 0, 0), limousine);
+            Limousine limousine = new Limousine("bluu", "df", "sddd", 198, 547, 1477, 1351);
+            vipServicesManger.AddNightLifeReservation(customer, address, location, location, new DateTime(2020, 09, 22, 03, 0, 0), new DateTime(2020, 09, 22, 10, 0, 0), limousine);
             Console.WriteLine("Einde Databank");
         }
     }

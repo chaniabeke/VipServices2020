@@ -14,8 +14,11 @@ namespace VipServices2020.Domain
             price.FirstHourPrice = limousine.FirstHourPrice;
 
             //tweede uurprijs 65% van de eerste-uur prijs, afgerond naar een veelvoud van € 5
-            //nachtuur wordt gerekend aan 140% van de eerste-uur prijs, afgerond naar een veelvoud van € 5 (22u - 7u)
+            price.SecondHourCount = totalHours.Hours - 1;
+            price.SecondHourPrice = Math.Round(((decimal)(65.0 / 100.0) * ((decimal)price.SecondHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+            //nachtuur wordt gerekend aan 140% van de eerste-uur prijs, afgerond naar een veelvoud van € 5 (22u - 7u)??
             //bereken subtotaal 
+            price.SubTotal = price.FirstHourPrice + price.SecondHourPrice + price.SecondHourPrice + price.NightHourPrice;
             return price;
 
         }
@@ -31,11 +34,10 @@ namespace VipServices2020.Domain
                 price.FirstHourPrice = limousine.FirstHourPrice;
                 overtimeHours--;
                 if (overtimeHours > 1)
-                { //afrond 5
-                    price.OvertimePrice = (decimal)(65.0 / 100.0) * ((decimal)overtimeHours * (decimal)limousine.FirstHourPrice);
-                    //number = (percentage / 100) * totalNumber;
+                { 
+                    price.OvertimePrice = Math.Round(((decimal)(65.0 / 100.0) * ((decimal)overtimeHours * (decimal)limousine.FirstHourPrice))/5)*5;
                 }
-                //if nachtuur
+                //if nachtuur??
             }
             price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.OvertimePrice;
             return price;
@@ -52,9 +54,22 @@ namespace VipServices2020.Domain
         {
             Price price = new Price();
             //overuur =  nachtuur , wordt gerekend aan 140% van de eerste-uur prijs, afgerond naar een veelvoud van € 5 (na 7 u huren)
+            price.FixedPrice = limousine.NightLifePrice;
+            int overtimeHours = totalHours.Hours - 7;
+            if (overtimeHours > 0)
+            {
+                price.NightHourCount = overtimeHours;
+                price.FirstHourPrice = limousine.FirstHourPrice;
+                overtimeHours--;
+                if (overtimeHours > 1)
+                {
+                    price.NightHourPrice = Math.Round(((decimal)(140.0 / 100.0) * ((decimal)overtimeHours * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+                }
+            }
+            price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.OvertimePrice;
             return price;
         }
-        public static Price TotalPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime)
+        private static Price TotalPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime)
         {
             Price price = new Price();
             //price.SubTotal, price.ExclusiveBtw;

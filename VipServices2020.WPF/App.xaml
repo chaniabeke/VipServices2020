@@ -1,9 +1,25 @@
 ﻿<Application x:Class="VipServices2020.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:VipServices2020.WPF"
-             StartupUri="MainWindow.xaml">
+             xmlns:viewmodels="clr-namespace:VipServices2020.WPF.ViewModels"
+             xmlns:views="clr-namespace:VipServices2020.WPF.Views"
+             xmlns:local="clr-namespace:VipServices2020.WPF">
     <Application.Resources>
-         
+
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewmodels:SearchReservationViewModel}">
+                <views:SearchReservationView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddReservationViewModel}">
+                <views:AddReservationView/>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
