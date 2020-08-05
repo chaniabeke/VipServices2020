@@ -25,5 +25,9 @@ namespace VipServices2020.Domain.Model
             StreetNumber = streetNumber;
             Town = town;
         }
+        public override string ToString()
+        {
+            return $"{StreetName} {StreetNumber} {Town}";
+        }
     }
 }

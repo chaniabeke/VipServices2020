@@ -24,5 +24,15 @@ namespace VipServices2020.WPF
         {
             InitializeComponent();
         }
+
+        private void SearchReservationScreen_Click(object sender, RoutedEventArgs e)
+        {
+            changingWindow.Source = new Uri("Pages/SearchReservation.xaml", UriKind.Relative);
+        }
+
+        private void AddReservationScreen_Click(object sender, RoutedEventArgs e)
+        {
+            changingWindow.Source = new Uri("Pages/AddReservation.xaml", UriKind.Relative);
+        }
     }
 }

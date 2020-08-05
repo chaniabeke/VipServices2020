@@ -8,5 +8,6 @@ namespace VipServices2020.Domain.Repositories
     public interface ILimousineRepository
     {
         void AddLimousine(Limousine limousine);
+        IEnumerable<Limousine> FindAll();
     }
 }

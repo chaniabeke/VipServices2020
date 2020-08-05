@@ -27,7 +27,10 @@ namespace VipServices2020.Domain
             uow.Locations.AddLocation(new Location(locationName));
             uow.Complete();
         }
-
+        public List<Location> GetAllLocations()
+        {
+            return uow.Locations.FindAll().ToList();
+        }
         public void AddCustomer(string name, Category category, string BtwNumber, Address address)
         {
             uow.Customers.AddCustomer(new Customer(name, BtwNumber, address, category));
@@ -35,7 +38,7 @@ namespace VipServices2020.Domain
         }
         public List<Customer> GetAllCustomers()
         {
-            return uow.Customers.FindAllCustomers().ToList();
+            return uow.Customers.FindAll().ToList();
         }
 
         public void AddAddress(string streetName, string streetNumber, string town)
@@ -49,9 +52,9 @@ namespace VipServices2020.Domain
             uow.Limousines.AddLimousine(new Limousine(brand, model, color, firstHourPrice, nightLifePrice, weddingPrice, welnessPrice));
             uow.Complete();
         }
-        public List<Reservation> GetAllReservations()
+        public List<Limousine> GetAllLimousines()
         {
-            return uow.Reservations.FindAll().ToList();
+            return uow.Limousines.FindAll().ToList();
         }
         public void AddWelnessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine)
@@ -158,6 +161,10 @@ namespace VipServices2020.Domain
             uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Business, startTime, endTime, totalHours, limousine, price));
             uow.Complete();
+        }
+        public List<Reservation> GetAllReservations()
+        {
+            return uow.Reservations.FindAll().ToList();
         }
     }
 }

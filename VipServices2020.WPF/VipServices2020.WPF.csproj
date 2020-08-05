@@ -6,4 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VipServices2020.Domain\VipServices2020.Domain.csproj" />
+    <ProjectReference Include="..\VipServices2020.EF\VipServices2020.EF.csproj" />
+  </ItemGroup>
+
 </Project>

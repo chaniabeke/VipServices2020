@@ -17,5 +17,9 @@ namespace VipServices2020.Domain.Model
         {
             CategoryName = categoryName;
         }
+        public override string ToString()
+        {
+            return $"{CategoryName}";
+        }
     }
 }

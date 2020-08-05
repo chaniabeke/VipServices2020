@@ -1,0 +1,63 @@
+﻿<Page x:Class="VipServices2020.WPF.AddReservation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VipServices2020.WPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="800"
+      Title="AddReservation">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="5 0 5 0"
+                   FontSize="20">Voeg een reservering toe.</TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" Width="355" Height="450" Margin="0 0 20 0">
+            <Label Content="_Klant:" Target="{Binding ElementName=cmbCustomer}" />
+            <ComboBox Name="cmbCustomer" Margin="5 0 0 0" />
+            <TextBlock Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Adres</TextBlock>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="_Straat:" Target="{Binding ElementName=txtStreet}"/>
+                <TextBox Name="txtStreet" Width="150"  Margin="0 0 25 0" />
+                <Label Content="_Huisnummer:" Target="{Binding ElementName=txtNumber}"/>
+                <TextBox Name="txtNumber" Width="50" />
+            </StackPanel>
+            <Label Content="_Gemeente:" Target="{Binding ElementName=txtTown}"/>
+            <TextBox Name="txtTown"  Margin="5 0 0 0"/>
+            <TextBlock Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Locatie</TextBlock>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="_Vertrek:" Target="{Binding ElementName=cmbStartLocation}" />
+                <ComboBox Name="cmbStartLocation" Width="100" Margin="0 0 35 0" />
+                <Label Content="_Aankomst:" Target="{Binding ElementName=cmbArrivalLocation}" />
+                <ComboBox Name="cmbArrivalLocation" Width="100" />
+            </StackPanel>
+            <Label Content="_Arrangement:" Target="{Binding ElementName=cmbArrangement}" Margin="0 10 0 0" />
+            <ComboBox Name="cmbArrangement" Margin="5 0 0 0" />
+            <Label Content="_Datum:" Target="{Binding ElementName=dtpDate}" Margin="0 10 0 0" />
+            <DatePicker Name="dtpDate" Margin="5 0 0 0" />
+            <TextBlock Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Uur</TextBlock>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="_Start:" Target="{Binding ElementName=cmbStartTime}" />
+                <ComboBox Name="cmbStartTime" Width="100" Margin="0 0 70 0" />
+                <Label Content="_Einde:" Target="{Binding ElementName=cmbEndTime}" />
+                <ComboBox Name="cmbEndTime" Width="100" />
+            </StackPanel>
+            
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical" Width="355" Height="450" Margin="20 0 0 0">
+            <Label Content="_Limousine:" Target="{Binding ElementName=cmbLimousine}"/>
+            <ComboBox Name="cmbLimousine" Margin="5 0 0 0" />
+        </StackPanel>
+    </Grid>
+</Page>

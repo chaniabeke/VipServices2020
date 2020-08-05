@@ -4,15 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VipServices2020.WPF"
-        xmlns:controls="clr-namespace:VipServices2020.WPF.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}"/>
-        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"/>
-    </Grid>
+        Title="MainWindow" Height="550" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" FontSize="15">
+            <MenuItem Header="Reserveringen" Margin="5">
+                <MenuItem x:Name="SearchReservationScreen" Header="_Zoeken" Click="SearchReservationScreen_Click"/>
+                <MenuItem x:Name="AddReservationScreen" Header="_Toevoegen" Click="AddReservationScreen_Click"/>
+            </MenuItem>
+        </Menu>
+        <Frame x:Name="changingWindow"  NavigationUIVisibility="Hidden" Source="Pages/SearchReservation.xaml">
+     
+        </Frame>
+    </DockPanel>
 </Window>

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VipServices2020.Tests", "Vi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VipServices2020.ConsoleUI", "VipServices2020.ConsoleUI\VipServices2020.ConsoleUI.csproj", "{C34FEE5B-AC7D-4C8F-8EE4-FB46BB20A545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VipServices2020.WPF", "VipServices2020.WPF\VipServices2020.WPF.csproj", "{8A0B055A-FCF5-4DC9-B94A-1FDCB620E7B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VipServices2020.WPF", "VipServices2020.WPF\VipServices2020.WPF.csproj", "{BEE7C650-C891-4ED8-BC88-B14E39B3014F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{C34FEE5B-AC7D-4C8F-8EE4-FB46BB20A545}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C34FEE5B-AC7D-4C8F-8EE4-FB46BB20A545}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C34FEE5B-AC7D-4C8F-8EE4-FB46BB20A545}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A0B055A-FCF5-4DC9-B94A-1FDCB620E7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A0B055A-FCF5-4DC9-B94A-1FDCB620E7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A0B055A-FCF5-4DC9-B94A-1FDCB620E7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A0B055A-FCF5-4DC9-B94A-1FDCB620E7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEE7C650-C891-4ED8-BC88-B14E39B3014F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE7C650-C891-4ED8-BC88-B14E39B3014F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE7C650-C891-4ED8-BC88-B14E39B3014F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE7C650-C891-4ED8-BC88-B14E39B3014F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

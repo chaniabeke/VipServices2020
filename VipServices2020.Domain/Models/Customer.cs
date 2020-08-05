@@ -34,5 +34,10 @@ namespace VipServices2020.Domain.Model
             Address = address;
             Category = category;
         }
+
+        public override string ToString()
+        {
+            return $"{CustomerNumber} {Name} {BtwNumber} {Address} {Category}";
+        }
     }
 }

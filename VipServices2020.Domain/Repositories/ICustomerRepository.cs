@@ -8,6 +8,6 @@ namespace VipServices2020.Domain.Repositories
     public interface ICustomerRepository
     {
         void AddCustomer(Customer customer);
-        IEnumerable<Customer> FindAllCustomers();
+        IEnumerable<Customer> FindAll();
     }
 }

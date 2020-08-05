@@ -17,5 +17,9 @@ namespace VipServices2020.Domain.Model
         {
             Town = town;
         }
+        public override string ToString()
+        {
+            return $"{Town}";
+        }
     }
 }

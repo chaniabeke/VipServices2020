@@ -33,5 +33,9 @@ namespace VipServices2020.Domain.Model
             WeddingPrice = weddingPrice;
             WelnessPrice = welnessPrice;
         }
+        public override string ToString()
+        {
+            return $"{Brand} {Model} {Color} {FirstHourPrice} {NightLifePrice} {WeddingPrice} {WelnessPrice}";
+        }
     }
 }

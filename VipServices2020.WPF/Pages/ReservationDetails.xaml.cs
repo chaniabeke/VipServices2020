@@ -11,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VipServices2020.WPF.Views
+namespace VipServices2020.WPF
 {
     /// <summary>
-    /// Interaction logic for AddReservationView.xaml
+    /// Interaction logic for ReservationDetails.xaml
     /// </summary>
-    public partial class AddReservationView : UserControl
+    public partial class ReservationDetails : Page
     {
-        public AddReservationView()
+        public ReservationDetails()
         {
             InitializeComponent();
         }

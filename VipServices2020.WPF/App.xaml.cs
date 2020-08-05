@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using VipServices2020.WPF.ViewModels;
 
 namespace VipServices2020.WPF
 {
@@ -14,13 +13,5 @@ namespace VipServices2020.WPF
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            Window window = new MainWindow();
-            window.DataContext = new MainViewModel();
-            window.Show();
-
-            base.OnStartup(e);
-        }
     }
 }
