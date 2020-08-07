@@ -62,6 +62,18 @@
     <Compile Remove="Migrations\20200802122227_decimal.Designer.cs" />
     <Compile Remove="Migrations\20200806123616_details.cs" />
     <Compile Remove="Migrations\20200806123616_details.Designer.cs" />
+    <Compile Remove="Migrations\20200806154013_initcreate.cs" />
+    <Compile Remove="Migrations\20200806154013_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200807121651_initcreate.cs" />
+    <Compile Remove="Migrations\20200807121651_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200807122433_categoryfix.cs" />
+    <Compile Remove="Migrations\20200807122433_categoryfix.Designer.cs" />
+    <Compile Remove="Migrations\20200807122948_categoryfix.cs" />
+    <Compile Remove="Migrations\20200807122948_categoryfix.Designer.cs" />
+    <Compile Remove="Migrations\20200807123625_fix2.cs" />
+    <Compile Remove="Migrations\20200807123625_fix2.Designer.cs" />
+    <Compile Remove="Migrations\20200807123943_initcreate.cs" />
+    <Compile Remove="Migrations\20200807123943_initcreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VipServices2020.Domain.Model;
+using VipServices2020.Domain.Models;
 
 namespace VipServices2020.Domain
 {
@@ -15,13 +16,6 @@ namespace VipServices2020.Domain
             this.uow = uow;
         }
 
-
-        public void AddCategory(string categoryName)
-        {
-            uow.Categories.AddCategory(new Category(categoryName));
-            uow.Complete();
-        }
-
         public void AddLocation(string locationName)
         {
             uow.Locations.AddLocation(new Location(locationName));
@@ -31,7 +25,7 @@ namespace VipServices2020.Domain
         {
             return uow.Locations.FindAll().ToList();
         }
-        public void AddCustomer(string name, Category category, string BtwNumber, Address address)
+        public void AddCustomer(string name, CategoryType category, string BtwNumber, Address address)
         {
             uow.Customers.AddCustomer(new Customer(name, BtwNumber, address, category));
             uow.Complete();
@@ -40,10 +34,6 @@ namespace VipServices2020.Domain
         {
             return uow.Customers.FindAll().ToList();
         }
-        //public void ShowCustomersDetails()
-        //{
-        //    uow.Customers.ShowCustomerDetails();
-        //}
          public void AddAddress(string streetName, string streetNumber, string town)
         {
             uow.Addresses.AddAddress(new Address(streetName, streetNumber, town));
@@ -58,6 +48,10 @@ namespace VipServices2020.Domain
         public List<Limousine> GetAllLimousines()
         {
             return uow.Limousines.FindAll().ToList();
+        }
+        public List<Limousine> GetAllAvailableLimousines(DateTime startTime, DateTime endTime, ArrangementType arrangement)
+        {
+            return uow.Limousines.FindAll(startTime, endTime, arrangement);
         }
         public void AddWelnessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine)
@@ -75,8 +69,10 @@ namespace VipServices2020.Domain
             //Pricecalculator
             Price price = PriceCalculator.WelnessCalculator(limousine, totalHours, startTime, endTime);
 
-            uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
-                ArrangementType.Wellness, startTime, endTime, totalHours, limousine, price));
+            Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
+                ArrangementType.Wellness, startTime, endTime, totalHours, limousine, price);
+            uow.Reservations.AddReservation(reservation);
+            limousine.Reservations.Add(reservation);
             uow.Complete();
         }
         public void AddNightLifeReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
@@ -98,8 +94,10 @@ namespace VipServices2020.Domain
             //Pricecalculator
             Price price = PriceCalculator.NightLifeCalculator(limousine, totalHours, startTime, endTime);
 
-            uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
-                ArrangementType.NightLife, startTime, endTime, totalHours, limousine, price));
+            Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
+                ArrangementType.NightLife, startTime, endTime, totalHours, limousine, price);
+            uow.Reservations.AddReservation(reservation);
+            limousine.Reservations.Add(reservation);
             uow.Complete();
         }
         public void AddWeddingReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
@@ -121,8 +119,10 @@ namespace VipServices2020.Domain
             //Pricecalculator
             Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime);
 
-            uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
-                ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price));
+            Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
+                ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price);
+            uow.Reservations.AddReservation(reservation);
+            limousine.Reservations.Add(reservation);
             uow.Complete();
 
         }
@@ -141,8 +141,11 @@ namespace VipServices2020.Domain
             //Pricecalculator
             Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime);
 
-            uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
-                ArrangementType.Airport, startTime, endTime, totalHours, limousine, price));
+
+            Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
+                ArrangementType.Airport, startTime, endTime, totalHours, limousine, price);
+            uow.Reservations.AddReservation(reservation);
+            limousine.Reservations.Add(reservation);
             uow.Complete();
         }
         public void AddBusinessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
@@ -161,8 +164,10 @@ namespace VipServices2020.Domain
             //Pricecalculator
             Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime);
 
-            uow.Reservations.AddReservation(new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
-                ArrangementType.Business, startTime, endTime, totalHours, limousine, price));
+            Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
+                ArrangementType.Business, startTime, endTime, totalHours, limousine, price);
+            uow.Reservations.AddReservation(reservation);
+            limousine.Reservations.Add(reservation);
             uow.Complete();
         }
         public List<Reservation> GetAllReservations()

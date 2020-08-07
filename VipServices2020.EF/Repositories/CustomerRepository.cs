@@ -25,7 +25,7 @@ namespace VipServices2020.EF.Repositories
         
         public IEnumerable<Customer> FindAll()
         {
-            return context.Customers.OrderBy(c => c.Name).Include(c => c.Address).Include(c => c.Category).AsEnumerable<Customer>();
+            return context.Customers.OrderBy(c => c.Name).Include(c => c.Address).AsEnumerable<Customer>();
         }
     }
 }

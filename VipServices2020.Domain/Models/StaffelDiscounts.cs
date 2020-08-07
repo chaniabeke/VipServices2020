@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using VipServices2020.Domain.Models;
 
 namespace VipServices2020.Domain.Model
 {
@@ -10,7 +11,7 @@ namespace VipServices2020.Domain.Model
         [Key]
         public int Id { get; set; }
         [Required]
-        public Category Category { get; set; }
+        public CategoryType Category { get; set; }
         [Required]
         public IList<StaffelDiscount> StaffelDiscountList { get; set; }
     }

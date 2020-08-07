@@ -14,7 +14,7 @@ namespace VipServices2020.EF
         public UnitOfWork(VipServicesContext context)
         {
             this.context = context;
-            Categories = new CategoryRepository(this.context);
+            
             Customers = new CustomerRepository(this.context);
             Addresses = new AddressRepository(this.context);
             Limousines = new LimousineRepository(this.context);
@@ -23,7 +23,7 @@ namespace VipServices2020.EF
             Prices = new PriceRepository(this.context);
         }
 
-        public ICategoryRepository Categories { get; private set; }
+     
 
         public ICustomerRepository Customers { get; private set; }
 

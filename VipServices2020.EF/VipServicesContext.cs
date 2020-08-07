@@ -38,7 +38,7 @@ namespace VipServices2020.EF
             }
         }
 
-        public DbSet<Category> Categories { get; set; }
+       
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Limousine> Limousines { get; set; }
@@ -48,7 +48,6 @@ namespace VipServices2020.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>().HasOne(c => c.Category);
             modelBuilder.Entity<Customer>().HasOne(c => c.Address);
         }
 

@@ -10,7 +10,7 @@ using VipServices2020.EF;
 namespace VipServices2020.EF.Migrations
 {
     [DbContext(typeof(VipServicesContext))]
-    [Migration("20200806154013_initcreate")]
+    [Migration("20200807125336_initcreate")]
     partial class initcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,23 +48,6 @@ namespace VipServices2020.EF.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Model.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("VipServices2020.Domain.Model.Customer", b =>
                 {
                     b.Property<int>("CustomerNumber")
@@ -79,7 +62,7 @@ namespace VipServices2020.EF.Migrations
                         .HasColumnType("nvarchar(16)")
                         .HasMaxLength(16);
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Category")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -90,8 +73,6 @@ namespace VipServices2020.EF.Migrations
                     b.HasKey("CustomerNumber");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Customers");
                 });
@@ -262,12 +243,6 @@ namespace VipServices2020.EF.Migrations
                     b.HasOne("VipServices2020.Domain.Model.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VipServices2020.Domain.Model.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

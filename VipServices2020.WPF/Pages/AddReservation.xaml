@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VipServices2020.WPF"
       mc:Ignorable="d" 
-      d:DesignHeight="550" d:DesignWidth="800"
-      Title="AddReservation">
+      d:DesignHeight="650" d:DesignWidth="800"
+      Title="AddReservation" FontSize="14">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -21,43 +21,102 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="5 0 5 0"
-                   FontSize="20">Voeg een reservering toe.</TextBlock>
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" Width="355" Height="450" Margin="0 0 20 0">
-            <Label Content="_Klant:" Target="{Binding ElementName=cmbCustomer}" />
-            <ComboBox Name="cmbCustomer" Margin="5 0 0 0" />
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="0 0 0 20"
+                   FontSize="20" TextAlignment="Center">Reservering Toevoegen</TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" Width="355" Margin="0 0 20 0">
+
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="_Klant:" Target="{Binding ElementName=cmbCustomer}" />
+                <ComboBox Name="cmbCustomer" Margin="10 0 10 0" Width="120" />
+                <Label Content="_Arrangement:" Target="{Binding ElementName=cmbArrangement}"  />
+                <ComboBox Name="cmbArrangement" Margin="5 0 0 0" Width="70"/>
+            </StackPanel>
+
             <TextBlock Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Adres</TextBlock>
             <StackPanel Orientation="Horizontal" >
                 <Label Content="_Straat:" Target="{Binding ElementName=txtStreet}"/>
-                <TextBox Name="txtStreet" Width="150"  Margin="0 0 25 0" />
+                <TextBox Name="txtStreet" Width="150"  Margin="0 0 10 0" />
                 <Label Content="_Huisnummer:" Target="{Binding ElementName=txtNumber}"/>
                 <TextBox Name="txtNumber" Width="50" />
             </StackPanel>
-            <Label Content="_Gemeente:" Target="{Binding ElementName=txtTown}"/>
-            <TextBox Name="txtTown"  Margin="5 0 0 0"/>
+            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                <Label Content="_Gemeente:" Target="{Binding ElementName=txtTown}"/>
+                <TextBox Name="txtTown" Width="275"/>
+            </StackPanel>
             <TextBlock Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Locatie</TextBlock>
             <StackPanel Orientation="Horizontal" >
                 <Label Content="_Vertrek:" Target="{Binding ElementName=cmbStartLocation}" />
-                <ComboBox Name="cmbStartLocation" Width="100" Margin="0 0 35 0" />
+                <ComboBox Name="cmbStartLocation" Width="100" Margin="0 0 25 0" />
                 <Label Content="_Aankomst:" Target="{Binding ElementName=cmbArrivalLocation}" />
                 <ComboBox Name="cmbArrivalLocation" Width="100" />
             </StackPanel>
-            <Label Content="_Arrangement:" Target="{Binding ElementName=cmbArrangement}" Margin="0 10 0 0" />
-            <ComboBox Name="cmbArrangement" Margin="5 0 0 0" />
-            <Label Content="_Datum:" Target="{Binding ElementName=dtpDate}" Margin="0 10 0 0" />
-            <DatePicker Name="dtpDate" Margin="5 0 0 0" />
-            <TextBlock Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Uur</TextBlock>
+
+            <TextBlock Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Begin</TextBlock>
             <StackPanel Orientation="Horizontal" >
-                <Label Content="_Start:" Target="{Binding ElementName=cmbStartTime}" />
-                <ComboBox Name="cmbStartTime" Width="100" Margin="0 0 70 0" />
-                <Label Content="_Einde:" Target="{Binding ElementName=cmbEndTime}" />
-                <ComboBox Name="cmbEndTime" Width="100" />
+                <Label Content="_Datum:" Target="{Binding ElementName=dtpStartDate}" />
+                <DatePicker Name="dtpStartDate" Margin="10 0 0 0" Width="150"/>
+                <Label Content="_Uur:" Target="{Binding ElementName=cmbStartTime}" Margin="45 0 0 0" />
+                <ComboBox Name="cmbStartTime" Width="50" Margin="10 0 0 0" />
             </StackPanel>
-            
+
+            <TextBlock Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Einde</TextBlock>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="_Datum:" Target="{Binding ElementName=dtpEndDate}" />
+                <DatePicker Name="dtpEndDate" Margin="10 0 0 0" Width="150"/>
+                <Label Content="_Uur:" Target="{Binding ElementName=cmbEndTime}" Margin="45 0 0 0" />
+                <ComboBox Name="cmbEndTime" Width="50" Margin="10 0 0 0" />
+            </StackPanel>
+
+            <Button x:Name="btnLimousine" Click="Button_Click" Width="200" Height="25" Margin="0 20 0 0">Bekijk beschikbare limousines</Button>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical" Width="355" Height="450" Margin="20 0 0 0">
-            <Label Content="_Limousine:" Target="{Binding ElementName=cmbLimousine}"/>
+
+
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical" Width="355"  Margin="20 0 0 0">
+
+            <Label Name="lblLimousine" Content="_Limousine:" Target="{Binding ElementName=cmbLimousine}"/>
             <ComboBox Name="cmbLimousine" Margin="5 0 0 0" />
+            <Button x:Name="btnPrice" Click="Button_Click" Width="200" Height="25" Margin="0 20 0 0">Bereken prijs</Button>
+            <StackPanel Orientation="Vertical" x:Name="stpPrice" Background="LightGray" Margin="0 20 0 0">
+                <TextBlock x:Name="txtPrice" Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Prijs</TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Margin="5 0 5 0">Eerste uur:</TextBlock>
+                    <TextBlock x:Name="txtFirstHourPrice">1000</TextBlock>
+                    <TextBlock Margin="25 0 5 0">Tweede uur:</TextBlock>
+                    <TextBlock x:Name="txtSecondHourCount">5x</TextBlock>
+                    <TextBlock x:Name="txtSecondHourPrice">1000</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
+                    <TextBlock Margin="5 0 5 0">Nacht uur:</TextBlock>
+                    <TextBlock x:Name="txtNightHourCount">3x</TextBlock>
+                    <TextBlock x:Name="NightHourPrice">100</TextBlock>
+                    <TextBlock Margin="25 0 5 0">Overuur:</TextBlock>
+                    <TextBlock x:Name="txtOvertimeCount">5x</TextBlock>
+                    <TextBlock x:Name="txtOvertimePrice">1000</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
+                    <TextBlock Margin="5 0 5 0">Vaste prijs:</TextBlock>
+                    <TextBlock x:Name="txtFixedPrice">1000</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
+                    <TextBlock Margin="5 0 5 0">Subtotaal:</TextBlock>
+                    <TextBlock x:Name="txtSubTotal">1500</TextBlock>
+                    <TextBlock Margin="25 0 5 0">Staffelkorting:</TextBlock>
+                    <TextBlock x:Name="txtStaffelDiscount">5%</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5 0 5 0">Prijs zonder btw:</TextBlock>
+                    <TextBlock x:Name="txtExclusiveBtw">1500</TextBlock>
+                    <TextBlock Margin="15 0 5 0">Btw:</TextBlock>
+                    <TextBlock x:Name="txtBtw">6%</TextBlock>
+                    <TextBlock Margin="15 0 5 0">Btw-bedrag:</TextBlock>
+                    <TextBlock x:Name="txtBtwPrice">1400</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+                    <TextBlock Margin="5 0 5 0" Foreground="HotPink">Totaalprijs:</TextBlock>
+                    <TextBlock x:Name="txtTotal" Foreground="HotPink">5000</TextBlock>
+                </StackPanel>
+                <Button x:Name="btnReservation" Click="Button_Click" Background="HotPink"  Width="200" Height="25" Margin="0 0 0 20">Toevoegen</Button>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

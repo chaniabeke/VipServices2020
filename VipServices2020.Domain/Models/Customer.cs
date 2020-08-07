@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using VipServices2020.Domain.Models;
 
 namespace VipServices2020.Domain.Model
 {
@@ -19,7 +20,7 @@ namespace VipServices2020.Domain.Model
         [Required]
         public Address Address { get; set; }
         [Required]
-        public Category Category { get; set; }
+        public CategoryType Category { get; set; }
 
         public Customer()
         {
@@ -31,7 +32,7 @@ namespace VipServices2020.Domain.Model
             BtwNumber = btwNumber;
         }
 
-        public Customer(string name, string btwNumber, Address address, Category category)
+        public Customer(string name, string btwNumber, Address address, CategoryType category)
         {
             Name = name;
             BtwNumber = btwNumber;

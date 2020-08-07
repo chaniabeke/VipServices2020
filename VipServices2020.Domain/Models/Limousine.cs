@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace VipServices2020.Domain.Model
 {
@@ -16,6 +18,7 @@ namespace VipServices2020.Domain.Model
         [Required]
         [StringLength(50, MinimumLength = 1)]
         public string Color { get; set; }
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
         [Required]
         public int FirstHourPrice { get; set; }

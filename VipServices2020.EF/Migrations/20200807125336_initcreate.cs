@@ -23,19 +23,6 @@ namespace VipServices2020.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Limousines",
                 columns: table => new
                 {
@@ -100,7 +87,7 @@ namespace VipServices2020.EF.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     BtwNumber = table.Column<string>(maxLength: 16, nullable: true),
                     AddressId = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false)
+                    Category = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,12 +96,6 @@ namespace VipServices2020.EF.Migrations
                         name: "FK_Customers_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Customers_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -184,11 +165,6 @@ namespace VipServices2020.EF.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_CategoryId",
-                table: "Customers",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reservations_ArrivalLocationId",
                 table: "Reservations",
                 column: "ArrivalLocationId");
@@ -238,9 +214,6 @@ namespace VipServices2020.EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Addresses");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
         }
     }
 }

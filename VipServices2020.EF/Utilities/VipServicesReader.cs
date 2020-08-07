@@ -5,26 +5,14 @@ using System.Linq;
 using System.Text;
 using VipServices2020.Domain;
 using VipServices2020.Domain.Model;
+using VipServices2020.Domain.Models;
 using VipServices2020.EF.Repositories;
 
 namespace VipServices2020.EF.Utilities
 {
     public static class VipServicesReader
     {
-        public static void InitializeCategories(string path, VipServicesManager manager)
-        {
-            using (StreamReader r = new StreamReader(path))
-            {
-                string line;
-                string categoryName;
-                while ((line = r.ReadLine()) != null)
-                {
-                    string[] ss = line.Split(',').Select(x => x.Trim()).ToArray();
-                    categoryName = ss[0];
-                    manager.AddCategory(categoryName);
-                }
-            }
-        }
+       
         public static void InitializeLocations(string path, VipServicesManager manager)
         {
             using (StreamReader r = new StreamReader(path))
@@ -44,7 +32,7 @@ namespace VipServices2020.EF.Utilities
             using (StreamReader r = new StreamReader(path))
             {
                 string line;
-                 string name; string categoryName;
+                 string name; 
                 string BtwNumber; string addressString;
                 string streetName; string streetNumber; string town;
                 while ((line = r.ReadLine()) != null)
@@ -52,8 +40,7 @@ namespace VipServices2020.EF.Utilities
                     string[] ss = line.Split(',').Select(x => x.Trim()).ToArray();
                     //customerNumber = int.Parse(ss[0]);
                     name = ss[1];
-
-                    categoryName = ss[2];
+                    CategoryType category = (CategoryType)Enum.Parse(typeof(CategoryType), ss[2]);
                     BtwNumber = ss[3];
                     addressString = ss[4];
                     string[] addresItems = addressString.Split(' ').Select(x => x.Trim()).ToArray();
@@ -62,7 +49,8 @@ namespace VipServices2020.EF.Utilities
                     town = addresItems[3];
                     Address address = new Address(streetName, streetNumber, town);
 
-                    manager.AddCustomer(name, new Category() {CategoryName = categoryName }, BtwNumber, address);
+                    manager.AddCustomer(name, category, BtwNumber, address);
+                    
                 }
             }
         }

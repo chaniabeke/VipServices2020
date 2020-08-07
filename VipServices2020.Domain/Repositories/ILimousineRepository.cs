@@ -9,5 +9,6 @@ namespace VipServices2020.Domain.Repositories
     {
         void AddLimousine(Limousine limousine);
         IEnumerable<Limousine> FindAll();
+        List<Limousine> FindAll(DateTime startTime, DateTime endTime, ArrangementType arrangement);
     }
 }
