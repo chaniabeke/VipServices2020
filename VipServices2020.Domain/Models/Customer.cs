@@ -21,6 +21,10 @@ namespace VipServices2020.Domain.Model
         [Required]
         public Category Category { get; set; }
 
+        public Customer()
+        {
+
+        }
         public Customer(string name, string btwNumber)
         {
             Name = name;

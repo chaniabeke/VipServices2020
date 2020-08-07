@@ -40,8 +40,11 @@ namespace VipServices2020.Domain
         {
             return uow.Customers.FindAll().ToList();
         }
-
-        public void AddAddress(string streetName, string streetNumber, string town)
+        //public void ShowCustomersDetails()
+        //{
+        //    uow.Customers.ShowCustomerDetails();
+        //}
+         public void AddAddress(string streetName, string streetNumber, string town)
         {
             uow.Addresses.AddAddress(new Address(streetName, streetNumber, town));
             uow.Complete();
@@ -65,7 +68,7 @@ namespace VipServices2020.Domain
             //Wellness is altijd 10 uur
             //Wellness is voor 10 uur met start vanaf 7u00 tot 12u00
             if (startTime < DateTime.Now) throw new DomainException("Een reservatie mag niet in het verleden zijn.");
-            if (startTime.Hour< 7) if (startTime.Hour > 12) throw new DomainException("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
+            if (startTime.Hour < 7) if (startTime.Hour > 12) throw new DomainException("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours != 10) throw new DomainException("Een Welness reservatie moet altijd 10 uur zijn.");
 
@@ -165,6 +168,18 @@ namespace VipServices2020.Domain
         public List<Reservation> GetAllReservations()
         {
             return uow.Reservations.FindAll().ToList();
+        }
+        public List<Reservation> GetAllReservations(int customerId)
+        {
+            return uow.Reservations.FindAll(new Customer { CustomerNumber = customerId }).ToList();
+        }
+        public List<Reservation> GetAllReservations(DateTime date)
+        {
+            return uow.Reservations.FindAll(date).ToList();
+        }
+        public List<Reservation> GetAllReservations(int customerId, DateTime date)
+        {
+            return uow.Reservations.FindAll(new Customer { CustomerNumber = customerId }, date).ToList();
         }
     }
 }

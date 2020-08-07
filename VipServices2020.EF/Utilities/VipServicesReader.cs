@@ -54,8 +54,6 @@ namespace VipServices2020.EF.Utilities
                     name = ss[1];
 
                     categoryName = ss[2];
-                    //Category category = manager.FindCategory(categoryName);
-                    //duplicate categories select id based on name
                     BtwNumber = ss[3];
                     addressString = ss[4];
                     string[] addresItems = addressString.Split(' ').Select(x => x.Trim()).ToArray();
@@ -64,7 +62,7 @@ namespace VipServices2020.EF.Utilities
                     town = addresItems[3];
                     Address address = new Address(streetName, streetNumber, town);
 
-                    manager.AddCustomer(name, new Category(categoryName), BtwNumber, address);
+                    manager.AddCustomer(name, new Category() {CategoryName = categoryName }, BtwNumber, address);
                 }
             }
         }

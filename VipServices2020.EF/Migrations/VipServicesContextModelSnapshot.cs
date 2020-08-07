@@ -172,8 +172,8 @@ namespace VipServices2020.EF.Migrations
                     b.Property<int>("NightHourCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("NightHourPrice")
-                        .HasColumnType("int");
+                    b.Property<decimal>("NightHourPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("OvertimeCount")
                         .HasColumnType("int");

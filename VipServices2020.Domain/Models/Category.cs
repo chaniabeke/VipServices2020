@@ -13,6 +13,10 @@ namespace VipServices2020.Domain.Model
         [StringLength(50, MinimumLength = 2)]
         public string CategoryName { get; set; }
 
+        public Category()
+        {
+
+        }
         public Category(string categoryName)
         {
             CategoryName = categoryName;

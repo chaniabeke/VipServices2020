@@ -11,7 +11,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VipServices2020.Domain;
+using VipServices2020.Domain.Model;
 using VipServices2020.EF;
+using VipServices2020.EF.Repositories;
 
 namespace VipServices2020.WPF
 {
@@ -26,6 +28,28 @@ namespace VipServices2020.WPF
             InitializeComponent();
             cmbCustomer.ItemsSource = vipServicesManager.GetAllCustomers();
             ltbReservations.ItemsSource = vipServicesManager.GetAllReservations();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (cmbCustomer.SelectedItem != null && dtpDate.SelectedDate != null)
+            {
+                int customerId = (cmbCustomer.SelectedItem as Customer).CustomerNumber;
+                ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(customerId, dtpDate.SelectedDate.Value);
+            }
+            else
+            {
+                if (cmbCustomer.SelectedItem != null)
+                {
+                    int customerId = (cmbCustomer.SelectedItem as Customer).CustomerNumber;
+                    ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(customerId);
+                }
+                if (dtpDate.SelectedDate != null)
+                {
+                    ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(dtpDate.SelectedDate.Value);
+                }
+            }
+
         }
     }
 }

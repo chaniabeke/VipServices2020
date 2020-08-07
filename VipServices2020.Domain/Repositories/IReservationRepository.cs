@@ -9,8 +9,9 @@ namespace VipServices2020.Domain.Repositories
     {
         void AddReservation(Reservation reservation);
         Reservation Find(int id);
-        IEnumerable<Reservation> Find(Customer customer);
-        IEnumerable<Reservation> Find(DateTime reservationDate);
         IEnumerable<Reservation> FindAll();
+        IEnumerable<Reservation> FindAll(Customer customer);
+        IEnumerable<Reservation> FindAll(DateTime reservationDate);
+        IEnumerable<Reservation> FindAll(Customer customer, DateTime reservationDate);
     }
 }

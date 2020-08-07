@@ -30,7 +30,7 @@
                 <Label Content="_Datum:" Target="{Binding ElementName=dtpDate}" />
                 <DatePicker Name="dtpDate" Width="150" />
             </StackPanel>
-            <Button Width="100" Height="25" VerticalAlignment="Bottom" Margin="20">Zoeken</Button>
+            <Button Width="100" Height="25" VerticalAlignment="Bottom" Margin="20" Click="Button_Click">Zoeken</Button>
         </StackPanel>
         <ListView x:Name="ltbReservations" Grid.Row="2" Grid.Column="1" MinHeight="300" Margin="0 20 0 0" Background="LightGray">
             <ListView.View>
@@ -40,7 +40,9 @@
                     <GridViewColumn Header="Arrangement" DisplayMemberBinding="{Binding Path=ArrangementType}"/>
                     <GridViewColumn Header="Start" DisplayMemberBinding="{Binding Path=StartTime}"/>
                     <GridViewColumn Header="End" DisplayMemberBinding="{Binding Path=EndTime}"/>
-                    <GridViewColumn Header="Limousine" DisplayMemberBinding="{Binding Path=Limousine.Brand}"/>
+                    <GridViewColumn Header="Merk" DisplayMemberBinding="{Binding Path=Limousine.Brand}"/>
+                    <GridViewColumn Header="Model" DisplayMemberBinding="{Binding Path=Limousine.Model}"/>
+                    <GridViewColumn Header="Prijs" DisplayMemberBinding="{Binding Path=Price.Total}"/>
                 </GridView>
             </ListView.View>
         </ListView>

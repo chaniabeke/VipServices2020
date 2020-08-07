@@ -54,6 +54,14 @@
     <Compile Remove="Migrations\20200730192446_initcreate.Designer.cs" />
     <Compile Remove="Migrations\20200801192351_reservationdate.cs" />
     <Compile Remove="Migrations\20200801192351_reservationdate.Designer.cs" />
+    <Compile Remove="Migrations\20200801192656_initcreate.cs" />
+    <Compile Remove="Migrations\20200801192656_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200802115151_price.cs" />
+    <Compile Remove="Migrations\20200802115151_price.Designer.cs" />
+    <Compile Remove="Migrations\20200802122227_decimal.cs" />
+    <Compile Remove="Migrations\20200802122227_decimal.Designer.cs" />
+    <Compile Remove="Migrations\20200806123616_details.cs" />
+    <Compile Remove="Migrations\20200806123616_details.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

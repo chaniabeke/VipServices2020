@@ -15,17 +15,17 @@ namespace VipServices2020.ConsoleUI
             Console.WriteLine("Initialiseer Databank");
             VipServicesManager vipServicesManger = new VipServicesManager(new UnitOfWork(new VipServicesContext("Production")));
 
-            //VipServicesReader.InitializeCategories(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\categories.txt", vipServicesManger);
-            //VipServicesReader.InitializeLocations(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\locaties.txt", vipServicesManger);
-            //VipServicesReader.InitializeCustomers(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt", vipServicesManger);
-            //VipServicesReader.InitializeLimousine(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
+            VipServicesReader.InitializeCategories(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\categories.txt", vipServicesManger);
+            VipServicesReader.InitializeLocations(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\locaties.txt", vipServicesManger);
+            VipServicesReader.InitializeCustomers(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt", vipServicesManger);
+            VipServicesReader.InitializeLimousine(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
 
-            Address address = new Address("Bldfostreet", "5g", "fdv");
-            Category category = new Category("category");
-            Customer customer = new Customer("Dan", "", address, category);
-            Location location = new Location("gent");
-            Limousine limousine = new Limousine("bluu", "df", "sddd", 198, 547, 1477, 1351);
-            vipServicesManger.AddNightLifeReservation(customer, address, location, location, new DateTime(2020, 09, 22, 03, 0, 0), new DateTime(2020, 09, 22, 10, 0, 0), limousine);
+            //Address address = new Address("Bldfostreet", "5g", "fdv");
+            //Category category = new Category("category");
+            //Customer customer = new Customer("Dan", "", address, category);
+            //Location location = new Location("gent");
+            //Limousine limousine = new Limousine("bluu", "df", "sddd", 198, 547, 1477, 1351);
+            //vipServicesManger.AddNightLifeReservation(customer, address, location, location, new DateTime(2020, 09, 22, 03, 0, 0), new DateTime(2020, 09, 22, 10, 0, 0), limousine);
             Console.WriteLine("Einde Databank");
         }
     }

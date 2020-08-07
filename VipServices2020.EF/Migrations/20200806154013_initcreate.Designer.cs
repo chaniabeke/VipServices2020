@@ -10,8 +10,8 @@ using VipServices2020.EF;
 namespace VipServices2020.EF.Migrations
 {
     [DbContext(typeof(VipServicesContext))]
-    [Migration("20200802122227_decimal")]
-    partial class @decimal
+    [Migration("20200806154013_initcreate")]
+    partial class initcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -174,8 +174,8 @@ namespace VipServices2020.EF.Migrations
                     b.Property<int>("NightHourCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("NightHourPrice")
-                        .HasColumnType("int");
+                    b.Property<decimal>("NightHourPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("OvertimeCount")
                         .HasColumnType("int");
