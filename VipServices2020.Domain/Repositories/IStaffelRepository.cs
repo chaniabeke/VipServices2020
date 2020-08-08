@@ -5,8 +5,8 @@ using VipServices2020.Domain.Models;
 
 namespace VipServices2020.Domain.Repositories
 {
-    public interface IAddressRepository
+    public interface IStaffelRepository
     {
-        void AddAddress(Address address);
+        void AddStaffel(Staffel staffel);
     }
 }

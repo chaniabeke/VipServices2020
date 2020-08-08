@@ -6,18 +6,18 @@ using VipServices2020.Domain.Repositories;
 
 namespace VipServices2020.EF.Repositories
 {
-    public class AddressRepository : IAddressRepository
+    public class StaffelRepository : IStaffelRepository
     {
         private VipServicesContext context;
 
-        public AddressRepository(VipServicesContext context)
+        public StaffelRepository(VipServicesContext context)
         {
             this.context = context;
         }
 
-        public void AddAddress(Address address)
+        public void AddStaffel(Staffel staffel)
         {
-            context.Addresses.Add(address);
+            context.Staffels.Add(staffel);
         }
     }
 }

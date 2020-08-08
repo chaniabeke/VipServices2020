@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 
-namespace VipServices2020.Domain.Model
+namespace VipServices2020.Domain.Models
 {
     public class Reservation
     {

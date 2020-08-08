@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using VipServices2020.Domain.Model;
+using VipServices2020.Domain.Models;
 using VipServices2020.Domain.Repositories;
 
 namespace VipServices2020.EF.Repositories
@@ -26,6 +26,13 @@ namespace VipServices2020.EF.Repositories
         public IEnumerable<Customer> FindAll()
         {
             return context.Customers.OrderBy(c => c.Name).Include(c => c.Address).AsEnumerable<Customer>();
+        }
+
+        public int FindReservationCount(Customer customer, DateTime dateTime)
+        {
+            int reservationtCount = context.Reservations.Where(r => r.Customer == customer)
+                .Where(r => r.StartTime.Year == dateTime.Year).Count();
+            return reservationtCount;
         }
     }
 }

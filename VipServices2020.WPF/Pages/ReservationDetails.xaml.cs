@@ -22,5 +22,6 @@ namespace VipServices2020.WPF
         {
             InitializeComponent();
         }
+
     }
 }

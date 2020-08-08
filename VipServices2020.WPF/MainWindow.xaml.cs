@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,16 +24,36 @@ namespace VipServices2020.WPF
         public MainWindow()
         {
             InitializeComponent();
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
         }
 
         private void SearchReservationScreen_Click(object sender, RoutedEventArgs e)
         {
-            changingWindow.Source = new Uri("Pages/SearchReservation.xaml", UriKind.Relative);
+            try
+            {
+                changingWindow.Source = new Uri("Pages/SearchReservation.xaml", UriKind.Relative);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AddReservationScreen_Click(object sender, RoutedEventArgs e)
         {
-            changingWindow.Source = new Uri("Pages/AddReservation.xaml", UriKind.Relative);
+            try
+            {
+                changingWindow.Source = new Uri("Pages/AddReservation.xaml", UriKind.Relative);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show((e.ExceptionObject as Exception).Message, "Unhandled UI Exception");
         }
     }
 }

@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using VipServices2020.Domain.Models;
 
-namespace VipServices2020.Domain.Model
+namespace VipServices2020.Domain.Models
 {
-    public class StaffelDiscounts
+    public class Discount
     {
         [Key]
         public int Id { get; set; }
         [Required]
         public CategoryType Category { get; set; }
         [Required]
-        public IList<StaffelDiscount> StaffelDiscountList { get; set; }
+        public IList<Staffel> StaffelDiscountList { get; set; }
     }
 }

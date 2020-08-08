@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using VipServices2020.Domain;
-using VipServices2020.Domain.Model;
 using VipServices2020.Domain.Models;
 using VipServices2020.EF.Repositories;
 

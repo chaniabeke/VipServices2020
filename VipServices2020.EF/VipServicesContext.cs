@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using VipServices2020.Domain.Model;
+using VipServices2020.Domain.Models;
 
 namespace VipServices2020.EF
 {
@@ -45,6 +45,8 @@ namespace VipServices2020.EF
         public DbSet<Location> Locations { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Price> Prices { get; set; }
+        public DbSet<Staffel> Staffels { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

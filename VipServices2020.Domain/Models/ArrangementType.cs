@@ -1,4 +1,4 @@
-﻿namespace VipServices2020.Domain.Model
+﻿namespace VipServices2020.Domain.Models
 {
     public enum ArrangementType
     {

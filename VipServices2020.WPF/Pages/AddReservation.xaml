@@ -12,7 +12,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="375"/>
             <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="0 0 0 20"
                    FontSize="20" TextAlignment="Center">Reservering Toevoegen</TextBlock>
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" Width="355" Margin="0 0 20 0">
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" Width="355" Margin="0,0,20,0">
 
             <StackPanel Orientation="Horizontal" >
                 <Label Content="_Klant:" Target="{Binding ElementName=cmbCustomer}" />
@@ -67,55 +67,55 @@
                 <ComboBox Name="cmbEndTime" Width="50" Margin="10 0 0 0" />
             </StackPanel>
 
-            <Button x:Name="btnLimousine" Click="Button_Click" Width="200" Height="25" Margin="0 20 0 0">Bekijk beschikbare limousines</Button>
+            <Button x:Name="btnLimousine" Click="btnLimousine_Click" Width="200" Height="25" Margin="0 20 0 0">Bekijk beschikbare limousines</Button>
         </StackPanel>
 
 
-        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical" Width="355"  Margin="20 0 0 0">
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical" Width="355"  Margin="20,0,0,0">
 
             <Label Name="lblLimousine" Content="_Limousine:" Target="{Binding ElementName=cmbLimousine}"/>
             <ComboBox Name="cmbLimousine" Margin="5 0 0 0" />
-            <Button x:Name="btnPrice" Click="Button_Click" Width="200" Height="25" Margin="0 20 0 0">Bereken prijs</Button>
+            <Button x:Name="btnPrice" Click="btnPrice_Click" Width="200" Height="25" Margin="0 20 0 0">Bereken prijs</Button>
             <StackPanel Orientation="Vertical" x:Name="stpPrice" Background="LightGray" Margin="0 20 0 0">
                 <TextBlock x:Name="txtPrice" Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Prijs</TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                     <TextBlock Margin="5 0 5 0">Eerste uur:</TextBlock>
-                    <TextBlock x:Name="txtFirstHourPrice">1000</TextBlock>
+                    <TextBlock x:Name="txtFirstHourPrice"></TextBlock>
                     <TextBlock Margin="25 0 5 0">Tweede uur:</TextBlock>
-                    <TextBlock x:Name="txtSecondHourCount">5x</TextBlock>
-                    <TextBlock x:Name="txtSecondHourPrice">1000</TextBlock>
+                    <TextBlock x:Name="txtSecondHourCount"></TextBlock>
+                    <TextBlock x:Name="txtSecondHourPrice"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
                     <TextBlock Margin="5 0 5 0">Nacht uur:</TextBlock>
-                    <TextBlock x:Name="txtNightHourCount">3x</TextBlock>
-                    <TextBlock x:Name="NightHourPrice">100</TextBlock>
+                    <TextBlock x:Name="txtNightHourCount"></TextBlock>
+                    <TextBlock x:Name="txtNightHourPrice"></TextBlock>
                     <TextBlock Margin="25 0 5 0">Overuur:</TextBlock>
-                    <TextBlock x:Name="txtOvertimeCount">5x</TextBlock>
-                    <TextBlock x:Name="txtOvertimePrice">1000</TextBlock>
+                    <TextBlock x:Name="txtOvertimeCount"></TextBlock>
+                    <TextBlock x:Name="txtOvertimePrice"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
                     <TextBlock Margin="5 0 5 0">Vaste prijs:</TextBlock>
-                    <TextBlock x:Name="txtFixedPrice">1000</TextBlock>
+                    <TextBlock x:Name="txtFixedPrice"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
                     <TextBlock Margin="5 0 5 0">Subtotaal:</TextBlock>
-                    <TextBlock x:Name="txtSubTotal">1500</TextBlock>
+                    <TextBlock x:Name="txtSubTotal"></TextBlock>
                     <TextBlock Margin="25 0 5 0">Staffelkorting:</TextBlock>
-                    <TextBlock x:Name="txtStaffelDiscount">5%</TextBlock>
+                    <TextBlock x:Name="txtStaffelDiscount"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="5 0 5 0">Prijs zonder btw:</TextBlock>
-                    <TextBlock x:Name="txtExclusiveBtw">1500</TextBlock>
+                    <TextBlock x:Name="txtExclusiveBtw"></TextBlock>
                     <TextBlock Margin="15 0 5 0">Btw:</TextBlock>
-                    <TextBlock x:Name="txtBtw">6%</TextBlock>
+                    <TextBlock x:Name="txtBtw"></TextBlock>
                     <TextBlock Margin="15 0 5 0">Btw-bedrag:</TextBlock>
-                    <TextBlock x:Name="txtBtwPrice">1400</TextBlock>
+                    <TextBlock x:Name="txtBtwPrice"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                     <TextBlock Margin="5 0 5 0" Foreground="HotPink">Totaalprijs:</TextBlock>
-                    <TextBlock x:Name="txtTotal" Foreground="HotPink">5000</TextBlock>
+                    <TextBlock x:Name="txtTotal" Foreground="HotPink"></TextBlock>
                 </StackPanel>
-                <Button x:Name="btnReservation" Click="Button_Click" Background="HotPink"  Width="200" Height="25" Margin="0 0 0 20">Toevoegen</Button>
+                <Button x:Name="btnReservation" Click="btnReservation_Click" Background="HotPink"  Width="200" Height="25" Margin="0 0 0 20">Toevoegen</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

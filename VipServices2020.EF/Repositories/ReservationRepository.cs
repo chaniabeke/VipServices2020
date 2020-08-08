@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VipServices2020.Domain.Model;
+using VipServices2020.Domain.Models;
 using VipServices2020.Domain.Repositories;
 
 namespace VipServices2020.EF.Repositories

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VipServices2020.EF;
 
 namespace VipServices2020.EF.Migrations
 {
     [DbContext(typeof(VipServicesContext))]
-    partial class VipServicesContextModelSnapshot : ModelSnapshot
+    [Migration("20200808120934_staffeldiscount")]
+    partial class staffeldiscount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace VipServices2020.EF.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Address", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +48,7 @@ namespace VipServices2020.EF.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Customer", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Customer", b =>
                 {
                     b.Property<int>("CustomerNumber")
                         .ValueGeneratedOnAdd()
@@ -75,7 +77,7 @@ namespace VipServices2020.EF.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Discount", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Discount", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,7 +92,7 @@ namespace VipServices2020.EF.Migrations
                     b.ToTable("Discounts");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Limousine", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Limousine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,7 +131,7 @@ namespace VipServices2020.EF.Migrations
                     b.ToTable("Limousines");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Location", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +148,7 @@ namespace VipServices2020.EF.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Price", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Price", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -183,9 +185,6 @@ namespace VipServices2020.EF.Migrations
                     b.Property<decimal>("SecondHourPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("StaffelNumberOfBookedReservations")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(18,2)");
 
@@ -194,12 +193,10 @@ namespace VipServices2020.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StaffelNumberOfBookedReservations");
-
                     b.ToTable("Prices");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Reservation", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -256,15 +253,15 @@ namespace VipServices2020.EF.Migrations
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Staffel", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Staffel", b =>
                 {
                     b.Property<int>("NumberOfBookedReservations")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Discount")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("DiscountId")
                         .HasColumnType("int");
@@ -276,52 +273,45 @@ namespace VipServices2020.EF.Migrations
                     b.ToTable("Staffels");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Customer", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Customer", b =>
                 {
-                    b.HasOne("VipServices2020.Domain.Models.Address", "Address")
+                    b.HasOne("VipServices2020.Domain.Model.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Price", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Reservation", b =>
                 {
-                    b.HasOne("VipServices2020.Domain.Models.Staffel", "Staffel")
-                        .WithMany()
-                        .HasForeignKey("StaffelNumberOfBookedReservations");
-                });
-
-            modelBuilder.Entity("VipServices2020.Domain.Models.Reservation", b =>
-                {
-                    b.HasOne("VipServices2020.Domain.Models.Location", "ArrivalLocation")
+                    b.HasOne("VipServices2020.Domain.Model.Location", "ArrivalLocation")
                         .WithMany()
                         .HasForeignKey("ArrivalLocationId");
 
-                    b.HasOne("VipServices2020.Domain.Models.Customer", "Customer")
+                    b.HasOne("VipServices2020.Domain.Model.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerNumber");
 
-                    b.HasOne("VipServices2020.Domain.Models.Address", "LimousineExpectedAddress")
+                    b.HasOne("VipServices2020.Domain.Model.Address", "LimousineExpectedAddress")
                         .WithMany()
                         .HasForeignKey("LimousineExpectedAddressId");
 
-                    b.HasOne("VipServices2020.Domain.Models.Limousine", "Limousine")
+                    b.HasOne("VipServices2020.Domain.Model.Limousine", "Limousine")
                         .WithMany("Reservations")
                         .HasForeignKey("LimousineId");
 
-                    b.HasOne("VipServices2020.Domain.Models.Price", "Price")
+                    b.HasOne("VipServices2020.Domain.Model.Price", "Price")
                         .WithMany()
                         .HasForeignKey("PriceId");
 
-                    b.HasOne("VipServices2020.Domain.Models.Location", "StartLocation")
+                    b.HasOne("VipServices2020.Domain.Model.Location", "StartLocation")
                         .WithMany()
                         .HasForeignKey("StartLocationId");
                 });
 
-            modelBuilder.Entity("VipServices2020.Domain.Models.Staffel", b =>
+            modelBuilder.Entity("VipServices2020.Domain.Model.Staffel", b =>
                 {
-                    b.HasOne("VipServices2020.Domain.Models.Discount", null)
+                    b.HasOne("VipServices2020.Domain.Model.Discount", null)
                         .WithMany("StaffelDiscountList")
                         .HasForeignKey("DiscountId");
                 });

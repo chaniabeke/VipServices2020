@@ -1,82 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using VipServices2020.Domain.Model;
+using VipServices2020.Domain.Models;
 
 namespace VipServices2020.Domain
 {
     public static class PriceCalculator
     {
-        public static Price PerHourPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime)
+        public static Price PerHourPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime, Staffel staffel)
         {
             Price price = new Price();
-            //eerste uur is volledige prijs
             price.FirstHourPrice = limousine.FirstHourPrice;
+            TimeSpan oneHour = new TimeSpan(1, 0, 0);
+            totalHours = totalHours - oneHour;
 
-            //tweede uurprijs 65% van de eerste-uur prijs, afgerond naar een veelvoud van € 5
-            price.SecondHourCount = totalHours.Hours - 1;
-            price.SecondHourPrice = Math.Round(((decimal)(65.0 / 100.0) * ((decimal)price.SecondHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
-            //nachtuur wordt gerekend aan 140% van de eerste-uur prijs, afgerond naar een veelvoud van € 5 (22u - 7u)??
-            //bereken subtotaal 
+            price.NightHourCount = CalculateNightHours(totalHours, startTime, endTime);
+            price.NightHourPrice = Math.Round(((decimal)(price.NightHourPercentage / 100.0) * ((decimal)price.NightHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+
+            price.SecondHourCount = totalHours.Hours - price.NightHourCount;
+            price.SecondHourPrice = Math.Round(((decimal)(price.SecondHourPercentage / 100.0) * ((decimal)price.SecondHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+
             price.SubTotal = price.FirstHourPrice + price.SecondHourPrice + price.SecondHourPrice + price.NightHourPrice;
-            return price;
 
-        }
-        public static Price WeddingPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime)
-        {
-            Price price = new Price();
-            //overuur berekent als eerste uur, tweede uur prijs,... (na 7 u huren)
-            price.FixedPrice = limousine.WeddingPrice;
-            int overtimeHours = totalHours.Hours - 7;
-            if (overtimeHours > 0)
-            {
-                price.OvertimeCount = overtimeHours;
-                price.FirstHourPrice = limousine.FirstHourPrice;
-                overtimeHours--;
-                if (overtimeHours > 1)
-                { 
-                    price.OvertimePrice = Math.Round(((decimal)(65.0 / 100.0) * ((decimal)overtimeHours * (decimal)limousine.FirstHourPrice))/5)*5;
-                }
-                //if nachtuur??
-            }
-            price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.OvertimePrice;
+            TotalPriceCalculator(price, staffel);
+
             return price;
         }
-        public static Price WelnessCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime)
+        public static Price WeddingPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime, Staffel staffel)
         {
             Price price = new Price();
-            //Fixed price 
+            price.FixedPrice = limousine.WeddingPrice;
+            TimeSpan extraHours = new TimeSpan((int)totalHours.TotalHours - 7, 0, 0);
+
+            price.NightHourCount = CalculateNightHours(extraHours, startTime, endTime);
+            price.NightHourPrice = Math.Round(((decimal)(price.NightHourPercentage / 100.0) * ((decimal)price.NightHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+
+            price.OvertimeCount = totalHours.Hours - price.NightHourCount;
+            price.OvertimePrice = Math.Round(((decimal)(price.SecondHourPercentage / 100.0) * ((decimal)price.OvertimeCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+
+            price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.OvertimePrice;
+
+            TotalPriceCalculator(price, staffel);
+
+            return price;
+        }
+        public static Price WelnessCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime, Staffel staffel)
+        {
+            Price price = new Price();
             price.FixedPrice = limousine.WelnessPrice;
             price.SubTotal = price.FixedPrice;
+
+            TotalPriceCalculator(price, staffel);
+
             return price;
         }
-        public static Price NightLifeCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime)
+        public static Price NightLifeCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime, Staffel staffel)
         {
             Price price = new Price();
-            //overuur =  nachtuur , wordt gerekend aan 140% van de eerste-uur prijs, afgerond naar een veelvoud van € 5 (na 7 u huren)
             price.FixedPrice = limousine.NightLifePrice;
             int overtimeHours = totalHours.Hours - 7;
             if (overtimeHours > 0)
             {
                 price.NightHourCount = overtimeHours;
                 price.FirstHourPrice = limousine.FirstHourPrice;
-                overtimeHours--;
-                if (overtimeHours > 1)
+                price.NightHourCount--;
+                if (price.NightHourCount > 1)
                 {
-                    price.NightHourPrice = Math.Round(((decimal)(140.0 / 100.0) * ((decimal)overtimeHours * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+                    price.NightHourPrice = Math.Round(((decimal)(price.NightHourPercentage / 100.0) * ((decimal)price.NightHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
                 }
             }
             price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.OvertimePrice;
+
+            TotalPriceCalculator(price, staffel);
+
             return price;
         }
-        private static Price TotalPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime)
+
+        private static Price TotalPriceCalculator(Price price, Staffel staffel)
         {
-            Price price = new Price();
-            //price.SubTotal, price.ExclusiveBtw;
-            //bereken staffelkorting op btw
-            //bereken btw-bedrag
-            //bereken totaal prijs
+            price.ExclusiveBtw = (decimal)(staffel.Discount / 100.0) * price.SubTotal + price.SubTotal;
+            price.BtwPrice = price.ExclusiveBtw * (decimal)(price.Btw / 100.0);
+            price.Total = Math.Round(price.ExclusiveBtw + price.BtwPrice, 2);
             return price;
+        }
+
+        private static bool BetweenTime(DateTime time, DateTime startTime, DateTime endTime)
+        {
+            if (time.TimeOfDay == startTime.TimeOfDay) return true;
+            if (time.TimeOfDay == endTime.TimeOfDay) return true;
+            if (startTime.TimeOfDay <= endTime.TimeOfDay)
+                return (time.TimeOfDay >= startTime.TimeOfDay && time.TimeOfDay <= endTime.TimeOfDay);
+            else
+                return !(time.TimeOfDay >= endTime.TimeOfDay && time.TimeOfDay <= startTime.TimeOfDay);
+        }
+        private static int CalculateNightHours(TimeSpan totalHours, DateTime startTime, DateTime endTime )
+        {
+            int dayHour = 0; int nightHour = 0;
+            DateTime DayStart = new DateTime(startTime.Year, startTime.Month, startTime.Day, 7, 0, 0);
+            DateTime DayEnd = new DateTime(startTime.Year, startTime.Month, startTime.Day, 21, 59, 59);
+            DateTime NightStart = new DateTime(endTime.Year, endTime.Month, endTime.Day, 22, 0, 0);
+            DateTime NightEnd = new DateTime(endTime.Year, endTime.Month, endTime.Day, 6, 59, 59);
+            DateTime dateTime = startTime;
+            for (int i = 0; i < totalHours.TotalHours; i++)
+            {
+                if (BetweenTime(dateTime, DayStart, DayEnd))
+                {
+                    dayHour++;
+                }
+                if (BetweenTime(dateTime, NightStart, NightEnd))
+                {
+                    nightHour++;
+                }
+                dateTime = dateTime.AddHours(1);
+            }
+            return nightHour;
         }
     }
 }

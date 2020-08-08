@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace VipServices2020.Domain.Model
+namespace VipServices2020.Domain.Models
 {
     public class Limousine
     {

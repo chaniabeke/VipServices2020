@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VipServices2020.Domain;
-using VipServices2020.Domain.Model;
+using VipServices2020.Domain.Models;
 using VipServices2020.EF;
 using VipServices2020.EF.Repositories;
 
@@ -49,7 +49,11 @@ namespace VipServices2020.WPF
                     ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(dtpDate.SelectedDate.Value);
                 }
             }
+        }
 
+        private void OpenReservationDetails_OnClick(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }
