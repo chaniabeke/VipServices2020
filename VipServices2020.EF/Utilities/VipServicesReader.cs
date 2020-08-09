@@ -48,7 +48,7 @@ namespace VipServices2020.EF.Utilities
                     town = addresItems[3];
                     Address address = new Address(streetName, streetNumber, town);
 
-                    manager.AddCustomer(name, category, BtwNumber, address);
+                    manager.AddCustomer(name, BtwNumber, address, category);
                     
                 }
             }

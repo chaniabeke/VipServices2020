@@ -24,7 +24,7 @@ namespace VipServices2020.Domain
         {
             return uow.Locations.FindAll().ToList();
         }
-        public void AddCustomer(string name, CategoryType category, string BtwNumber, Address address)
+        public void AddCustomer(string name, string BtwNumber, Address address, CategoryType category)
         {
             uow.Customers.AddCustomer(new Customer(name, BtwNumber, address, category));
             uow.Complete();
@@ -56,8 +56,9 @@ namespace VipServices2020.Domain
              DateTime startTime, DateTime endTime, Limousine limousine, Staffel staffel)
         {
             //Domeinregels
-            //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn
+            //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn + de test
             if (startTime < DateTime.Now) throw new DomainException("Een reservatie mag niet in het verleden zijn.");
+            if(endTime < startTime) throw new DomainException("Een reservatie mag niet eindigen voor het begint.");
             if (startTime.Hour < 7) if (startTime.Hour > 12) throw new DomainException("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours != 10) throw new DomainException("Een Welness reservatie moet altijd 10 uur zijn.");

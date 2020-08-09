@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
@@ -14,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DomainLayer\Model\" />
-    <Folder Include="EFLayer\Reader\" />
+    <ProjectReference Include="..\VipServices2020.Domain\VipServices2020.Domain.csproj" />
+    <ProjectReference Include="..\VipServices2020.EF\VipServices2020.EF.csproj" />
   </ItemGroup>
 
 </Project>

@@ -61,6 +61,18 @@ namespace VipServices2020.WPF
         private void btnReservation_Click(object sender, RoutedEventArgs e)
         {
 
+            //Alle  soorten reservaties toevoegen
+            Address address = new Address(txtStreet.Text, txtNumber.Text, txtTown.Text);
+
+            DateTime startDate = new DateTime(dtpStartDate.SelectedDate.Value.Year,
+                dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
+                (int)cmbStartTime.SelectedItem, 0, 0);
+            DateTime endDate = new DateTime(dtpEndDate.SelectedDate.Value.Year,
+                dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day,
+                (int)cmbEndTime.SelectedItem, 0, 0);
+
+            vipServicesManager.AddNightLifeReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
+                (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, new Staffel(0, 0));
         }
 
         private void CalculatePrice()
