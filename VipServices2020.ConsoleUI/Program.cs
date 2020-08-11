@@ -25,7 +25,7 @@ namespace VipServices2020.ConsoleUI
             Location location = new Location("gent");
             Limousine limousine = new Limousine("bluu", "df", "sddd", 198, 547, 1477, 1351);
             Staffel staffel = new Staffel(2, 5);
-            vipServicesManger.AddNightLifeReservation(customer, address, location, location, new DateTime(2020, 09, 22, 0, 0, 0), new DateTime(2020, 09, 22, 8, 0, 0), limousine, staffel);
+            vipServicesManger.AddNightLifeReservation(customer, address, location, location, new DateTime(2020, 09, 22, 22, 0, 0), new DateTime(2020, 09, 23, 9, 0, 0), limousine, staffel);
             Console.WriteLine("Einde Databank");
 
             //foreach (Reservation reservation in limousine.Reservations)

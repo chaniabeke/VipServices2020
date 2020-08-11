@@ -13,16 +13,19 @@ namespace VipServices2020.Domain
             price.FirstHourPrice = limousine.FirstHourPrice;
             TimeSpan oneHour = new TimeSpan(1, 0, 0);
             totalHours = totalHours - oneHour;
+            DateTime startTimeMinusStartHour = startTime + oneHour;
 
-            price.NightHourCount = CalculateNightHours(totalHours, startTime, endTime);
-            price.NightHourPrice = Math.Round(((decimal)(price.NightHourPercentage / 100.0) * ((decimal)price.NightHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+            price.NightHourCount = CalculateNightHours(totalHours, startTimeMinusStartHour, endTime);
+            price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
             price.SecondHourCount = totalHours.Hours - price.NightHourCount;
-            price.SecondHourPrice = Math.Round(((decimal)(price.SecondHourPercentage / 100.0) * ((decimal)price.SecondHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+            price.SecondHourPrice = Math.Round(((double)(price.SecondHourPercentage / 100.0) * ((double)price.SecondHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
-            price.SubTotal = price.FirstHourPrice + price.SecondHourPrice + price.SecondHourPrice + price.NightHourPrice;
+            price.SubTotal = price.FirstHourPrice + price.SecondHourPrice + price.NightHourPrice;
 
             TotalPriceCalculator(price, staffel);
+
+            totalHours = totalHours + oneHour;
 
             return price;
         }
@@ -30,15 +33,28 @@ namespace VipServices2020.Domain
         {
             Price price = new Price();
             price.FixedPrice = limousine.WeddingPrice;
-            TimeSpan extraHours = new TimeSpan((int)totalHours.TotalHours - 7, 0, 0);
+            
+            if (totalHours.Hours > 7)
+            { 
+                price.FirstHourPrice = limousine.FirstHourPrice;
 
-            price.NightHourCount = CalculateNightHours(extraHours, startTime, endTime);
-            price.NightHourPrice = Math.Round(((decimal)(price.NightHourPercentage / 100.0) * ((decimal)price.NightHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+                if(totalHours.Hours > 8)
+                {
+                    TimeSpan eightHours = new TimeSpan(8, 0, 0);
+                    totalHours = totalHours - eightHours;
+                    DateTime startTimeMinusStartHour = startTime + eightHours;
 
-            price.OvertimeCount = totalHours.Hours - price.NightHourCount;
-            price.OvertimePrice = Math.Round(((decimal)(price.SecondHourPercentage / 100.0) * ((decimal)price.OvertimeCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+                    price.NightHourCount = CalculateNightHours(totalHours, startTimeMinusStartHour, endTime);
+                    price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
-            price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.OvertimePrice;
+                    price.OvertimeCount = totalHours.Hours - price.NightHourCount;
+                    price.OvertimePrice = Math.Round(((double)(price.SecondHourPercentage / 100.0) * ((double)price.OvertimeCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+
+                    totalHours = totalHours + eightHours;
+                }
+            }
+           
+            price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.NightHourPrice + price.OvertimePrice;
 
             TotalPriceCalculator(price, staffel);
 
@@ -58,18 +74,28 @@ namespace VipServices2020.Domain
         {
             Price price = new Price();
             price.FixedPrice = limousine.NightLifePrice;
-            int overtimeHours = totalHours.Hours - 7;
-            if (overtimeHours > 0)
+
+            if (totalHours.Hours > 7)
             {
-                price.NightHourCount = overtimeHours;
                 price.FirstHourPrice = limousine.FirstHourPrice;
-                price.NightHourCount--;
-                if (price.NightHourCount > 1)
+
+                if (totalHours.Hours > 8)
                 {
-                    price.NightHourPrice = Math.Round(((decimal)(price.NightHourPercentage / 100.0) * ((decimal)price.NightHourCount * (decimal)limousine.FirstHourPrice)) / 5) * 5;
+                    TimeSpan eightHours = new TimeSpan(8, 0, 0);
+                    totalHours = totalHours - eightHours;
+                    DateTime startTimeMinusStartHour = startTime + eightHours;
+
+                    price.NightHourCount = CalculateNightHours(totalHours, startTimeMinusStartHour, endTime);
+                    price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+
+                    price.OvertimeCount = totalHours.Hours - price.NightHourCount;
+                    price.OvertimePrice = Math.Round(((double)(price.SecondHourPercentage / 100.0) * ((double)price.OvertimeCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+
+                    totalHours = totalHours + eightHours;
                 }
             }
-            price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.OvertimePrice;
+
+            price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.NightHourPrice + price.OvertimePrice;
 
             TotalPriceCalculator(price, staffel);
 
@@ -78,8 +104,8 @@ namespace VipServices2020.Domain
 
         private static Price TotalPriceCalculator(Price price, Staffel staffel)
         {
-            price.ExclusiveBtw = (decimal)(staffel.Discount / 100.0) * price.SubTotal + price.SubTotal;
-            price.BtwPrice = price.ExclusiveBtw * (decimal)(price.Btw / 100.0);
+            price.ExclusiveBtw = price.SubTotal - (price.SubTotal * (double)(staffel.Discount / 100.0));
+            price.BtwPrice = price.ExclusiveBtw * (double)(price.Btw / 100.0);
             price.Total = Math.Round(price.ExclusiveBtw + price.BtwPrice, 2);
             return price;
         }

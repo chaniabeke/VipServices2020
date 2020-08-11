@@ -57,9 +57,8 @@ namespace VipServices2020.Domain
         {
             //Domeinregels
             //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn + de test
-            if (startTime < DateTime.Now) throw new DomainException("Een reservatie mag niet in het verleden zijn.");
             if(endTime < startTime) throw new DomainException("Een reservatie mag niet eindigen voor het begint.");
-            if (startTime.Hour < 7) if (startTime.Hour > 12) throw new DomainException("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
+            if (startTime.Hour < 7 || startTime.Hour > 12) throw new DomainException("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours != 10) throw new DomainException("Een Welness reservatie moet altijd 10 uur zijn.");
 
@@ -78,11 +77,10 @@ namespace VipServices2020.Domain
         {
             //Domeinregels
             //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn
-            if (startTime < DateTime.Now) throw new DomainException("Een reservatie mag niet in het verleden zijn.");
             if (startTime.Hour < 20 && startTime.Hour != 0) throw new DomainException("Een NightLife reservatie moet starten tussen 20u00 en 24u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
-            if (totalHours.Hours < 7) throw new DomainException("Een NigtLife reservatie moet minstens 7uur zijn.");
+            if (totalHours.Hours < 7) throw new DomainException("Een NightLife reservatie moet minstens 7uur zijn.");
 
             Price price = PriceCalculator.NightLifeCalculator(limousine, totalHours, startTime, endTime, staffel);
 
@@ -98,8 +96,7 @@ namespace VipServices2020.Domain
             //Domeinregels  
             //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn
 
-            if (startTime < DateTime.Now) throw new DomainException("Een reservatie mag niet in het verleden zijn.");
-            if (startTime.Hour < 7) if (startTime.Hour > 15) throw new DomainException("Een Wedding reservatie moet starten tussen 07u00 en 15u00.");
+            if (startTime.Hour < 7 || startTime.Hour > 15) throw new DomainException("Een Wedding reservatie moet starten tussen 07u00 en 15u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
             if (totalHours.Hours < 7) throw new DomainException("Een Wedding reservatie moet minstens 7uur zijn.");
@@ -119,10 +116,8 @@ namespace VipServices2020.Domain
         {
             //Domeinregels
             //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn
-
-            if (startTime < DateTime.Now) throw new DomainException("Een reservatie mag niet in het verleden zijn.");
             TimeSpan totalHours = endTime - startTime;
-            if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
+            if (totalHours.Hours > 11) throw new DomainException("Een Airport reservatie mag niet langer zijn dan 11uur.");
 
             //Pricecalculator
             Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, staffel);
@@ -138,10 +133,8 @@ namespace VipServices2020.Domain
         {
             //Domeinregels
             //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn
-
-            if (startTime < DateTime.Now) throw new DomainException("Een reservatie mag niet in het verleden zijn.");
             TimeSpan totalHours = endTime - startTime;
-            if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
+            if (totalHours.Hours > 11) throw new DomainException("Een Business reservatie mag niet langer zijn dan 11uur.");
 
             //Pricecalculator
             Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, staffel);
