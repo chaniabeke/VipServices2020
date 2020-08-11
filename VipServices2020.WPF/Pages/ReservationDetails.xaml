@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:VipServices2020.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="800"
-      Title="ReservationDetails">
+      Title="ReservationDetails" FontSize="16">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -22,8 +22,118 @@
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="0 0 0 20"
-                   FontSize="20" TextAlignment="Center">Reservering Details</TextBlock>
-        
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="0 0 0 50"
+                   FontSize="25" TextAlignment="Center">Reservering Details</TextBlock>
+
+        <StackPanel x:Name="stpLeft" Orientation ="Vertical" Grid.Row="2" Grid.Column="1">
+            <TextBlock FontWeight="Bold" TextDecorations="Underline" Margin="0 0 0 20">Klant</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 5">Nr:</TextBlock>
+                <TextBlock x:Name="txtCustomerNumber" />
+                <TextBlock FontWeight="DemiBold" Margin="20 0 10 0">Naam:</TextBlock>
+                <TextBlock x:Name="txtCustomerName" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 5">Categorie:</TextBlock>
+                <TextBlock x:Name="txtCustomerCategory" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 5">BtwNummer:</TextBlock>
+                <TextBlock x:Name="txtCustomerBtwNumber" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 0" >Adres:</TextBlock>
+                <TextBlock x:Name="txtCustomerAddress"/>
+            </StackPanel>
+
+            <TextBlock FontWeight="Bold" TextDecorations="Underline" Margin="0 40 0 20">Reservering</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 5" >Nr:</TextBlock>
+                <TextBlock x:Name="txtReservationId" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 10" >Gemaakt op:</TextBlock>
+                <TextBlock x:Name="txtReservationCreated"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 10" >Verwacht op adres:</TextBlock>
+                <TextBlock x:Name="txtLimousineExpectedAddress"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 10" >Start:</TextBlock>
+                <TextBlock x:Name="txtReservationStartLocation"/>
+                <TextBlock FontWeight="DemiBold" Margin="20 0 10 00" >Aankomst:</TextBlock>
+                <TextBlock x:Name="txtReservationArrivalLocation"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 10" >Van:</TextBlock>
+                <TextBlock x:Name="txtReservationStartTime"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 10" >Tot:</TextBlock>
+                <TextBlock x:Name="txtReservationEndTime"/>
+            </StackPanel>
+            
+        </StackPanel>
+        <StackPanel x:Name="stpRight" Orientation ="Vertical" Grid.Row="2" Grid.Column="2" Margin="70 0 0 0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 30" >Arrangement:</TextBlock>
+                <TextBlock x:Name="txtLimousineArrangementType"/>
+            </StackPanel>
+            <TextBlock FontWeight="Bold" TextDecorations="Underline">Limousine</TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 10" >Nr:</TextBlock>
+                <TextBlock x:Name="txtLimousineNumber"/>
+                <TextBlock FontWeight="DemiBold" Margin="20 0 10 0" >Model:</TextBlock>
+                <TextBlock x:Name="txtLimousineBrand"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 10" >Model:</TextBlock>
+                <TextBlock x:Name="txtLimousineModel"/>
+                <TextBlock FontWeight="DemiBold" Margin="20 0 10 0" >Kleur:</TextBlock>
+                <TextBlock x:Name="txtLimousineColor"/>
+            </StackPanel>
+            
+            <TextBlock FontWeight="Bold" TextDecorations="Underline" Margin="0 30 0 20">Prijs</TextBlock>
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 5 0">Eerste uur:</TextBlock>
+                <TextBlock x:Name="txtFirstHourPrice"></TextBlock>
+                <TextBlock FontWeight="DemiBold" Margin="25 0 5 0">Tweede uur:</TextBlock>
+                <TextBlock x:Name="txtSecondHourCount"></TextBlock>
+                <TextBlock x:Name="txtSecondHourPrice"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 5 0">Nacht uur:</TextBlock>
+                <TextBlock x:Name="txtNightHourCount"></TextBlock>
+                <TextBlock x:Name="txtNightHourPrice"></TextBlock>
+                <TextBlock FontWeight="DemiBold" Margin="25 0 5 0">Overuur:</TextBlock>
+                <TextBlock x:Name="txtOvertimeCount"></TextBlock>
+                <TextBlock x:Name="txtOvertimePrice"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 10 0">Vaste prijs:</TextBlock>
+                <TextBlock x:Name="txtFixedPrice"></TextBlock>
+                <TextBlock FontWeight="DemiBold" Margin="10 0 10 0">Subtotaal:</TextBlock>
+                <TextBlock x:Name="txtSubTotal"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
+                <TextBlock FontWeight="DemiBold" Margin="0 0 5 0">Staffelkorting:</TextBlock>
+                <TextBlock x:Name="txtStaffelDiscount"></TextBlock>
+                <TextBlock FontWeight="DemiBold" Margin="10 0 5 0">Prijs zonder btw:</TextBlock>
+                <TextBlock x:Name="txtExclusiveBtw"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+
+                <TextBlock FontWeight="DemiBold" Margin="0 0 5 0">Btw:</TextBlock>
+                <TextBlock x:Name="txtBtw"></TextBlock>
+                <TextBlock FontWeight="DemiBold" Margin="10 0 5 0">Btw-bedrag:</TextBlock>
+                <TextBlock x:Name="txtBtwPrice"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20" Background="DarkRed">
+                <TextBlock FontWeight="Bold" Margin="0 0 10 0" Foreground="White" Padding="10">Totaalprijs:</TextBlock>
+                <TextBlock x:Name="txtTotal" Foreground="White" Padding="10"></TextBlock>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

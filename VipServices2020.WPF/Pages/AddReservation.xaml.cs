@@ -36,11 +36,19 @@ namespace VipServices2020.WPF
             cmbEndTime.ItemsSource = hours;
             lblLimousine.Visibility = Visibility.Hidden;
             cmbLimousine.Visibility = Visibility.Hidden;
+            btnPrice.Visibility = Visibility.Hidden;
+            stpPrice.Visibility = Visibility.Hidden;
         }
 
         private void btnPrice_Click(object sender, RoutedEventArgs e)
         {
-            CalculatePrice();
+            if (cmbArrangement.SelectedItem != null && dtpStartDate != null && dtpEndDate != null 
+                && cmbStartTime != null && cmbEndTime != null && cmbLimousine != null)
+            {
+                stpPrice.Visibility = Visibility.Visible;
+                CalculatePrice();
+            }
+
         }
 
         private void btnLimousine_Click(object sender, RoutedEventArgs e)
@@ -52,15 +60,17 @@ namespace VipServices2020.WPF
                 cmbLimousine.ItemsSource =
                 vipServicesManager.GetAllAvailableLimousines(DateTime.Now, DateTime.Now,
                     (ArrangementType)Enum.Parse(typeof(ArrangementType), cmbArrangement.SelectedItem.ToString()));
+
+                btnPrice.Visibility = Visibility.Visible;
             }
             else
             {
                 MessageBox.Show("Gelieve eerst een arrangement aanduiden.");
             }
+           
         }
         private void btnReservation_Click(object sender, RoutedEventArgs e)
         {
-
             //Alle  soorten reservaties toevoegen
             Address address = new Address(txtStreet.Text, txtNumber.Text, txtTown.Text);
 

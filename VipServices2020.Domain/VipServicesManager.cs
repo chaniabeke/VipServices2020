@@ -145,6 +145,10 @@ namespace VipServices2020.Domain
             limousine.Reservations.Add(reservation);
             uow.Complete();
         }
+        public Reservation GetReservation(int reservationId)
+        {
+            return uow.Reservations.Find(reservationId).FirstOrDefault();
+        }
         public List<Reservation> GetAllReservations()
         {
             return uow.Reservations.FindAll().ToList();

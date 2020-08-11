@@ -51,7 +51,9 @@
                     <GridViewColumn Header="Details">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="OpenReservationDetails" Content="Open Reservatie" Click="OpenReservationDetails_OnClick"/>
+                                <Button x:Name="btnOpenReservationDetails" 
+                                        Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}"
+                                        Content="Open Reservatie" Click="btnOpenReservationDetails_OnClick"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

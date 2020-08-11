@@ -21,9 +21,12 @@ namespace VipServices2020.EF.Repositories
             context.Reservations.Add(reservation);
         }
 
-        public Reservation Find(int id)
+        public IEnumerable<Reservation> Find(int id)
         {
-            return context.Reservations.Find(id);
+            return context.Reservations.Where(r => r.Id == id).Include(r => r.Customer).ThenInclude(c => c.Address)
+                .Include(r => r.LimousineExpectedAddress)
+                .Include(r => r.StartLocation).Include(r => r.ArrivalLocation)
+                .Include(r => r.Limousine).Include(r => r.Price).AsEnumerable<Reservation>();
         }
         public IEnumerable<Reservation> FindAll()
         {

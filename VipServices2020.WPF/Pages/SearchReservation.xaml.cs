@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -51,9 +52,12 @@ namespace VipServices2020.WPF
             }
         }
 
-        private void OpenReservationDetails_OnClick(object sender, RoutedEventArgs e)
+        private void btnOpenReservationDetails_OnClick(object sender, RoutedEventArgs e)
         {
-           
+            var item = ((sender as Button)?.Tag as ListViewItem)?.DataContext;
+            var reservationId = (item as Reservation).Id;
+            ReservationDetails reservationDetails = new ReservationDetails(reservationId);
+            this.NavigationService.Navigate(reservationDetails);
         }
     }
 }
