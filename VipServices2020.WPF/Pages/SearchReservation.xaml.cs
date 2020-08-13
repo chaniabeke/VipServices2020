@@ -27,37 +27,63 @@ namespace VipServices2020.WPF
         public SearchReservation()
         {
             InitializeComponent();
-            cmbCustomer.ItemsSource = vipServicesManager.GetAllCustomers();
-            ltbReservations.ItemsSource = vipServicesManager.GetAllReservations();
+            try
+            {
+                cmbCustomer.ItemsSource = vipServicesManager.GetAllCustomers();
+                ltbReservations.ItemsSource = vipServicesManager.GetAllReservations();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout: " + ex.Message,
+                                 "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbCustomer.SelectedItem != null && dtpDate.SelectedDate != null)
+            try
             {
-                int customerId = (cmbCustomer.SelectedItem as Customer).CustomerNumber;
-                ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(customerId, dtpDate.SelectedDate.Value);
-            }
-            else
-            {
-                if (cmbCustomer.SelectedItem != null)
+                if (cmbCustomer.SelectedItem != null && dtpDate.SelectedDate != null)
                 {
                     int customerId = (cmbCustomer.SelectedItem as Customer).CustomerNumber;
-                    ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(customerId);
+                    ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(customerId, dtpDate.SelectedDate.Value);
                 }
-                if (dtpDate.SelectedDate != null)
+                else
                 {
-                    ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(dtpDate.SelectedDate.Value);
+                    if (cmbCustomer.SelectedItem != null)
+                    {
+                        int customerId = (cmbCustomer.SelectedItem as Customer).CustomerNumber;
+                        ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(customerId);
+                    }
+                    if (dtpDate.SelectedDate != null)
+                    {
+                        ltbReservations.ItemsSource = vipServicesManager.GetAllReservations(dtpDate.SelectedDate.Value);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout: " + ex.Message,
+                               "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+           
         }
 
         private void btnOpenReservationDetails_OnClick(object sender, RoutedEventArgs e)
         {
-            var item = ((sender as Button)?.Tag as ListViewItem)?.DataContext;
-            var reservationId = (item as Reservation).Id;
-            ReservationDetails reservationDetails = new ReservationDetails(reservationId);
-            this.NavigationService.Navigate(reservationDetails);
+            try
+            {
+                var item = ((sender as Button)?.Tag as ListViewItem)?.DataContext;
+                var reservationId = (item as Reservation).Id;
+                ReservationDetails reservationDetails = new ReservationDetails(reservationId);
+                this.NavigationService.Navigate(reservationDetails);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout: " + ex.Message,
+                                "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

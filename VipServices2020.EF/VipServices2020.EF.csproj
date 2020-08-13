@@ -74,6 +74,44 @@
     <Compile Remove="Migrations\20200807123625_fix2.Designer.cs" />
     <Compile Remove="Migrations\20200807123943_initcreate.cs" />
     <Compile Remove="Migrations\20200807123943_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200807125336_initcreate.cs" />
+    <Compile Remove="Migrations\20200807125336_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200807152422_res.cs" />
+    <Compile Remove="Migrations\20200807152422_res.Designer.cs" />
+    <Compile Remove="Migrations\20200808120934_staffeldiscount.cs" />
+    <Compile Remove="Migrations\20200808120934_staffeldiscount.Designer.cs" />
+    <Compile Remove="Migrations\20200808131507_staffel.cs" />
+    <Compile Remove="Migrations\20200808131507_staffel.Designer.cs" />
+    <Compile Remove="Migrations\20200808141904_dfg.cs" />
+    <Compile Remove="Migrations\20200808141904_dfg.Designer.cs" />
+    <Compile Remove="Migrations\20200811120204_double.cs" />
+    <Compile Remove="Migrations\20200811120204_double.Designer.cs" />
+    <Compile Remove="Migrations\20200812172141_reser.cs" />
+    <Compile Remove="Migrations\20200812172141_reser.Designer.cs" />
+    <Compile Remove="Migrations\20200812172534_reservation.cs" />
+    <Compile Remove="Migrations\20200812172534_reservation.Designer.cs" />
+    <Compile Remove="Migrations\20200812172901_reer.cs" />
+    <Compile Remove="Migrations\20200812172901_reer.Designer.cs" />
+    <Compile Remove="Migrations\20200812174230_dferg.cs" />
+    <Compile Remove="Migrations\20200812174230_dferg.Designer.cs" />
+    <Compile Remove="Migrations\20200812195951_gfg4.cs" />
+    <Compile Remove="Migrations\20200812195951_gfg4.Designer.cs" />
+    <Compile Remove="Migrations\20200812201239_ggg.cs" />
+    <Compile Remove="Migrations\20200812201239_ggg.Designer.cs" />
+    <Compile Remove="Migrations\20200812211518_staffellastonehopefully.cs" />
+    <Compile Remove="Migrations\20200812211518_staffellastonehopefully.Designer.cs" />
+    <Compile Remove="Migrations\20200812212458_initcreate.cs" />
+    <Compile Remove="Migrations\20200812212458_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200812213133_initcreate.cs" />
+    <Compile Remove="Migrations\20200812213133_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200813175512_initcreate.cs" />
+    <Compile Remove="Migrations\20200813175512_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200813181128_initcreate.cs" />
+    <Compile Remove="Migrations\20200813181128_initcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200813203548_null.cs" />
+    <Compile Remove="Migrations\20200813203548_null.Designer.cs" />
+    <Compile Remove="Migrations\20200813210516_stafe.cs" />
+    <Compile Remove="Migrations\20200813210516_stafe.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

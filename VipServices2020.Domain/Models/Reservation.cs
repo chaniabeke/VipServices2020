@@ -16,6 +16,7 @@ namespace VipServices2020.Domain.Models
         [Required]
         public DateTime ReservationCreated { get; set; }
 
+        [Required]
         public Address LimousineExpectedAddress { get; set; }
 
         public Location StartLocation { get; set; }
@@ -35,6 +36,7 @@ namespace VipServices2020.Domain.Models
 
         public Limousine Limousine { get; set; }
 
+        [Required]
         public Price Price { get; set; }
 
 

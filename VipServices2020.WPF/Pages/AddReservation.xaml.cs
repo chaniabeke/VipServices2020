@@ -22,122 +22,203 @@ namespace VipServices2020.WPF
     /// </summary>
     public partial class AddReservation : Page
     {
-        
+
         private int[] hours = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
         VipServicesManager vipServicesManager = new VipServicesManager(new UnitOfWork(new VipServicesContext("Production")));
         public AddReservation()
         {
             InitializeComponent();
-            cmbCustomer.ItemsSource = vipServicesManager.GetAllCustomers();
-            cmbStartLocation.ItemsSource = vipServicesManager.GetAllLocations();
-            cmbArrivalLocation.ItemsSource = vipServicesManager.GetAllLocations();
-            cmbArrangement.ItemsSource = typeof(ArrangementType).GetEnumValues();
-            cmbStartTime.ItemsSource = hours;
-            cmbEndTime.ItemsSource = hours;
-            lblLimousine.Visibility = Visibility.Hidden;
-            cmbLimousine.Visibility = Visibility.Hidden;
-            btnPrice.Visibility = Visibility.Hidden;
-            stpPrice.Visibility = Visibility.Hidden;
+            try
+            {
+                cmbCustomer.ItemsSource = vipServicesManager.GetAllCustomers();
+                cmbStartLocation.ItemsSource = vipServicesManager.GetAllLocations();
+                cmbArrivalLocation.ItemsSource = vipServicesManager.GetAllLocations();
+                cmbArrangement.ItemsSource = typeof(ArrangementType).GetEnumValues();
+                cmbStartTime.ItemsSource = hours;
+                cmbEndTime.ItemsSource = hours;
+                lblLimousine.Visibility = Visibility.Hidden;
+                cmbLimousine.Visibility = Visibility.Hidden;
+                cmbDiscountCategory.ItemsSource = typeof(CategoryType).GetEnumValues();
+                btnPrice.Visibility = Visibility.Hidden;
+                stpPrice.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout: " + ex.Message,
+                                    "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
         }
 
         private void btnPrice_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbArrangement.SelectedItem != null && dtpStartDate != null && dtpEndDate != null 
+            if (cmbArrangement.SelectedItem != null && dtpStartDate != null && dtpEndDate != null
                 && cmbStartTime != null && cmbEndTime != null && cmbLimousine != null)
             {
-                stpPrice.Visibility = Visibility.Visible;
-                CalculatePrice();
+                try
+                {
+                    stpPrice.Visibility = Visibility.Visible;
+                    CalculatePrice();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Fout: " + ex.Message,
+                                   "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
-
         }
 
         private void btnLimousine_Click(object sender, RoutedEventArgs e)
         {
             if (cmbArrangement.SelectedItem != null)
             {
-                lblLimousine.Visibility = Visibility.Visible;
-                cmbLimousine.Visibility = Visibility.Visible;
-                cmbLimousine.ItemsSource =
-                vipServicesManager.GetAllAvailableLimousines(DateTime.Now, DateTime.Now,
-                    (ArrangementType)Enum.Parse(typeof(ArrangementType), cmbArrangement.SelectedItem.ToString()));
+                try
+                {
+                    lblLimousine.Visibility = Visibility.Visible;
+                    cmbLimousine.Visibility = Visibility.Visible;
+                    cmbLimousine.ItemsSource =
+                    vipServicesManager.GetAllAvailableLimousines(DateTime.Now, DateTime.Now,
+                        (ArrangementType)Enum.Parse(typeof(ArrangementType), cmbArrangement.SelectedItem.ToString()));
 
-                btnPrice.Visibility = Visibility.Visible;
+                    btnPrice.Visibility = Visibility.Visible;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Fout: " + ex.Message,
+                                   "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
             {
                 MessageBox.Show("Gelieve eerst een arrangement aanduiden.");
             }
-           
+
         }
         private void btnReservation_Click(object sender, RoutedEventArgs e)
         {
-            //Alle  soorten reservaties toevoegen
-            Address address = new Address(txtStreet.Text, txtNumber.Text, txtTown.Text);
+            if (cmbCustomer.SelectedItem != null && txtStreet.Text != String.Empty && txtNumber.Text != String.Empty
+                && txtTown.Text != String.Empty && cmbArrangement.SelectedItem != null && dtpStartDate != null
+                && dtpEndDate != null && cmbStartLocation.SelectedItem != null && cmbEndTime.SelectedItem != null
+                && cmbStartTime != null && cmbEndTime != null && cmbLimousine != null)
+            {
+                try
+                {
+                    Address address = new Address(txtStreet.Text, txtNumber.Text, txtTown.Text);
 
-            DateTime startDate = new DateTime(dtpStartDate.SelectedDate.Value.Year,
-                dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
-                (int)cmbStartTime.SelectedItem, 0, 0);
-            DateTime endDate = new DateTime(dtpEndDate.SelectedDate.Value.Year,
-                dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day,
-                (int)cmbEndTime.SelectedItem, 0, 0);
+                    DateTime startDate = new DateTime(dtpStartDate.SelectedDate.Value.Year,
+                        dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
+                        (int)cmbStartTime.SelectedItem, 0, 0);
+                    DateTime endDate = new DateTime(dtpEndDate.SelectedDate.Value.Year,
+                        dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day,
+                        (int)cmbEndTime.SelectedItem, 0, 0);
 
-            vipServicesManager.AddNightLifeReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
-                (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, new Staffel(0, 0));
+                    Staffel staffel = vipServicesManager.GetStaffel((Customer)cmbCustomer.SelectedItem,
+                   startDate, (CategoryType)cmbDiscountCategory.SelectedItem);
+
+                    if (cmbArrangement.SelectedItem.Equals(ArrangementType.NightLife))
+                    {
+                        vipServicesManager.AddNightLifeReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
+                        (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, staffel);
+                    }
+                    if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wedding))
+                    {
+                        vipServicesManager.AddWeddingReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
+                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, staffel);
+                    }
+                    if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wellness))
+                    {
+                        vipServicesManager.AddWelnessReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
+                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, staffel);
+                    }
+                    if (cmbArrangement.SelectedItem.Equals(ArrangementType.Business))
+                    {
+                        vipServicesManager.AddBusinessReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
+                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, staffel);
+                    }
+                    if (cmbArrangement.SelectedItem.Equals(ArrangementType.Airport))
+                    {
+                        vipServicesManager.AddAirportReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
+                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, staffel);
+                    }
+                    MessageBox.Show("Reservatie is succesvol toegevoegd!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Fout: " + ex.Message,
+                     "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Gelieve alle velden in te vullen.");
+            }
         }
 
         private void CalculatePrice()
         {
-            DateTime startDate = new DateTime(dtpStartDate.SelectedDate.Value.Year,
-                dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
-                (int)cmbStartTime.SelectedItem, 0, 0);
-            DateTime endDate = new DateTime(dtpEndDate.SelectedDate.Value.Year,
-                dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day,
-                (int)cmbEndTime.SelectedItem, 0, 0);
+            try
+            {
+                DateTime startDate = new DateTime(dtpStartDate.SelectedDate.Value.Year,
+               dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
+               (int)cmbStartTime.SelectedItem, 0, 0);
+                DateTime endDate = new DateTime(dtpEndDate.SelectedDate.Value.Year,
+                    dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day,
+                    (int)cmbEndTime.SelectedItem, 0, 0);
 
-            TimeSpan totalHours = endDate - startDate;
+                TimeSpan totalHours = endDate - startDate;
 
-            Price price = new Price();
+                Price price = new Price();
 
-            if (cmbArrangement.SelectedItem.Equals(ArrangementType.NightLife))
-            {
-                price = PriceCalculator.NightLifeCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
-                     startDate, endDate, new Staffel(0, 0));
-            }
-            if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wedding))
-            {
-                price = PriceCalculator.WeddingPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
-                  startDate, endDate, new Staffel(0, 0));
-            }
-            if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wellness))
-            {
-                price = PriceCalculator.WelnessCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
-                  startDate, endDate, new Staffel(0, 0));
-            }
-            if (cmbArrangement.SelectedItem.Equals(ArrangementType.Business))
-            {
-                price = PriceCalculator.PerHourPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
-                 startDate, endDate, new Staffel(0, 0));
-            }
-            if (cmbArrangement.SelectedItem.Equals(ArrangementType.Airport))
-            {
-                price = PriceCalculator.PerHourPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
-                  startDate, endDate, new Staffel(0, 0));
-            }
+                Staffel staffel = vipServicesManager.GetStaffel((Customer)cmbCustomer.SelectedItem,
+                    startDate, (CategoryType)cmbDiscountCategory.SelectedItem);
 
-            txtFirstHourPrice.Text = "\u20AC" + price.FirstHourPrice.ToString();
-            txtSecondHourCount.Text = price.SecondHourCount.ToString() + " x ";
-            txtSecondHourPrice.Text = "\u20AC" + price.SecondHourPrice.ToString();
-            txtOvertimeCount.Text = price.OvertimeCount.ToString() + " x ";
-            txtOvertimePrice.Text = "\u20AC" + price.OvertimePrice.ToString();
-            txtNightHourCount.Text = price.NightHourCount.ToString() + " x ";
-            txtNightHourPrice.Text = "\u20AC" + price.NightHourPrice.ToString();
-            txtFixedPrice.Text = "\u20AC" + price.FixedPrice.ToString();
-            txtSubTotal.Text = "\u20AC" + price.SubTotal.ToString();
-            txtExclusiveBtw.Text = "\u20AC" + price.ExclusiveBtw.ToString();
-            //txtStaffelDiscount.Text = price.Staffel.Discount.ToString() + "%";
-            txtBtw.Text = price.Btw.ToString() + "%";
-            txtBtwPrice.Text = "\u20AC" + price.BtwPrice.ToString();
-            txtTotal.Text = "\u20AC" + price.Total.ToString();
+                if (cmbArrangement.SelectedItem.Equals(ArrangementType.NightLife))
+                {
+                    price = PriceCalculator.NightLifeCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                         startDate, endDate, staffel);
+                }
+                if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wedding))
+                {
+                    price = PriceCalculator.WeddingPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                      startDate, endDate, staffel);
+                }
+                if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wellness))
+                {
+                    price = PriceCalculator.WelnessCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                      startDate, endDate, staffel);
+                }
+                if (cmbArrangement.SelectedItem.Equals(ArrangementType.Business))
+                {
+                    price = PriceCalculator.PerHourPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                     startDate, endDate, staffel);
+                }
+                if (cmbArrangement.SelectedItem.Equals(ArrangementType.Airport))
+                {
+                    price = PriceCalculator.PerHourPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                      startDate, endDate, staffel);
+                }
+
+                txtFirstHourPrice.Text = "\u20AC" + price.FirstHourPrice.ToString();
+                txtSecondHourCount.Text = price.SecondHourCount.ToString() + " x ";
+                txtSecondHourPrice.Text = "\u20AC" + price.SecondHourPrice.ToString();
+                txtOvertimeCount.Text = price.OvertimeCount.ToString() + " x ";
+                txtOvertimePrice.Text = "\u20AC" + price.OvertimePrice.ToString();
+                txtNightHourCount.Text = price.NightHourCount.ToString() + " x ";
+                txtNightHourPrice.Text = "\u20AC" + price.NightHourPrice.ToString();
+                txtFixedPrice.Text = "\u20AC" + price.FixedPrice.ToString();
+                txtSubTotal.Text = "\u20AC" + price.SubTotal.ToString();
+                txtExclusiveBtw.Text = "\u20AC" + price.ExclusiveBtw.ToString();
+                txtStaffelDiscount.Text = price.Staffel.DiscountPercentage.ToString() + "%";
+                txtBtw.Text = price.Btw.ToString() + "%";
+                txtBtwPrice.Text = "\u20AC" + price.BtwPrice.ToString();
+                txtTotal.Text = "\u20AC" + price.Total.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout: " + ex.Message,
+                                   "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+           
         }
     }
 }

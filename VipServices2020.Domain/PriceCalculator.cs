@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using VipServices2020.Domain.Models;
+using VipServices2020.Domain.Repositories;
 
 namespace VipServices2020.Domain
 {
@@ -23,7 +23,8 @@ namespace VipServices2020.Domain
 
             price.SubTotal = price.FirstHourPrice + price.SecondHourPrice + price.NightHourPrice;
 
-            TotalPriceCalculator(price, staffel);
+            price.Staffel = staffel;
+            TotalPriceCalculator(price, price.Staffel);
 
             totalHours = totalHours + oneHour;
 
@@ -56,7 +57,8 @@ namespace VipServices2020.Domain
            
             price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.NightHourPrice + price.OvertimePrice;
 
-            TotalPriceCalculator(price, staffel);
+            price.Staffel = staffel;
+            TotalPriceCalculator(price, price.Staffel);
 
             return price;
         }
@@ -66,7 +68,8 @@ namespace VipServices2020.Domain
             price.FixedPrice = limousine.WelnessPrice;
             price.SubTotal = price.FixedPrice;
 
-            TotalPriceCalculator(price, staffel);
+            price.Staffel = staffel;
+            TotalPriceCalculator(price, price.Staffel);
 
             return price;
         }
@@ -97,14 +100,15 @@ namespace VipServices2020.Domain
 
             price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.NightHourPrice + price.OvertimePrice;
 
-            TotalPriceCalculator(price, staffel);
+            price.Staffel = staffel;
+            TotalPriceCalculator(price, price.Staffel);
 
             return price;
         }
 
         private static Price TotalPriceCalculator(Price price, Staffel staffel)
         {
-            price.ExclusiveBtw = price.SubTotal - (price.SubTotal * (double)(staffel.Discount / 100.0));
+            price.ExclusiveBtw = price.SubTotal - (price.SubTotal * (double)(staffel.DiscountPercentage / 100.0));
             price.BtwPrice = price.ExclusiveBtw * (double)(price.Btw / 100.0);
             price.Total = Math.Round(price.ExclusiveBtw + price.BtwPrice, 2);
             return price;

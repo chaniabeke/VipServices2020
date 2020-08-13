@@ -18,7 +18,6 @@ namespace VipServices2020.Domain.Models
         [Required]
         [StringLength(50, MinimumLength = 1)]
         public string Color { get; set; }
-        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
         [Required]
         public int FirstHourPrice { get; set; }

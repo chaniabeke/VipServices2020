@@ -8,5 +8,7 @@ namespace VipServices2020.Domain.Repositories
     public interface IStaffelRepository
     {
         void AddStaffel(Staffel staffel);
+        Staffel FindSmallestReservationCount(Discount discount);
+        IEnumerable<Staffel> FindAll(Discount discount);
     }
 }

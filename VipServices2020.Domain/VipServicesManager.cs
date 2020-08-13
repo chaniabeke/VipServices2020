@@ -33,7 +33,7 @@ namespace VipServices2020.Domain
         {
             return uow.Customers.FindAll().ToList();
         }
-         public void AddAddress(string streetName, string streetNumber, string town)
+        public void AddAddress(string streetName, string streetNumber, string town)
         {
             uow.Addresses.AddAddress(new Address(streetName, streetNumber, town));
             uow.Complete();
@@ -52,12 +52,49 @@ namespace VipServices2020.Domain
         {
             return uow.Limousines.FindAll(startTime, endTime, arrangement);
         }
+        public void AddDiscount(Discount discount)
+        {
+            uow.Discounts.AddDiscount(discount);
+            uow.Complete();
+        }
+        public void AddStaffel(Staffel staffel)
+        {
+            uow.Staffels.AddStaffel(staffel);
+            uow.Complete();
+        }
+        public Staffel GetStaffel(Customer customer, DateTime startTime, CategoryType category)
+        {
+            Discount discount = uow.Discounts.Find(category);
+            int reservationCount = uow.Customers.FindReservationCount(customer, startTime);
+            if (category != CategoryType.geen)
+            {
+                Staffel smallestStaffelCount = uow.Staffels.FindSmallestReservationCount(discount);
+                if (reservationCount > smallestStaffelCount.NumberOfBookedReservations)
+                {
+                    if(reservationCount == smallestStaffelCount.NumberOfBookedReservations)
+                    {
+                        Staffel staffel1 = uow.Staffels.FindAll(discount)
+                        .Where(s => s.NumberOfBookedReservations == reservationCount)
+                        .FirstOrDefault();
+                        return staffel1;
+                    }
+                    Staffel staffel2 = uow.Staffels.FindAll(discount)
+                        .Where(s => s.NumberOfBookedReservations > reservationCount)
+                        .FirstOrDefault();
+                    return staffel2;
+                }
+            }
+            Discount discountGeen = uow.Discounts.Find(CategoryType.geen);
+            Staffel staffelGeen = new Staffel(reservationCount, 0, discountGeen);
+            AddStaffel(staffelGeen);
+            return staffelGeen;
+        }
         public void AddWelnessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine, Staffel staffel)
         {
             //Domeinregels
             //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn + de test
-            if(endTime < startTime) throw new DomainException("Een reservatie mag niet eindigen voor het begint.");
+            if (endTime < startTime) throw new DomainException("Een reservatie mag niet eindigen voor het begint.");
             if (startTime.Hour < 7 || startTime.Hour > 12) throw new DomainException("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours != 10) throw new DomainException("Een Welness reservatie moet altijd 10 uur zijn.");
@@ -67,8 +104,6 @@ namespace VipServices2020.Domain
             Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Wellness, startTime, endTime, totalHours, limousine, price);
             uow.Reservations.AddReservation(reservation);
-
-            limousine.Reservations.Add(reservation);
 
             uow.Complete();
         }
@@ -87,7 +122,6 @@ namespace VipServices2020.Domain
             Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.NightLife, startTime, endTime, totalHours, limousine, price);
             uow.Reservations.AddReservation(reservation);
-            limousine.Reservations.Add(reservation);
             uow.Complete();
         }
         public void AddWeddingReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
@@ -107,7 +141,6 @@ namespace VipServices2020.Domain
             Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price);
             uow.Reservations.AddReservation(reservation);
-            limousine.Reservations.Add(reservation);
             uow.Complete();
 
         }
@@ -125,7 +158,6 @@ namespace VipServices2020.Domain
             Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Airport, startTime, endTime, totalHours, limousine, price);
             uow.Reservations.AddReservation(reservation);
-            limousine.Reservations.Add(reservation);
             uow.Complete();
         }
         public void AddBusinessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
@@ -142,7 +174,6 @@ namespace VipServices2020.Domain
             Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Business, startTime, endTime, totalHours, limousine, price);
             uow.Reservations.AddReservation(reservation);
-            limousine.Reservations.Add(reservation);
             uow.Complete();
         }
         public Reservation GetReservation(int reservationId)

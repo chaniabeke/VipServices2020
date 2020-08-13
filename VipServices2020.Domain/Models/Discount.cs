@@ -12,7 +12,5 @@ namespace VipServices2020.Domain.Models
         public int Id { get; set; }
         [Required]
         public CategoryType Category { get; set; }
-        [Required]
-        public IList<Staffel> StaffelDiscountList { get; set; }
     }
 }

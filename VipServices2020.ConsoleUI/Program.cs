@@ -14,24 +14,25 @@ namespace VipServices2020.ConsoleUI
         {
             Console.WriteLine("Initialiseer Databank");
             VipServicesManager vipServicesManger = new VipServicesManager(new UnitOfWork(new VipServicesContext("Production")));
-            //namespace modelsss
 
             //VipServicesReader.InitializeLocations(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\locaties.txt", vipServicesManger);
             //VipServicesReader.InitializeCustomers(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt", vipServicesManger);
             //VipServicesReader.InitializeLimousine(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
 
-            Address address = new Address("Bldfostreet", "5g", "fdv");
-            Customer customer = new Customer("Dan", "", address, CategoryType.concertpromotor);
-            Location location = new Location("gent");
-            Limousine limousine = new Limousine("bluu", "df", "sddd", 198, 547, 1477, 1351);
-            Staffel staffel = new Staffel(2, 5);
-            vipServicesManger.AddNightLifeReservation(customer, address, location, location, new DateTime(2020, 09, 22, 22, 0, 0), new DateTime(2020, 09, 23, 9, 0, 0), limousine, staffel);
-            Console.WriteLine("Einde Databank");
+            //Discount discountVip = new Discount();
+            //discountVip.Category = CategoryType.vip;
+            //Staffel staffel1 = new Staffel(2, 5, discountVip);
+            //Staffel staffel2 = new Staffel(7, 7.5, discountVip);
+            //Staffel staffel3 = new Staffel(15, 10, discountVip);
+            //vipServicesManger.AddStaffel(staffel1);
+            //vipServicesManger.AddStaffel(staffel2);
+            //vipServicesManger.AddStaffel(staffel3);
 
-            //foreach (Reservation reservation in limousine.Reservations)
-            //{
-            //    Console.WriteLine(reservation.Id);
-            //}
+            //Discount discountGeen = new Discount();
+            //discountGeen.Category = CategoryType.geen;
+            //vipServicesManger.AddDiscount(discountGeen);
+
+            Console.WriteLine("Einde Databank");
         }
     }
 }

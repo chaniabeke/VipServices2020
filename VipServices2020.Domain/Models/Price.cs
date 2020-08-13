@@ -20,6 +20,7 @@ namespace VipServices2020.Domain.Models {
         public int FixedPrice { get; set; } = 0;
         [Required]
         public double SubTotal { get; set; }
+        [Required]
         public Staffel Staffel { get; set; }
         [Required]
         public double ExclusiveBtw { get; set; }
