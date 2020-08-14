@@ -112,6 +112,8 @@
     <Compile Remove="Migrations\20200813203548_null.Designer.cs" />
     <Compile Remove="Migrations\20200813210516_stafe.cs" />
     <Compile Remove="Migrations\20200813210516_stafe.Designer.cs" />
+    <Compile Remove="Migrations\20200813220034_initcreate.cs" />
+    <Compile Remove="Migrations\20200813220034_initcreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

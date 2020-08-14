@@ -24,7 +24,8 @@ namespace VipServices2020.EF.Repositories
         {
             return context.Limousines.OrderBy(l => l.Brand).ThenBy(l => l.Model).ThenBy(l => l.Color).AsEnumerable<Limousine>();
         }
-        public List<Limousine> FindAll(DateTime startTime, DateTime endTime, ArrangementType arrangement)
+
+        public List<Limousine> FindAllAvailable(ArrangementType arrangement)
         {
             List<Limousine> limousines = new List<Limousine>();
             if(arrangement == ArrangementType.Wedding)

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using VipServices2020.Domain;
 using VipServices2020.Domain.Models;
+using VipServices2020.EF;
+using VipServices2020.Tests.EFLayer;
 
 namespace VipServices2020.Tests.DomainLayer
 {
@@ -18,9 +20,9 @@ namespace VipServices2020.Tests.DomainLayer
             DateTime startTime = new DateTime(2020, 09, 22, 14, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 23, 1, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Staffel staffel = new Staffel(5, 5);
+            double discountPercentage = 5;
 
-            Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, staffel);
+            Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Assert.AreEqual(price.FirstHourPrice, 600);
             Assert.AreEqual(price.NightHourCount, 3);
@@ -39,9 +41,9 @@ namespace VipServices2020.Tests.DomainLayer
             DateTime startTime = new DateTime(2020, 09, 22, 14, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 23, 1, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Staffel staffel = new Staffel(5, 5);
+            double discountPercentage = 5;
 
-            Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime, staffel);
+            Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Assert.AreEqual(price.FixedPrice, 2500);
             Assert.AreEqual(price.FirstHourPrice, 600);
@@ -61,9 +63,9 @@ namespace VipServices2020.Tests.DomainLayer
             DateTime startTime = new DateTime(2020, 09, 22, 8, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 18, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Staffel staffel = new Staffel(5, 5);
+            double discountPercentage = 5;
 
-            Price price = PriceCalculator.WelnessCalculator(limousine, totalHours, startTime, endTime, staffel);
+            Price price = PriceCalculator.WelnessCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Assert.AreEqual(price.FixedPrice, 2700);
             Assert.AreEqual(price.SubTotal, 2700);
@@ -78,9 +80,9 @@ namespace VipServices2020.Tests.DomainLayer
             DateTime startTime = new DateTime(2020, 09, 21, 22, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 9, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Staffel staffel = new Staffel(5, 5);
+            double discountPercentage = 5;
 
-            Price price = PriceCalculator.NightLifeCalculator(limousine, totalHours, startTime, endTime, staffel);
+            Price price = PriceCalculator.NightLifeCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Assert.AreEqual(price.FixedPrice, 1500);
             Assert.AreEqual(price.FirstHourPrice, 600);

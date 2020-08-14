@@ -68,6 +68,31 @@ namespace VipServices2020.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Prices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstHourPrice = table.Column<int>(nullable: false),
+                    SecondHourCount = table.Column<int>(nullable: false),
+                    SecondHourPrice = table.Column<double>(nullable: false),
+                    NightHourCount = table.Column<int>(nullable: false),
+                    NightHourPrice = table.Column<double>(nullable: false),
+                    OvertimeCount = table.Column<int>(nullable: false),
+                    OvertimePrice = table.Column<double>(nullable: false),
+                    FixedPrice = table.Column<int>(nullable: false),
+                    SubTotal = table.Column<double>(nullable: false),
+                    StaffelDiscount = table.Column<double>(nullable: false),
+                    ExclusiveBtw = table.Column<double>(nullable: false),
+                    BtwPrice = table.Column<double>(nullable: false),
+                    Total = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prices", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -106,37 +131,6 @@ namespace VipServices2020.EF.Migrations
                         name: "FK_Staffels_Discounts_DiscountId",
                         column: x => x.DiscountId,
                         principalTable: "Discounts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Prices",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstHourPrice = table.Column<int>(nullable: false),
-                    SecondHourCount = table.Column<int>(nullable: false),
-                    SecondHourPrice = table.Column<double>(nullable: false),
-                    NightHourCount = table.Column<int>(nullable: false),
-                    NightHourPrice = table.Column<double>(nullable: false),
-                    OvertimeCount = table.Column<int>(nullable: false),
-                    OvertimePrice = table.Column<double>(nullable: false),
-                    FixedPrice = table.Column<int>(nullable: false),
-                    SubTotal = table.Column<double>(nullable: false),
-                    StaffelId = table.Column<int>(nullable: false),
-                    ExclusiveBtw = table.Column<double>(nullable: false),
-                    BtwPrice = table.Column<double>(nullable: false),
-                    Total = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Prices", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Prices_Staffels_StaffelId",
-                        column: x => x.StaffelId,
-                        principalTable: "Staffels",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -206,11 +200,6 @@ namespace VipServices2020.EF.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Prices_StaffelId",
-                table: "Prices",
-                column: "StaffelId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reservations_ArrivalLocationId",
                 table: "Reservations",
                 column: "ArrivalLocationId");
@@ -252,6 +241,9 @@ namespace VipServices2020.EF.Migrations
                 name: "Reservations");
 
             migrationBuilder.DropTable(
+                name: "Staffels");
+
+            migrationBuilder.DropTable(
                 name: "Locations");
 
             migrationBuilder.DropTable(
@@ -264,13 +256,10 @@ namespace VipServices2020.EF.Migrations
                 name: "Prices");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
-
-            migrationBuilder.DropTable(
-                name: "Staffels");
-
-            migrationBuilder.DropTable(
                 name: "Discounts");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
         }
     }
 }

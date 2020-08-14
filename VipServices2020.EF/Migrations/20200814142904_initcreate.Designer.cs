@@ -10,7 +10,7 @@ using VipServices2020.EF;
 namespace VipServices2020.EF.Migrations
 {
     [DbContext(typeof(VipServicesContext))]
-    [Migration("20200813220034_initcreate")]
+    [Migration("20200814142904_initcreate")]
     partial class initcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -185,8 +185,8 @@ namespace VipServices2020.EF.Migrations
                     b.Property<double>("SecondHourPrice")
                         .HasColumnType("float");
 
-                    b.Property<int>("StaffelId")
-                        .HasColumnType("int");
+                    b.Property<double>("StaffelDiscount")
+                        .HasColumnType("float");
 
                     b.Property<double>("SubTotal")
                         .HasColumnType("float");
@@ -195,8 +195,6 @@ namespace VipServices2020.EF.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StaffelId");
 
                     b.ToTable("Prices");
                 });
@@ -286,15 +284,6 @@ namespace VipServices2020.EF.Migrations
                     b.HasOne("VipServices2020.Domain.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("VipServices2020.Domain.Models.Price", b =>
-                {
-                    b.HasOne("VipServices2020.Domain.Models.Staffel", "Staffel")
-                        .WithMany()
-                        .HasForeignKey("StaffelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -26,14 +26,14 @@ namespace VipServices2020.EF.Repositories
             return context.Reservations.Where(r => r.Id == id).Include(r => r.Customer).ThenInclude(c => c.Address)
                 .Include(r => r.LimousineExpectedAddress)
                 .Include(r => r.StartLocation).Include(r => r.ArrivalLocation)
-                .Include(r => r.Limousine).Include(r => r.Price).ThenInclude(p => p.Staffel).AsEnumerable<Reservation>();
+                .Include(r => r.Limousine).Include(r => r.Price).AsEnumerable<Reservation>();
         }
         public IEnumerable<Reservation> FindAll()
         {
             return context.Reservations.OrderBy(r => r.StartTime).ThenBy(r => r.Customer)
                 .Include(r => r.Customer).Include(r => r.LimousineExpectedAddress)
                 .Include(r => r.StartLocation).Include(r => r.ArrivalLocation)
-                .Include(r => r.Limousine).Include(r => r.Price).ThenInclude(p => p.Staffel).AsEnumerable<Reservation>();
+                .Include(r => r.Limousine).Include(r => r.Price).AsEnumerable<Reservation>();
         }
 
         public IEnumerable<Reservation> FindAll(Customer customer)
@@ -49,6 +49,9 @@ namespace VipServices2020.EF.Repositories
         {
             return context.Reservations.Where(r => r.StartTime.Date == startTime.Date).Where(r => r.Customer == customer).AsEnumerable<Reservation>();
         }
-
+        public IEnumerable<Reservation> FindAllNotAvailable(DateTime startTime, DateTime endTime)
+        {
+            return context.Reservations.Where(r => r.EndTime.AddHours(6) > startTime && r.StartTime > endTime).AsEnumerable<Reservation>();
+        }
     }
 }

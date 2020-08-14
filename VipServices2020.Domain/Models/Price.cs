@@ -21,7 +21,7 @@ namespace VipServices2020.Domain.Models {
         [Required]
         public double SubTotal { get; set; }
         [Required]
-        public Staffel Staffel { get; set; }
+        public double StaffelDiscount { get; set; }
         [Required]
         public double ExclusiveBtw { get; set; }
         [NotMapped]

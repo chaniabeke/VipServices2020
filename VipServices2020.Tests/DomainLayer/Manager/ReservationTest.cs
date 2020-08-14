@@ -29,16 +29,17 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 18, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
-            Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime, staffel);
+            double discountPercentage = m.CalculateStaffel(customer, startTime, category);
+            Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
             Reservation weddingReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price);
 
             Action act = () =>
             {
                 m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().NotThrow<DomainException>();
@@ -70,12 +71,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 20, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
             Action act = () =>
             {
                 m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een reservatie mag niet langer zijn dan 11uur.");
@@ -95,12 +96,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 23, 0, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
             Action act = () =>
             {
                 m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Wedding reservatie moet starten tussen 07u00 en 15u00.");
@@ -120,12 +121,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 12, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
             Action act = () =>
             {
                 m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Wedding reservatie moet minstens 7uur zijn.");
@@ -145,16 +146,17 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 23, 4, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
-            Price price = PriceCalculator.NightLifeCalculator(limousine, totalHours, startTime, endTime, staffel);
+            double discountPercentage = m.CalculateStaffel(customer, startTime, category);
+            Price price = PriceCalculator.NightLifeCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
             Reservation nightLifeReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.NightLife, startTime, endTime, totalHours, limousine, price);
 
             Action act = () =>
             {
                 m.AddNightLifeReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().NotThrow<DomainException>();
@@ -186,13 +188,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 23, 8, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
-            
             Action act = () =>
             {
                 m.AddNightLifeReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een reservatie mag niet langer zijn dan 11uur.");
@@ -212,12 +213,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 23, 4, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
             Action act = () =>
             {
                 m.AddNightLifeReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een NightLife reservatie moet starten tussen 20u00 en 24u00.");
@@ -237,13 +238,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 23, 22, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
-
+            CategoryType category = CategoryType.geen;
 
             Action act = () =>
             {
                 m.AddNightLifeReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een NightLife reservatie moet minstens 7uur zijn.");
@@ -263,16 +263,17 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 17, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
-            Price price = PriceCalculator.WelnessCalculator(limousine, totalHours, startTime, endTime, staffel);
+            double discountPercentage = m.CalculateStaffel(customer, startTime, category);
+            Price price = PriceCalculator.WelnessCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
             Reservation welnessReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Wellness, startTime, endTime, totalHours, limousine, price);
 
             Action act = () =>
             {
                 m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().NotThrow<DomainException>();
@@ -304,12 +305,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 23, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
             Action act = () =>
             {
                 m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
@@ -329,12 +330,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 20, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
             Action act = () =>
             {
                 m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Welness reservatie moet altijd 10 uur zijn.");
@@ -354,16 +355,17 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 17, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
-            Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, staffel);
+            double discountPercentage = m.CalculateStaffel(customer, startTime, category);
+            Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
             Reservation airportReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Airport, startTime, endTime, totalHours, limousine, price);
 
             Action act = () =>
             {
                 m.AddAirportReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().NotThrow<DomainException>();
@@ -395,12 +397,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 19, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
             Action act = () =>
             {
                 m.AddAirportReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Airport reservatie mag niet langer zijn dan 11uur.");
@@ -420,16 +422,17 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 17, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
-            Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, staffel);
+            double discountPercentage = m.CalculateStaffel(customer, startTime, category);
+            Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
             Reservation businessReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Business, startTime, endTime, totalHours, limousine, price);
 
             Action act = () =>
             {
                 m.AddBusinessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().NotThrow<DomainException>();
@@ -461,12 +464,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime endTime = new DateTime(2020, 09, 22, 19, 0, 0);
             TimeSpan totalHours = endTime - startTime;
             Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
-            Staffel staffel = new Staffel(5, 5);
+            CategoryType category = CategoryType.geen;
 
             Action act = () =>
             {
                 m.AddBusinessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, staffel);
+                startTime, endTime, limousine, category);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Business reservatie mag niet langer zijn dan 11uur.");

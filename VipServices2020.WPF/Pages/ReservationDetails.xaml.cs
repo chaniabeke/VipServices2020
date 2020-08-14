@@ -65,7 +65,7 @@ namespace VipServices2020.WPF
                 txtFixedPrice.Text = "\u20AC" + reservation.Price.FixedPrice.ToString();
                 txtSubTotal.Text = "\u20AC" + reservation.Price.SubTotal.ToString();
                 txtExclusiveBtw.Text = "\u20AC" + reservation.Price.ExclusiveBtw.ToString();
-                txtStaffelDiscount.Text = reservation.Price.Staffel.DiscountPercentage.ToString() + "%";
+                txtStaffelDiscount.Text = reservation.Price.StaffelDiscount.ToString() + "%";
                 txtBtw.Text = reservation.Price.Btw.ToString() + "%";
                 txtBtwPrice.Text = "\u20AC" + reservation.Price.BtwPrice.ToString();
                 txtTotal.Text = "\u20AC" + reservation.Price.Total.ToString();

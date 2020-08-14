@@ -7,7 +7,8 @@ namespace VipServices2020.Domain
 {
     public static class PriceCalculator
     {
-        public static Price PerHourPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime, Staffel staffel)
+        public static Price PerHourPriceCalculator(Limousine limousine, TimeSpan totalHours,  
+            DateTime startTime, DateTime endTime, double discountPercentage)
         {
             Price price = new Price();
             price.FirstHourPrice = limousine.FirstHourPrice;
@@ -23,14 +24,15 @@ namespace VipServices2020.Domain
 
             price.SubTotal = price.FirstHourPrice + price.SecondHourPrice + price.NightHourPrice;
 
-            price.Staffel = staffel;
-            TotalPriceCalculator(price, price.Staffel);
+            price.StaffelDiscount = discountPercentage;
+            TotalPriceCalculator(price);
 
             totalHours = totalHours + oneHour;
 
             return price;
         }
-        public static Price WeddingPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime, Staffel staffel)
+        public static Price WeddingPriceCalculator(Limousine limousine, TimeSpan totalHours, 
+            DateTime startTime, DateTime endTime, double discountPercentage)
         {
             Price price = new Price();
             price.FixedPrice = limousine.WeddingPrice;
@@ -57,23 +59,25 @@ namespace VipServices2020.Domain
            
             price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.NightHourPrice + price.OvertimePrice;
 
-            price.Staffel = staffel;
-            TotalPriceCalculator(price, price.Staffel);
+            price.StaffelDiscount = discountPercentage;
+            TotalPriceCalculator(price);
 
             return price;
         }
-        public static Price WelnessCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime, Staffel staffel)
+        public static Price WelnessCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, 
+            DateTime endTime, double discountPercentage)
         {
             Price price = new Price();
             price.FixedPrice = limousine.WelnessPrice;
             price.SubTotal = price.FixedPrice;
 
-            price.Staffel = staffel;
-            TotalPriceCalculator(price, price.Staffel);
+            price.StaffelDiscount = discountPercentage;
+            TotalPriceCalculator(price);
 
             return price;
         }
-        public static Price NightLifeCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, DateTime endTime, Staffel staffel)
+        public static Price NightLifeCalculator(Limousine limousine, TimeSpan totalHours, 
+            DateTime startTime, DateTime endTime, double discountPercentage)
         {
             Price price = new Price();
             price.FixedPrice = limousine.NightLifePrice;
@@ -100,15 +104,15 @@ namespace VipServices2020.Domain
 
             price.SubTotal = price.FixedPrice + price.FirstHourPrice + price.NightHourPrice + price.OvertimePrice;
 
-            price.Staffel = staffel;
-            TotalPriceCalculator(price, price.Staffel);
+            price.StaffelDiscount = discountPercentage;
+            TotalPriceCalculator(price);
 
             return price;
         }
 
-        private static Price TotalPriceCalculator(Price price, Staffel staffel)
+        private static Price TotalPriceCalculator(Price price)
         {
-            price.ExclusiveBtw = price.SubTotal - (price.SubTotal * (double)(staffel.DiscountPercentage / 100.0));
+            price.ExclusiveBtw = price.SubTotal - (price.SubTotal * (double)(price.StaffelDiscount / 100.0));
             price.BtwPrice = price.ExclusiveBtw * (double)(price.Btw / 100.0);
             price.Total = Math.Round(price.ExclusiveBtw + price.BtwPrice, 2);
             return price;
@@ -145,5 +149,7 @@ namespace VipServices2020.Domain
             }
             return nightHour;
         }
+
+       
     }
 }
