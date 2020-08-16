@@ -95,8 +95,6 @@ namespace VipServices2020.WPF
 
         }
 
-       
-
         private void btnReservation_Click(object sender, RoutedEventArgs e)
         {
             if (cmbCustomer.SelectedItem != null && txtStreet.Text != String.Empty && txtNumber.Text != String.Empty
@@ -173,7 +171,7 @@ namespace VipServices2020.WPF
                 Price price = new Price();
 
                 CategoryType discountCategory = (CategoryType)cmbDiscountCategory.SelectedItem;
-                double discountPercentage 
+                double discountPercentage
                     = vipServicesManager.CalculateStaffel((Customer)cmbCustomer.SelectedItem, startDate, discountCategory);
 
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.NightLife))
@@ -204,25 +202,25 @@ namespace VipServices2020.WPF
 
                 txtFirstHourPrice.Text = "\u20AC" + price.FirstHourPrice.ToString();
                 txtSecondHourCount.Text = price.SecondHourCount.ToString() + " x ";
-                txtSecondHourPrice.Text = "\u20AC" + price.SecondHourPrice.ToString();
+                txtSecondHourPrice.Text = "\u20AC" + Math.Round(price.SecondHourPrice, 2).ToString();
                 txtOvertimeCount.Text = price.OvertimeCount.ToString() + " x ";
-                txtOvertimePrice.Text = "\u20AC" + price.OvertimePrice.ToString();
+                txtOvertimePrice.Text = "\u20AC" + Math.Round(price.OvertimePrice, 2).ToString();
                 txtNightHourCount.Text = price.NightHourCount.ToString() + " x ";
-                txtNightHourPrice.Text = "\u20AC" + price.NightHourPrice.ToString();
+                txtNightHourPrice.Text = "\u20AC" + Math.Round(price.NightHourPrice, 2).ToString();
                 txtFixedPrice.Text = "\u20AC" + price.FixedPrice.ToString();
-                txtSubTotal.Text = "\u20AC" + price.SubTotal.ToString();
-                txtExclusiveBtw.Text = "\u20AC" + price.ExclusiveBtw.ToString();
+                txtSubTotal.Text = "\u20AC" + Math.Round(price.SubTotal, 2).ToString();
+                txtExclusiveBtw.Text = "\u20AC" + Math.Round(price.ExclusiveBtw, 2).ToString();
                 txtStaffelDiscount.Text = price.StaffelDiscount.ToString() + "%";
                 txtBtw.Text = price.Btw.ToString() + "%";
-                txtBtwPrice.Text = "\u20AC" + price.BtwPrice.ToString();
-                txtTotal.Text = "\u20AC" + price.Total.ToString();
+                txtBtwPrice.Text = "\u20AC" + Math.Round(price.BtwPrice, 2).ToString();
+                txtTotal.Text = "\u20AC" + Math.Round(price.Total, 2).ToString();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Fout: " + ex.Message,
                                    "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-           
+
         }
         private DateTime GetStartDate()
         {

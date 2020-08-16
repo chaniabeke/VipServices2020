@@ -4,7 +4,8 @@ using System.Text;
 
 namespace VipServices2020.Tests.DomainLayer.Manager
 {
-    class DiscountTest
+    public class DiscountTest
     {
+        public void AddDiscount_ShouldWork() { }
     }
 }

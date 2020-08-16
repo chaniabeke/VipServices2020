@@ -37,7 +37,7 @@ namespace VipServices2020.Domain.Models
         }
         public override string ToString()
         {
-            return $"{Brand} {Model} {Color} {FirstHourPrice} {NightLifePrice} {WeddingPrice} {WelnessPrice}";
+            return $"{Brand} {Model} {Color}";
         }
     }
 }

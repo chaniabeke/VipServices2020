@@ -8,5 +8,15 @@ namespace VipServices2020.Tests.DomainLayer.Manager
     [TestClass]
     public class LocationTest
     {
+        [TestMethod]
+        public void AddLocation_ShouldWork()
+        {
+
+        }
+        [TestMethod]
+        public void GetAllLocations_ShouldWork()
+        {
+
+        }
     }
 }

@@ -57,18 +57,18 @@ namespace VipServices2020.WPF
 
                 txtFirstHourPrice.Text = "\u20AC" + reservation.Price.FirstHourPrice.ToString();
                 txtSecondHourCount.Text = reservation.Price.SecondHourCount.ToString() + " x ";
-                txtSecondHourPrice.Text = "\u20AC" + reservation.Price.SecondHourPrice.ToString();
+                txtSecondHourPrice.Text = "\u20AC" + Math.Round(reservation.Price.SecondHourPrice, 2).ToString();
                 txtOvertimeCount.Text = reservation.Price.OvertimeCount.ToString() + " x ";
-                txtOvertimePrice.Text = "\u20AC" + reservation.Price.OvertimePrice.ToString();
+                txtOvertimePrice.Text = "\u20AC" + Math.Round(reservation.Price.OvertimePrice, 2).ToString();
                 txtNightHourCount.Text = reservation.Price.NightHourCount.ToString() + " x ";
-                txtNightHourPrice.Text = "\u20AC" + reservation.Price.NightHourPrice.ToString();
+                txtNightHourPrice.Text = "\u20AC" + Math.Round(reservation.Price.NightHourPrice, 2).ToString();
                 txtFixedPrice.Text = "\u20AC" + reservation.Price.FixedPrice.ToString();
-                txtSubTotal.Text = "\u20AC" + reservation.Price.SubTotal.ToString();
-                txtExclusiveBtw.Text = "\u20AC" + reservation.Price.ExclusiveBtw.ToString();
+                txtSubTotal.Text = "\u20AC" + Math.Round(reservation.Price.SubTotal, 2).ToString();
+                txtExclusiveBtw.Text = "\u20AC" + Math.Round(reservation.Price.ExclusiveBtw, 2).ToString();
                 txtStaffelDiscount.Text = reservation.Price.StaffelDiscount.ToString() + "%";
                 txtBtw.Text = reservation.Price.Btw.ToString() + "%";
-                txtBtwPrice.Text = "\u20AC" + reservation.Price.BtwPrice.ToString();
-                txtTotal.Text = "\u20AC" + reservation.Price.Total.ToString();
+                txtBtwPrice.Text = "\u20AC" + Math.Round(reservation.Price.BtwPrice, 2).ToString();
+                txtTotal.Text = "\u20AC" + Math.Round(reservation.Price.Total, 2).ToString();
             }
             catch (Exception ex)
             {

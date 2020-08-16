@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VipServices2020.Domain.Models {
     public class Price {
-        //aantallen uren met soort (eerste uur, nachtuur, overuur) eenheidsprijs of vaste prijs ..
         [Key]
         public int Id { get; set; }
         public int FirstHourPrice { get; set; } = 0;

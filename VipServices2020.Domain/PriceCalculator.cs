@@ -17,10 +17,12 @@ namespace VipServices2020.Domain
             DateTime startTimeMinusStartHour = startTime + oneHour;
 
             price.NightHourCount = CalculateNightHours(totalHours, startTimeMinusStartHour, endTime);
-            price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+            price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) 
+                * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
             price.SecondHourCount = totalHours.Hours - price.NightHourCount;
-            price.SecondHourPrice = Math.Round(((double)(price.SecondHourPercentage / 100.0) * ((double)price.SecondHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+            price.SecondHourPrice = Math.Round(((double)(price.SecondHourPercentage / 100.0) 
+                * ((double)price.SecondHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
             price.SubTotal = price.FirstHourPrice + price.SecondHourPrice + price.NightHourPrice;
 
@@ -48,10 +50,12 @@ namespace VipServices2020.Domain
                     DateTime startTimeMinusStartHour = startTime + eightHours;
 
                     price.NightHourCount = CalculateNightHours(totalHours, startTimeMinusStartHour, endTime);
-                    price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+                    price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) 
+                        * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
                     price.OvertimeCount = totalHours.Hours - price.NightHourCount;
-                    price.OvertimePrice = Math.Round(((double)(price.SecondHourPercentage / 100.0) * ((double)price.OvertimeCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+                    price.OvertimePrice = Math.Round(((double)(price.SecondHourPercentage / 100.0) 
+                        * ((double)price.OvertimeCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
                     totalHours = totalHours + eightHours;
                 }
@@ -93,10 +97,12 @@ namespace VipServices2020.Domain
                     DateTime startTimeMinusStartHour = startTime + eightHours;
 
                     price.NightHourCount = CalculateNightHours(totalHours, startTimeMinusStartHour, endTime);
-                    price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+                    price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) 
+                        * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
                     price.OvertimeCount = totalHours.Hours - price.NightHourCount;
-                    price.OvertimePrice = Math.Round(((double)(price.SecondHourPercentage / 100.0) * ((double)price.OvertimeCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+                    price.OvertimePrice = Math.Round(((double)(price.SecondHourPercentage / 100.0) 
+                        * ((double)price.OvertimeCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
                     totalHours = totalHours + eightHours;
                 }

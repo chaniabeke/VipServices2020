@@ -98,12 +98,12 @@ namespace VipServices2020.Domain
         public void AddWelnessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
-            //Domeinregels
-            //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn + de test
             if (endTime < startTime) throw new DomainException("Een reservatie mag niet eindigen voor het begint.");
             if (startTime.Hour < 7 || startTime.Hour > 12) throw new DomainException("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours != 10) throw new DomainException("Een Welness reservatie moet altijd 10 uur zijn.");
+            List<Limousine> limousines = GetAllAvailableLimousines(startTime, endTime, ArrangementType.Wellness);
+            if (!limousines.Contains(limousine)) throw new DomainException("Limousine is niet beschikbaar.");
 
             double discountPercentage = CalculateStaffel(customer, startTime, discountCategory);
             Price price = PriceCalculator.WelnessCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
@@ -117,12 +117,12 @@ namespace VipServices2020.Domain
         public void AddNightLifeReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
-            //Domeinregels
-            //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn
             if (startTime.Hour < 20 && startTime.Hour != 0) throw new DomainException("Een NightLife reservatie moet starten tussen 20u00 en 24u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
             if (totalHours.Hours < 7) throw new DomainException("Een NightLife reservatie moet minstens 7uur zijn.");
+            List<Limousine> limousines = GetAllAvailableLimousines(startTime, endTime, ArrangementType.NightLife);
+            if (!limousines.Contains(limousine)) throw new DomainException("Limousine is niet beschikbaar.");
 
             double discountPercentage = CalculateStaffel(customer, startTime, discountCategory);
             Price price = PriceCalculator.NightLifeCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
@@ -135,13 +135,12 @@ namespace VipServices2020.Domain
         public void AddWeddingReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
-            //Domeinregels  
-            //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn
-
             if (startTime.Hour < 7 || startTime.Hour > 15) throw new DomainException("Een Wedding reservatie moet starten tussen 07u00 en 15u00.");
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours > 11) throw new DomainException("Een reservatie mag niet langer zijn dan 11uur.");
             if (totalHours.Hours < 7) throw new DomainException("Een Wedding reservatie moet minstens 7uur zijn.");
+            List<Limousine> limousines = GetAllAvailableLimousines(startTime, endTime, ArrangementType.Wedding);
+            if (!limousines.Contains(limousine)) throw new DomainException("Limousine is niet beschikbaar.");
 
             double discountPercentage = CalculateStaffel(customer, startTime, discountCategory);
             Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
@@ -150,15 +149,14 @@ namespace VipServices2020.Domain
                 ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price);
             uow.Reservations.AddReservation(reservation);
             uow.Complete();
-
         }
         public void AddAirportReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
-            //Domeinregels
-            //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours > 11) throw new DomainException("Een Airport reservatie mag niet langer zijn dan 11uur.");
+            List<Limousine> limousines = GetAllAvailableLimousines(startTime, endTime, ArrangementType.Airport);
+            if (!limousines.Contains(limousine)) throw new DomainException("Limousine is niet beschikbaar.");
 
             double discountPercentage = CalculateStaffel(customer, startTime, discountCategory);
             Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
@@ -171,10 +169,10 @@ namespace VipServices2020.Domain
         public void AddBusinessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
             DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
-            //Domeinregels
-            //Tussen twee reserveringen van eenzelfde limousine moet minstens 6 uur verschil zijn
             TimeSpan totalHours = endTime - startTime;
             if (totalHours.Hours > 11) throw new DomainException("Een Business reservatie mag niet langer zijn dan 11uur.");
+            List<Limousine> limousines = GetAllAvailableLimousines(startTime, endTime, ArrangementType.Business);
+            if (!limousines.Contains(limousine)) throw new DomainException("Limousine is niet beschikbaar.");
 
             double discountPercentage = CalculateStaffel(customer, startTime, discountCategory);
             Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);

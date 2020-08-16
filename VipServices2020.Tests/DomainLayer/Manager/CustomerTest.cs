@@ -8,5 +8,15 @@ namespace VipServices2020.Tests.DomainLayer.Manager
     [TestClass]
     public class CustomerTest
     {
+        [TestMethod]
+        public void AddCustomer_ShouldWork()
+        {
+
+        }
+        [TestMethod]
+        public void GetAllCustomers_ShouldWork()
+        {
+
+        }
     }
 }
