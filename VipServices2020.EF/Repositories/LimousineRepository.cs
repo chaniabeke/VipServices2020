@@ -20,6 +20,12 @@ namespace VipServices2020.EF.Repositories
         {
             context.Limousines.Add(limousine);
         }
+
+        public Limousine Find(int id)
+        {
+            return context.Limousines.Where(l => l.Id == id).FirstOrDefault();
+        }
+
         public IEnumerable<Limousine> FindAll()
         {
             return context.Limousines.OrderBy(l => l.Brand).ThenBy(l => l.Model).ThenBy(l => l.Color).AsEnumerable<Limousine>();

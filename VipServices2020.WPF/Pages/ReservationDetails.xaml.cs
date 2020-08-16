@@ -56,11 +56,11 @@ namespace VipServices2020.WPF
                 txtLimousineColor.Text = reservation.Limousine.Color.ToString();
 
                 txtFirstHourPrice.Text = "\u20AC" + reservation.Price.FirstHourPrice.ToString();
-                txtSecondHourCount.Text = reservation.Price.SecondHourCount.ToString() + " x ";
+                txtSecondHourCount.Text = reservation.Price.SecondHourCount.ToString() + "x  = ";
                 txtSecondHourPrice.Text = "\u20AC" + Math.Round(reservation.Price.SecondHourPrice, 2).ToString();
-                txtOvertimeCount.Text = reservation.Price.OvertimeCount.ToString() + " x ";
+                txtOvertimeCount.Text = reservation.Price.OvertimeCount.ToString() + "x  = ";
                 txtOvertimePrice.Text = "\u20AC" + Math.Round(reservation.Price.OvertimePrice, 2).ToString();
-                txtNightHourCount.Text = reservation.Price.NightHourCount.ToString() + " x ";
+                txtNightHourCount.Text = reservation.Price.NightHourCount.ToString() + "x  = ";
                 txtNightHourPrice.Text = "\u20AC" + Math.Round(reservation.Price.NightHourPrice, 2).ToString();
                 txtFixedPrice.Text = "\u20AC" + reservation.Price.FixedPrice.ToString();
                 txtSubTotal.Text = "\u20AC" + Math.Round(reservation.Price.SubTotal, 2).ToString();

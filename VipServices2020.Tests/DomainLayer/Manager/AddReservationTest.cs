@@ -7,6 +7,7 @@ using System.Text;
 using VipServices2020.Domain;
 using VipServices2020.Domain.Models;
 using VipServices2020.EF;
+using VipServices2020.EF.Repositories;
 using VipServices2020.Tests.EFLayer;
 
 namespace VipServices2020.Tests.DomainLayer.Manager
@@ -19,6 +20,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -28,8 +30,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 8, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 18, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             double discountPercentage = m.CalculateStaffel(customer, startTime, category);
             Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
@@ -61,6 +65,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -70,8 +75,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 8, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 20, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
@@ -86,6 +93,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -95,8 +103,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 17, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 23, 0, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
@@ -111,6 +121,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -120,8 +131,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 10, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 12, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
@@ -136,6 +149,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -145,8 +159,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 20, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 23, 4, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             double discountPercentage = m.CalculateStaffel(customer, startTime, category);
             Price price = PriceCalculator.NightLifeCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
@@ -178,6 +194,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -187,8 +204,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 20, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 23, 8, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
@@ -203,6 +222,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -212,8 +232,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 19, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 23, 4, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
@@ -228,6 +250,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -237,8 +260,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 20, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 23, 22, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
@@ -253,6 +278,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -262,8 +288,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 7, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 17, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             double discountPercentage = m.CalculateStaffel(customer, startTime, category);
             Price price = PriceCalculator.WelnessCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
@@ -295,6 +323,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -304,8 +333,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 13, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 23, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
@@ -320,6 +351,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -329,8 +361,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 12, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 20, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
@@ -345,6 +379,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -354,8 +389,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 7, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 17, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             double discountPercentage = m.CalculateStaffel(customer, startTime, category);
             Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
@@ -387,6 +424,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -396,8 +434,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 7, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 19, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
@@ -412,6 +452,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -421,8 +462,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 7, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 17, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             double discountPercentage = m.CalculateStaffel(customer, startTime, category);
             Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
@@ -454,6 +497,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
             Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
             Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
@@ -463,8 +507,10 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             DateTime startTime = new DateTime(2020, 09, 22, 7, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 19, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            Limousine limousine = new Limousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             CategoryType category = CategoryType.geen;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {

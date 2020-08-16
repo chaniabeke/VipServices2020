@@ -201,11 +201,11 @@ namespace VipServices2020.WPF
                 }
 
                 txtFirstHourPrice.Text = "\u20AC" + price.FirstHourPrice.ToString();
-                txtSecondHourCount.Text = price.SecondHourCount.ToString() + " x ";
+                txtSecondHourCount.Text = price.SecondHourCount.ToString() + "x  = ";
                 txtSecondHourPrice.Text = "\u20AC" + Math.Round(price.SecondHourPrice, 2).ToString();
-                txtOvertimeCount.Text = price.OvertimeCount.ToString() + " x ";
+                txtOvertimeCount.Text = price.OvertimeCount.ToString() + "x  = ";
                 txtOvertimePrice.Text = "\u20AC" + Math.Round(price.OvertimePrice, 2).ToString();
-                txtNightHourCount.Text = price.NightHourCount.ToString() + " x ";
+                txtNightHourCount.Text = price.NightHourCount.ToString() + "x  = ";
                 txtNightHourPrice.Text = "\u20AC" + Math.Round(price.NightHourPrice, 2).ToString();
                 txtFixedPrice.Text = "\u20AC" + price.FixedPrice.ToString();
                 txtSubTotal.Text = "\u20AC" + Math.Round(price.SubTotal, 2).ToString();
