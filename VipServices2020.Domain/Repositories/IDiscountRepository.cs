@@ -9,5 +9,6 @@ namespace VipServices2020.Domain.Repositories
     {
         void AddDiscount(Discount discounts);
         Discount Find(CategoryType category);
+        IEnumerable<Discount> FindAll();
     }
 }

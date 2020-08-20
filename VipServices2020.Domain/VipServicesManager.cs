@@ -53,9 +53,12 @@ namespace VipServices2020.Domain
         {
             List<Limousine> notAvailableLimousines = new List<Limousine>();
             List<Limousine> availableLimousines = uow.Limousines.FindAllAvailable(arrangement);
-            foreach (Reservation reservation in uow.Reservations.FindAllNotAvailable(startTime, endTime))
+            foreach (Reservation r in uow.Reservations.FindAll())
             {
-                notAvailableLimousines.Add(reservation.Limousine);
+                if (r.EndTime.AddHours(6) > startTime || r.StartTime > endTime)
+                {
+                    notAvailableLimousines.Add(r.Limousine);
+                }
             }
             availableLimousines = availableLimousines.Except(notAvailableLimousines).ToList();
             return availableLimousines;
@@ -64,6 +67,10 @@ namespace VipServices2020.Domain
         {
             uow.Discounts.AddDiscount(discount);
             uow.Complete();
+        }
+        public List<Discount> GetAllDiscounts()
+        {
+            return uow.Discounts.FindAll().ToList();
         }
         public void AddStaffel(Staffel staffel)
         {

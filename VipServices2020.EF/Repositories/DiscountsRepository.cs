@@ -24,5 +24,10 @@ namespace VipServices2020.EF.Repositories
         {
             return context.Discounts.Where(d => d.Category == category).FirstOrDefault();
         }
+
+        public IEnumerable<Discount> FindAll()
+        {
+            return context.Discounts.OrderBy(d => d.Category).AsEnumerable<Discount>();
+        }
     }
 }

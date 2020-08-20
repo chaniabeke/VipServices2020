@@ -13,6 +13,5 @@ namespace VipServices2020.Domain.Repositories
         IEnumerable<Reservation> FindAll(Customer customer);
         IEnumerable<Reservation> FindAll(DateTime reservationDate);
         IEnumerable<Reservation> FindAll(Customer customer, DateTime reservationDate);
-        IEnumerable<Reservation> FindAllNotAvailable(DateTime startTime, DateTime endTime);
     }
 }

@@ -49,9 +49,5 @@ namespace VipServices2020.EF.Repositories
         {
             return context.Reservations.Where(r => r.StartTime.Date == startTime.Date).Where(r => r.Customer == customer).AsEnumerable<Reservation>();
         }
-        public IEnumerable<Reservation> FindAllNotAvailable(DateTime startTime, DateTime endTime)
-        {
-            return context.Reservations.Where(r => r.EndTime.AddHours(6) > startTime && r.StartTime > endTime).AsEnumerable<Reservation>();
-        }
     }
 }

@@ -38,7 +38,7 @@ namespace VipServices2020.WPF
                 cmbEndTime.ItemsSource = hours;
                 lblLimousine.Visibility = Visibility.Hidden;
                 cmbLimousine.Visibility = Visibility.Hidden;
-                cmbDiscountCategory.ItemsSource = typeof(CategoryType).GetEnumValues();
+                cmbDiscountCategory.ItemsSource = vipServicesManager.GetAllDiscounts();
                 btnPrice.Visibility = Visibility.Hidden;
                 stpPrice.Visibility = Visibility.Hidden;
             }
