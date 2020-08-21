@@ -19,8 +19,7 @@ namespace VipServices2020.ConsoleUI
             VipServicesReader.InitializeCustomers(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt", vipServicesManger);
             VipServicesReader.InitializeLimousine(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
 
-            Discount discountVip = new Discount();
-            discountVip.Category = CategoryType.vip;
+            Discount discountVip = new Discount(CategoryType.vip);
             Staffel staffel1 = new Staffel(2, 5, discountVip);
             Staffel staffel2 = new Staffel(7, 7.5, discountVip);
             Staffel staffel3 = new Staffel(15, 10, discountVip);
@@ -28,8 +27,7 @@ namespace VipServices2020.ConsoleUI
             vipServicesManger.AddStaffel(staffel2);
             vipServicesManger.AddStaffel(staffel3);
 
-            Discount discountPlanner = new Discount();
-            discountPlanner.Category = CategoryType.huwelijksplanner;
+            Discount discountPlanner = new Discount(CategoryType.huwelijksplanner);
             Staffel staffel4 = new Staffel(5, 7.5, discountPlanner);
             Staffel staffel5 = new Staffel(10, 10, discountPlanner);
             Staffel staffel6 = new Staffel(15, 12.5, discountPlanner);
@@ -41,8 +39,7 @@ namespace VipServices2020.ConsoleUI
             vipServicesManger.AddStaffel(staffel7);
             vipServicesManger.AddStaffel(staffel8);
 
-            Discount discountGeen = new Discount();
-            discountGeen.Category = CategoryType.geen;
+            Discount discountGeen = new Discount(CategoryType.geen);
             vipServicesManger.AddDiscount(discountGeen);
 
             Console.WriteLine("Einde Databank");

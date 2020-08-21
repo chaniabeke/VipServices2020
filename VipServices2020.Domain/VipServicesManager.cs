@@ -16,62 +16,107 @@ namespace VipServices2020.Domain
             this.uow = uow;
         }
 
+        /// <summary>
+        /// Deze method voegt een locatie toe aan de DB
+        /// </summary>
         public void AddLocation(string locationName)
         {
             uow.Locations.AddLocation(new Location(locationName));
             uow.Complete();
         }
+        /// <summary>
+        /// Deze method haalt alle locaties uit de DB
+        /// </summary>
         public List<Location> GetAllLocations()
         {
             return uow.Locations.FindAll().ToList();
         }
+
+        /// <summary>
+        /// Deze method voegt een klant toe aan de DB
+        /// </summary>
         public void AddCustomer(string name, string BtwNumber, Address address, CategoryType category)
         {
             uow.Customers.AddCustomer(new Customer(name, BtwNumber, address, category));
             uow.Complete();
         }
+        /// <summary>
+        /// Deze method haalt alle klanten uit de DB
+        /// </summary>
         public List<Customer> GetAllCustomers()
         {
             return uow.Customers.FindAll().ToList();
         }
+
+        /// <summary>
+        /// Deze method voegt een adres toe aan de DB
+        /// </summary>
         public void AddAddress(string streetName, string streetNumber, string town)
         {
             uow.Addresses.AddAddress(new Address(streetName, streetNumber, town));
             uow.Complete();
         }
 
+        /// <summary>
+        /// Deze method voegt een limousine toe aan de DB
+        /// </summary>
         public void AddLimousine(string brand, string model, string color, int firstHourPrice, int nightLifePrice, int weddingPrice, int welnessPrice)
         {
             uow.Limousines.AddLimousine(new Limousine(brand, model, color, firstHourPrice, nightLifePrice, weddingPrice, welnessPrice));
             uow.Complete();
         }
+        /// <summary>
+        /// Deze method haalt alle limousines uit de DB
+        /// </summary>
         public List<Limousine> GetAllLimousines()
         {
             return uow.Limousines.FindAll().ToList();
         }
+
+        /// <summary>
+        /// Deze method haalt alle beschikbare limousines uit de DB, op basis van het start uur, eind uur en arrangement type
+        /// </summary>
         public List<Limousine> GetAllAvailableLimousines(DateTime startTime, DateTime endTime, ArrangementType arrangement)
         {
             List<Limousine> notAvailableLimousines = new List<Limousine>();
+            //Haal alle beschikbare limousines uit de DB op basis van het arrangement (waar prijs geen 0 is)
             List<Limousine> availableLimousines = uow.Limousines.FindAllAvailable(arrangement);
+
+            //Kijk voor iedere reservatie of de limo beschikbaar is
             foreach (Reservation r in uow.Reservations.FindAll())
             {
+                /*Indien het einduur van de reservatie plus 6 uur groter is dan het gekozen startuur 
+                of indien het startuur van de reservatie groter is dan het gekozen einduur */
                 if (r.EndTime.AddHours(6) > startTime || r.StartTime > endTime)
                 {
+                    //Voeg limo toe aan de lijst van niet beschikbare limousines
                     notAvailableLimousines.Add(r.Limousine);
                 }
             }
+            //Haal de niet beschikbare limousines uit de lijst van beschikbare limousines
             availableLimousines = availableLimousines.Except(notAvailableLimousines).ToList();
             return availableLimousines;
         }
+
+        /// <summary>
+        /// Deze method voegt een Discount toe aan de DB
+        /// </summary>
         public void AddDiscount(Discount discount)
         {
             uow.Discounts.AddDiscount(discount);
             uow.Complete();
         }
+        /// <summary>
+        /// Deze method haalt alle Discounts uit de DB
+        /// </summary>
         public List<Discount> GetAllDiscounts()
         {
             return uow.Discounts.FindAll().ToList();
         }
+
+        /// <summary>
+        /// Deze method voegt een Staffel toe aan de DB
+        /// </summary>
         public void AddStaffel(Staffel staffel)
         {
             uow.Staffels.AddStaffel(staffel);
@@ -102,6 +147,10 @@ namespace VipServices2020.Domain
             }
             return staffelDiscount;
         }
+
+        /// <summary>
+        /// Deze method voegt een welness arrangement reservatie toe aan de DB
+        /// </summary>
         public void AddWelnessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
@@ -121,6 +170,10 @@ namespace VipServices2020.Domain
 
             uow.Complete();
         }
+
+        /// <summary>
+        /// Deze method voegt een nightlife arrangement reservatie toe aan de DB
+        /// </summary>
         public void AddNightLifeReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
@@ -139,6 +192,10 @@ namespace VipServices2020.Domain
             uow.Reservations.AddReservation(reservation);
             uow.Complete();
         }
+
+        /// <summary>
+        /// Deze method voegt een wedding arrangement reservatie toe aan de DB
+        /// </summary>
         public void AddWeddingReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
@@ -157,6 +214,10 @@ namespace VipServices2020.Domain
             uow.Reservations.AddReservation(reservation);
             uow.Complete();
         }
+
+        /// <summary>
+        /// Deze method voegt een airport arrangement reservatie toe aan de DB
+        /// </summary>
         public void AddAirportReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
              DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
@@ -173,6 +234,10 @@ namespace VipServices2020.Domain
             uow.Reservations.AddReservation(reservation);
             uow.Complete();
         }
+
+        /// <summary>
+        /// Deze method voegt een business arrangement reservatie toe aan de DB
+        /// </summary>
         public void AddBusinessReservation(Customer customer, Address limousineExpectedAddress, Location startLocation, Location arrivalLocation,
             DateTime startTime, DateTime endTime, Limousine limousine, CategoryType discountCategory)
         {
@@ -189,22 +254,39 @@ namespace VipServices2020.Domain
             uow.Reservations.AddReservation(reservation);
             uow.Complete();
         }
+
+        /// <summary>
+        /// Deze method haalt 1 reservatie uit de DB op basis van reservatie Id
+        /// </summary>
         public Reservation GetReservation(int reservationId)
         {
             return uow.Reservations.Find(reservationId).FirstOrDefault();
         }
+        /// <summary>
+        /// Deze method haalt alle reservaties uit de DB
+        /// </summary>
         public List<Reservation> GetAllReservations()
         {
             return uow.Reservations.FindAll().ToList();
         }
+
+        /// <summary>
+        /// Deze method haalt alle reservaties uit de DB op basis van gekozen klantnummer
+        /// </summary>
         public List<Reservation> GetAllReservations(int customerId)
         {
             return uow.Reservations.FindAll(new Customer { CustomerNumber = customerId }).ToList();
         }
+        /// <summary>
+        /// Deze method haalt alle reservaties uit de DB op basis van gekozen datum
+        /// </summary>
         public List<Reservation> GetAllReservations(DateTime date)
         {
             return uow.Reservations.FindAll(date).ToList();
         }
+        /// <summary>
+        /// Deze method haalt alle reservaties uit de DB op basis van gekozen klantnummer en datum
+        /// </summary>
         public List<Reservation> GetAllReservations(int customerId, DateTime date)
         {
             return uow.Reservations.FindAll(new Customer { CustomerNumber = customerId }, date).ToList();

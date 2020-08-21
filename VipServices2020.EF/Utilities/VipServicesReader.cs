@@ -37,7 +37,6 @@ namespace VipServices2020.EF.Utilities
                 while ((line = r.ReadLine()) != null)
                 {
                     string[] ss = line.Split(',').Select(x => x.Trim()).ToArray();
-                    //customerNumber = int.Parse(ss[0]);
                     name = ss[1];
                     CategoryType category = (CategoryType)Enum.Parse(typeof(CategoryType), ss[2]);
                     BtwNumber = ss[3];
