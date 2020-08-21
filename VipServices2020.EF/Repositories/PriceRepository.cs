@@ -15,6 +15,9 @@ namespace VipServices2020.EF.Repositories
             this.context = context;
         }
 
+        /// <summary>
+        ///voeg prijs object toe
+        /// </summary>
         public void AddPrice(Price price)
         {
             context.Prices.Add(price);

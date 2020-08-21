@@ -15,6 +15,9 @@ namespace VipServices2020.EF.Repositories
             this.context = context;
         }
 
+        /// <summary>
+        ///voeg adres object toe
+        /// </summary>
         public void AddAddress(Address address)
         {
             context.Addresses.Add(address);

@@ -12,7 +12,7 @@ using VipServices2020.Tests.EFLayer;
 namespace VipServices2020.Tests.DomainLayer.Manager
 {
     [TestClass]
-    public class StaffelTest
+    public class StaffelDiscountTest
     {
         [TestMethod]
         public void AddStaffel_ShouldWork()
@@ -36,7 +36,47 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             Assert.AreEqual(staffelInDB.DiscountPercentage, 5);
         }
         [TestMethod]
-        public void CalculateStaffel_ShouldWork()
+        public void CalculateStaffel_None_ShouldBeCorrect()
+        {
+
+        }
+        [TestMethod]
+        public void CalculateStaffel_Vip_0Res_ShouldBeCorrect()
+        {
+
+        }
+        [TestMethod]
+        public void CalculateStaffel_Vip_2Res_ShouldBeCorrect()
+        {
+
+        }
+        [TestMethod]
+        public void CalculateStaffel_Vip_15Res_ShouldBeCorrect()
+        {
+
+        }
+        [TestMethod]
+        public void CalculateStaffel_Vip_20Res_ShouldBeCorrect()
+        {
+
+        }
+        [TestMethod]
+        public void CalculateStaffel_Planner_0Res_ShouldBeCorrect()
+        {
+
+        }
+        [TestMethod]
+        public void CalculateStaffel_Planner_5Res_ShouldBeCorrect()
+        {
+
+        }
+        [TestMethod]
+        public void CalculateStaffel_Vip_25Res_ShouldBeCorrect()
+        {
+
+        }
+        [TestMethod]
+        public void CalculateStaffel_Vip_30Res_ShouldBeCorrect()
         {
 
         }

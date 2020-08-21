@@ -11,7 +11,9 @@ namespace VipServices2020.EF.Utilities
 {
     public static class VipServicesReader
     {
-       
+        /// <summary>
+        /// Zoek naar het locatie document en voeg iedere locatie toe aan de DB
+        /// </summary>
         public static void InitializeLocations(string path, VipServicesManager manager)
         {
             using (StreamReader r = new StreamReader(path))
@@ -26,6 +28,10 @@ namespace VipServices2020.EF.Utilities
                 }
             }
         }
+
+        /// <summary>
+        /// Zoek naar het klanten document en voeg iedere klant toe aan de DB
+        /// </summary>
         public static void InitializeCustomers(string path, VipServicesManager manager)
         {
             using (StreamReader r = new StreamReader(path))
@@ -52,7 +58,11 @@ namespace VipServices2020.EF.Utilities
                 }
             }
         }
-        public static void InitializeLimousine(string path, VipServicesManager manager)
+
+        /// <summary>
+        /// Zoek naar het limousines document en voeg iedere limousine toe aan de DB
+        /// </summary>
+        public static void InitializeLimousines(string path, VipServicesManager manager)
         {
             using (StreamReader r = new StreamReader(path))
             {

@@ -172,7 +172,7 @@ namespace VipServices2020.WPF
 
                 CategoryType discountCategory = (CategoryType)cmbDiscountCategory.SelectedItem;
                 double discountPercentage
-                    = vipServicesManager.CalculateStaffel((Customer)cmbCustomer.SelectedItem, startDate, discountCategory);
+                    = vipServicesManager.CalculateStaffel((Customer)cmbCustomer.SelectedItem, discountCategory);
 
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.NightLife))
                 {

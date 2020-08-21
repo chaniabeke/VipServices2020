@@ -16,21 +16,33 @@ namespace VipServices2020.EF.Repositories
             this.context = context;
         }
 
+        /// <summary>
+        ///voeg limousine object toe
+        /// </summary>
         public void AddLimousine(Limousine limousine)
         {
             context.Limousines.Add(limousine);
         }
 
+        /// <summary>
+        /// Vind limousine op basis van id
+        /// </summary>
         public Limousine Find(int id)
         {
             return context.Limousines.Where(l => l.Id == id).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Geef alle limousines, gesorteerd op merk, model en kleur
+        /// </summary>
         public IEnumerable<Limousine> FindAll()
         {
             return context.Limousines.OrderBy(l => l.Brand).ThenBy(l => l.Model).ThenBy(l => l.Color).AsEnumerable<Limousine>();
         }
 
+        /// <summary>
+        /// Geef een lijst van limousines op basis van het arrangement, indien de prijs niet 0 is
+        /// </summary>
         public List<Limousine> FindAllAvailable(ArrangementType arrangement)
         {
             List<Limousine> limousines = new List<Limousine>();

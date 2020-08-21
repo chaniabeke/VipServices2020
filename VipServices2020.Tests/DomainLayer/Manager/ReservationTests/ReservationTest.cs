@@ -10,7 +10,7 @@ using VipServices2020.EF;
 using VipServices2020.EF.Repositories;
 using VipServices2020.Tests.EFLayer;
 
-namespace VipServices2020.Tests.DomainLayer.Manager
+namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests
 {
     [TestClass]
     public class ReservationTest
@@ -35,7 +35,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
 
-            double discountPercentage = m.CalculateStaffel(customer, startTime, category);
+            double discountPercentage = m.CalculateStaffel(customer, category);
             Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
             Reservation weddingReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price);

@@ -101,7 +101,7 @@ namespace VipServices2020.Domain
             return price;
         }
         /// <summary>
-        /// Deze method berekent de netto prijs voor het Welnees arrangement
+        /// Deze method berekent de netto prijs voor het Welness arrangement
         /// </summary>
         public static Price WelnessCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, 
             DateTime endTime, double discountPercentage)

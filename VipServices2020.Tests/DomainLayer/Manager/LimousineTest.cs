@@ -59,6 +59,14 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             Assert.AreEqual(3, m.GetAllLimousines().Count);
         }
         [TestMethod]
+        public void GetAllAvailableLimousines_AvailableLimousine_ShouldWork() { }
+        [TestMethod]
+        public void GetAllAvailableLimousines_ArrangementNotAvailable_ShouldNotShow() { }
+        [TestMethod]
+        public void GetAllAvailableLimousines_LimousineNotAvailable_ShouldNotShow() { }
+
+
+        [TestMethod]
         public void GetAllAvailableLimousines_ShouldWork()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);

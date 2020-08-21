@@ -8,5 +8,20 @@ namespace VipServices2020.Tests.EFLayer.Utilities
     [TestClass]
     public class Reader
     {
+        [TestMethod]
+        public void InitializeLocations_ShouldWork()
+        {
+
+        }
+        [TestMethod]
+        public void InitializeCustomers_ShouldWork()
+        {
+
+        }
+        [TestMethod]
+        public void InitializeLimousines_ShouldWork()
+        {
+
+        }
     }
 }

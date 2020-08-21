@@ -24,11 +24,7 @@ namespace VipServices2020.EF
             Staffels = new StaffelRepository(this.context);
             Discounts = new DiscountsRepository(this.context);
         }
-
-     
-
         public ICustomerRepository Customers { get; private set; }
-
         public IAddressRepository Addresses { get; private set; }
         public ILimousineRepository Limousines { get; private set; }
         public ILocationRepository Locations { get; private set; }
