@@ -60,12 +60,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Assert.AreEqual(reservationInDb.Price.Total, businessReservation.Price.Total);
         }
         [TestMethod]
-        public void AddBusinessReservation_WithLessThen1Hour_ShouldFail()
+        public void AddBusinessReservation_WithLessThen1Hour_ShouldThrowException()
         {
             Assert.Fail();
         }
         [TestMethod]
-        public void AddBusinessReservation_WithMoreThen11Hours_ShouldFail()
+        public void AddBusinessReservation_WithMoreThen11Hours_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -92,7 +92,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             act.Should().Throw<DomainException>().WithMessage("Een Business reservatie mag niet langer zijn dan 11uur.");
         }
         [TestMethod]
-        public void AddBusinessReservation_WithNotAvailableLimousine_ShouldFail()
+        public void AddBusinessReservation_EndDateBeforeStartDate_ShouldThrowException()
+        {
+            Assert.Fail();
+        }
+        [TestMethod]
+        public void AddBusinessReservation_WithNotAvailableLimousine_ShouldThrowException()
         {
             Assert.Fail();
         }

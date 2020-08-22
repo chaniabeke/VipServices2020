@@ -60,12 +60,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Assert.AreEqual(reservationInDb.Price.Total, airportReservation.Price.Total);
         }
         [TestMethod]
-        public void AddAirportReservation_WithLessThan1Hour_ShouldFail()
+        public void AddAirportReservation_WithLessThan1Hour_ShouldThrowException()
         {
             Assert.Fail();
         }
         [TestMethod]
-        public void AddAirportReservation_WithMoreThen11Hours_ShouldFail()
+        public void AddAirportReservation_WithMoreThen11Hours_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -92,7 +92,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             act.Should().Throw<DomainException>().WithMessage("Een Airport reservatie mag niet langer zijn dan 11uur.");
         }
         [TestMethod]
-        public void AddAirportReservation_WithNotAvailableLimousine_ShouldFail()
+        public void AddAirportReservation_EndDateBeforeStartDate_ShouldThrowException()
+        {
+            Assert.Fail();
+        }
+        [TestMethod]
+        public void AddAirportReservation_WithNotAvailableLimousine_ShouldThrowException()
         {
             Assert.Fail();
         }

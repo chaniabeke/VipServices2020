@@ -107,18 +107,29 @@ namespace VipServices2020.Domain
             uow.Complete();
         }
 
+        /// <summary>
+        /// Deze method bekijkt welke staffelkortingpercentage overeenkomt met de categorie van de klant en 
+        /// het aantal reservaties van dit jaar
+        /// </summary>
         public double CalculateStaffel(Customer customer)
         {
             CategoryType category = customer.Category;
+
+            //Geef het aantal reservering van dit jaar
             int reservationCount = uow.Customers.FindReservationCount(customer);
             double staffelDiscount = 0.0;
+
             if (category != CategoryType.geen)
             {
+                //Indien de categorie geen staffelkorting(en) bezit
                 if (uow.StaffelDiscounts.FindAll(category).Count() != 0)
                 {
+                    //Vind Het kleinste nummer van "NumberOfBookedReservations"
                     int smallestStaffelCount = uow.StaffelDiscounts.FindSmallestReservationCount(category).NumberOfBookedReservations;
+                    //Indien het aantal reserveringen van de klant gelijk of groter is dan de kleinste nummer van "NumberOfBookedReservations"
                     if (reservationCount >= smallestStaffelCount)
                     {
+                        //Zoek de staffelkortingpercentage die het dichtste bij het aantal reservering valt
                         staffelDiscount = uow.StaffelDiscounts.FindAll(category)
                         .Where(s => reservationCount >= s.NumberOfBookedReservations)
                         .FirstOrDefault().DiscountPercentage;
@@ -126,6 +137,7 @@ namespace VipServices2020.Domain
                     }
                 }
             }
+            //Geef standaard 0.0 terug indien niet aan deze voorwaarden voldaan wordt
             return staffelDiscount;
         }
 

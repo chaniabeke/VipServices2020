@@ -61,7 +61,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Assert.AreEqual(reservationInDb.Price.Total, nightLifeReservation.Price.Total);
         }
         [TestMethod]
-        public void AddNightLifeReservation_WithMoreThen11Hours_ShouldFail()
+        public void AddNightLifeReservation_WithMoreThen11Hours_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -88,7 +88,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             act.Should().Throw<DomainException>().WithMessage("Een reservatie mag niet langer zijn dan 11uur.");
         }
         [TestMethod]
-        public void AddNightLifeReservation_WithWrongStartHour_ShouldFail()
+        public void AddNightLifeReservation_WithWrongStartHour_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -115,7 +115,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             act.Should().Throw<DomainException>().WithMessage("Een NightLife reservatie moet starten tussen 20u00 en 24u00.");
         }
         [TestMethod]
-        public void AddNightLifeReservation_WithLessThan7TotalHours_ShouldFail()
+        public void AddNightLifeReservation_WithLessThan7TotalHours_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -141,7 +141,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
 
             act.Should().Throw<DomainException>().WithMessage("Een NightLife reservatie moet minstens 7uur zijn.");
         }
-        public void AddNightLifeReservation_WithNotAvailableLimousine_ShouldFail()
+        [TestMethod]
+        public void AddNightLifeReservation_EndDateBeforeStartDate_ShouldThrowException()
+        {
+            Assert.Fail();
+        }
+        public void AddNightLifeReservation_WithNotAvailableLimousine_ShouldThrowException()
         {
             Assert.Fail();
         }

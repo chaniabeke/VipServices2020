@@ -61,7 +61,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Assert.AreEqual(reservationInDb.Price.Total, weddingReservation.Price.Total);
         }
         [TestMethod]
-        public void AddWeddingReservation_WithMoreThen11Hours_ShouldFail()
+        public void AddWeddingReservation_WithMoreThen11Hours_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -88,7 +88,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             act.Should().Throw<DomainException>().WithMessage("Een reservatie mag niet langer zijn dan 11uur.");
         }
         [TestMethod]
-        public void AddWeddingReservation_WithWrongStartHour_ShouldFail()
+        public void AddWeddingReservation_WithWrongStartHour_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -115,7 +115,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             act.Should().Throw<DomainException>().WithMessage("Een Wedding reservatie moet starten tussen 07u00 en 15u00.");
         }
         [TestMethod]
-        public void AddWeddingReservation_WithLessThan7TotalHours_ShouldFail()
+        public void AddWeddingReservation_WithLessThan7TotalHours_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -142,7 +142,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             act.Should().Throw<DomainException>().WithMessage("Een Wedding reservatie moet minstens 7uur zijn.");
         }
         [TestMethod]
-        public void AddWeddingReservation_WithNotAvailableLimousine_ShouldFail()
+        public void AddWeddingReservation_EndDateBeforeStartDate_ShouldThrowException()
+        {
+            Assert.Fail();
+        }
+        [TestMethod]
+        public void AddWeddingReservation_WithNotAvailableLimousine_ShouldThrowException()
         {
             Assert.Fail();
         }

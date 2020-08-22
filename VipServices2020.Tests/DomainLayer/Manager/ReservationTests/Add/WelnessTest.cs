@@ -60,7 +60,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Assert.AreEqual(reservationInDb.Price.Total, welnessReservation.Price.Total);
         }
         [TestMethod]
-        public void AddWelnessReservation_WithWrongStartHour_ShouldFail()
+        public void AddWelnessReservation_WithWrongStartHour_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -87,7 +87,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             act.Should().Throw<DomainException>().WithMessage("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
         }
         [TestMethod]
-        public void AddWelnessReservation_WithMoreThen10Hours_ShouldFail()
+        public void AddWelnessReservation_WithLessThen10Hours_ShouldThrowException()
+        {
+            Assert.Fail();
+        }
+            [TestMethod]
+        public void AddWelnessReservation_WithMoreThen10Hours_ShouldThrowException()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
@@ -114,7 +119,12 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             act.Should().Throw<DomainException>().WithMessage("Een Welness reservatie moet altijd 10 uur zijn.");
         }
         [TestMethod]
-        public void AddWelnessReservation_WithNotAvailableLimousine_ShouldFail()
+        public void AddWelnessReservation_EndDateBeforeStartDate_ShouldThrowException()
+        {
+            Assert.Fail();
+        }
+        [TestMethod]
+        public void AddWelnessReservation_WithNotAvailableLimousine_ShouldThrowException()
         {
             Assert.Fail();
         }
