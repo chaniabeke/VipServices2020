@@ -15,32 +15,29 @@ namespace VipServices2020.ConsoleUI
             Console.WriteLine("Initialiseer Databank");
             VipServicesManager vipServicesManger = new VipServicesManager(new UnitOfWork(new VipServicesContext("Production")));
 
-            VipServicesReader.InitializeLocations(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\locaties.txt", vipServicesManger);
-            VipServicesReader.InitializeCustomers(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt", vipServicesManger);
-            VipServicesReader.InitializeLimousine(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
+            //VipServicesReader.InitializeLocations(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\locaties.txt", vipServicesManger);
+            //VipServicesReader.InitializeCustomers(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\klanten.txt", vipServicesManger);
+            //VipServicesReader.InitializeLimousines(@"C:\Users\Chania\Desktop\PROJECT\VipServices2020\Resources\vehicles.txt", vipServicesManger);
 
-            Discount discountVip = new Discount(CategoryType.vip);
-            Staffel staffel1 = new Staffel(2, 5, discountVip);
-            Staffel staffel2 = new Staffel(7, 7.5, discountVip);
-            Staffel staffel3 = new Staffel(15, 10, discountVip);
-            vipServicesManger.AddStaffel(staffel1);
-            vipServicesManger.AddStaffel(staffel2);
-            vipServicesManger.AddStaffel(staffel3);
+            //CategoryType vip = CategoryType.vip;
+            //StaffelDiscount staffel1 = new StaffelDiscount(2, 5, vip);
+            //StaffelDiscount staffel2 = new StaffelDiscount(7, 7.5, vip);
+            //StaffelDiscount staffel3 = new StaffelDiscount(15, 10, vip);
+            //vipServicesManger.AddStaffel(staffel1);
+            //vipServicesManger.AddStaffel(staffel2);
+            //vipServicesManger.AddStaffel(staffel3);
 
-            Discount discountPlanner = new Discount(CategoryType.huwelijksplanner);
-            Staffel staffel4 = new Staffel(5, 7.5, discountPlanner);
-            Staffel staffel5 = new Staffel(10, 10, discountPlanner);
-            Staffel staffel6 = new Staffel(15, 12.5, discountPlanner);
-            Staffel staffel7 = new Staffel(20, 15, discountPlanner);
-            Staffel staffel8 = new Staffel(25, 25, discountPlanner);
-            vipServicesManger.AddStaffel(staffel4);
-            vipServicesManger.AddStaffel(staffel5);
-            vipServicesManger.AddStaffel(staffel6);
-            vipServicesManger.AddStaffel(staffel7);
-            vipServicesManger.AddStaffel(staffel8);
-
-            Discount discountGeen = new Discount(CategoryType.geen);
-            vipServicesManger.AddDiscount(discountGeen);
+            //CategoryType planner = CategoryType.huwelijksplanner;
+            //StaffelDiscount staffel4 = new StaffelDiscount(5, 7.5, planner);
+            //StaffelDiscount staffel5 = new StaffelDiscount(10, 10, planner);
+            //StaffelDiscount staffel6 = new StaffelDiscount(15, 12.5, planner);
+            //StaffelDiscount staffel7 = new StaffelDiscount(20, 15, planner);
+            //StaffelDiscount staffel8 = new StaffelDiscount(25, 25, planner);
+            //vipServicesManger.AddStaffel(staffel4);
+            //vipServicesManger.AddStaffel(staffel5);
+            //vipServicesManger.AddStaffel(staffel6);
+            //vipServicesManger.AddStaffel(staffel7);
+            //vipServicesManger.AddStaffel(staffel8);
 
             Console.WriteLine("Einde Databank");
         }

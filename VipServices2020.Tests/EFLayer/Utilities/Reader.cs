@@ -11,17 +11,17 @@ namespace VipServices2020.Tests.EFLayer.Utilities
         [TestMethod]
         public void InitializeLocations_ShouldWork()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void InitializeCustomers_ShouldWork()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void InitializeLimousines_ShouldWork()
         {
-
+            Assert.Fail();
         }
     }
 }

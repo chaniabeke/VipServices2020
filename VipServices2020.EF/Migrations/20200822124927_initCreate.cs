@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VipServices2020.EF.Migrations
 {
-    public partial class initcreate : Migration
+    public partial class initCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,19 +20,6 @@ namespace VipServices2020.EF.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Addresses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Discounts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Category = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Discounts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,6 +80,21 @@ namespace VipServices2020.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StaffelDiscounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NumberOfBookedReservations = table.Column<int>(nullable: false),
+                    DiscountPercentage = table.Column<double>(nullable: false),
+                    Category = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StaffelDiscounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -110,27 +112,6 @@ namespace VipServices2020.EF.Migrations
                         name: "FK_Customers_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Staffels",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NumberOfBookedReservations = table.Column<int>(nullable: false),
-                    DiscountPercentage = table.Column<double>(nullable: false),
-                    DiscountId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Staffels", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Staffels_Discounts_DiscountId",
-                        column: x => x.DiscountId,
-                        principalTable: "Discounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -228,11 +209,6 @@ namespace VipServices2020.EF.Migrations
                 name: "IX_Reservations_StartLocationId",
                 table: "Reservations",
                 column: "StartLocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Staffels_DiscountId",
-                table: "Staffels",
-                column: "DiscountId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -241,7 +217,7 @@ namespace VipServices2020.EF.Migrations
                 name: "Reservations");
 
             migrationBuilder.DropTable(
-                name: "Staffels");
+                name: "StaffelDiscounts");
 
             migrationBuilder.DropTable(
                 name: "Locations");
@@ -254,9 +230,6 @@ namespace VipServices2020.EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Prices");
-
-            migrationBuilder.DropTable(
-                name: "Discounts");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

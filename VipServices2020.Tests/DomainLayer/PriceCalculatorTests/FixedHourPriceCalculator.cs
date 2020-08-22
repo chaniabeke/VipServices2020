@@ -11,27 +11,27 @@ namespace VipServices2020.Tests.DomainLayer.PriceCalculatorTests
         [TestMethod]
         public void Start7hEnd17h_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void Start10hEnd20h_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void Start12hEnd22h_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void With5ProcentStaffelDiscount_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void With15ProcentStaffelDiscount_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
     }
 }

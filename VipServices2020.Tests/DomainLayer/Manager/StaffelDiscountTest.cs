@@ -20,65 +20,64 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
             VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
 
-            Discount discount = new Discount(CategoryType.huwelijksplanner);
-            Staffel staffel = new Staffel(5, 5, discount);
+            StaffelDiscount staffelDiscount = new StaffelDiscount(5, 5, CategoryType.concertpromotor);
 
             Action act = () =>
             {
-                m.AddStaffel(staffel);
+                m.AddStaffel(staffelDiscount);
             };
 
             act.Should().NotThrow<Exception>();
-            Assert.AreEqual(1, contextTest.Staffels.Local.Count);
-            var staffelInDB = contextTest.Staffels.First();
-            Assert.AreEqual(staffelInDB.Discount.Category, discount.Category);
+            Assert.AreEqual(1, contextTest.StaffelDiscounts.Local.Count);
+            var staffelInDB = contextTest.StaffelDiscounts.First();
+            Assert.AreEqual(staffelInDB.Category,CategoryType.concertpromotor);
             Assert.AreEqual(staffelInDB.NumberOfBookedReservations, 5);
             Assert.AreEqual(staffelInDB.DiscountPercentage, 5);
         }
         [TestMethod]
         public void CalculateStaffel_None_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void CalculateStaffel_Vip_0Res_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void CalculateStaffel_Vip_2Res_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void CalculateStaffel_Vip_15Res_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void CalculateStaffel_Vip_20Res_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void CalculateStaffel_Planner_0Res_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
         public void CalculateStaffel_Planner_5Res_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
-        public void CalculateStaffel_Vip_25Res_ShouldBeCorrect()
+        public void CalculateStaffel_Planner25Res_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
         [TestMethod]
-        public void CalculateStaffel_Vip_30Res_ShouldBeCorrect()
+        public void CalculateStaffel_Planner_30Res_ShouldBeCorrect()
         {
-
+            Assert.Fail();
         }
     }
 }

@@ -30,12 +30,11 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             DateTime startTime = new DateTime(2020, 09, 22, 7, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 17, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
 
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
 
-            double discountPercentage = m.CalculateStaffel(customer, category);
+            double discountPercentage = m.CalculateStaffel(customer);
             Price price = PriceCalculator.PerHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
             Reservation airportReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Airport, startTime, endTime, totalHours, limousine, price);
@@ -43,7 +42,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Action act = () =>
             {
                 m.AddAirportReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, category);
+                startTime, endTime, limousine);
             };
 
             act.Should().NotThrow<DomainException>();
@@ -61,6 +60,11 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Assert.AreEqual(reservationInDb.Price.Total, airportReservation.Price.Total);
         }
         [TestMethod]
+        public void AddAirportReservation_WithLessThan1Hour_ShouldFail()
+        {
+            Assert.Fail();
+        }
+        [TestMethod]
         public void AddAirportReservation_WithMoreThen11Hours_ShouldFail()
         {
             VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
@@ -75,7 +79,6 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             DateTime startTime = new DateTime(2020, 09, 22, 7, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 19, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
 
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
@@ -83,7 +86,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Action act = () =>
             {
                 m.AddAirportReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, category);
+                startTime, endTime, limousine);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Airport reservatie mag niet langer zijn dan 11uur.");
@@ -91,7 +94,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
         [TestMethod]
         public void AddAirportReservation_WithNotAvailableLimousine_ShouldFail()
         {
-
+            Assert.Fail();
         }
     }
 }

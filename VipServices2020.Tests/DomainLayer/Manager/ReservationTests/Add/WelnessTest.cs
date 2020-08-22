@@ -30,20 +30,19 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             DateTime startTime = new DateTime(2020, 09, 22, 7, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 17, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
 
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
 
-            double discountPercentage = m.CalculateStaffel(customer, category);
-            Price price = PriceCalculator.WelnessCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
+            double discountPercentage = m.CalculateStaffel(customer);
+            Price price = PriceCalculator.FixedHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
             Reservation welnessReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Wellness, startTime, endTime, totalHours, limousine, price);
 
             Action act = () =>
             {
                 m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, category);
+                startTime, endTime, limousine);
             };
 
             act.Should().NotThrow<DomainException>();
@@ -75,7 +74,6 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             DateTime startTime = new DateTime(2020, 09, 22, 13, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 23, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
 
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
@@ -83,7 +81,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Action act = () =>
             {
                 m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, category);
+                startTime, endTime, limousine);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Welness reservatie moet starten tussen 07u00 en 12u00.");
@@ -103,7 +101,6 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             DateTime startTime = new DateTime(2020, 09, 22, 12, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 20, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
 
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
@@ -111,7 +108,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Action act = () =>
             {
                 m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, category);
+                startTime, endTime, limousine);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Welness reservatie moet altijd 10 uur zijn.");
@@ -119,6 +116,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
         [TestMethod]
         public void AddWelnessReservation_WithNotAvailableLimousine_ShouldFail()
         {
+            Assert.Fail();
         }
     }
 }

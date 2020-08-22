@@ -30,20 +30,20 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             DateTime startTime = new DateTime(2020, 09, 22, 8, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 18, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
 
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
 
-            double discountPercentage = m.CalculateStaffel(customer, category);
-            Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
+            double discountPercentage = m.CalculateStaffel(customer);
+            Price price = PriceCalculator.FixedPriceWithDetailsPriceCalculator
+                (limousine, totalHours, startTime, endTime, discountPercentage, ArrangementType.Wedding);
             Reservation weddingReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price);
 
             Action act = () =>
             {
                 m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, category);
+                startTime, endTime, limousine);
             };
 
             act.Should().NotThrow<DomainException>();
@@ -75,15 +75,14 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             DateTime startTime = new DateTime(2020, 09, 22, 8, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 20, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
-
+  
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
                 m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, category);
+                startTime, endTime, limousine);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een reservatie mag niet langer zijn dan 11uur.");
@@ -103,7 +102,6 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             DateTime startTime = new DateTime(2020, 09, 22, 17, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 23, 0, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
 
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
@@ -111,7 +109,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             Action act = () =>
             {
                 m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, category);
+                startTime, endTime, limousine);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Wedding reservatie moet starten tussen 07u00 en 15u00.");
@@ -131,15 +129,14 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
             DateTime startTime = new DateTime(2020, 09, 22, 10, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 12, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
-
+ 
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
 
             Action act = () =>
             {
                 m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-                startTime, endTime, limousine, category);
+                startTime, endTime, limousine);
             };
 
             act.Should().Throw<DomainException>().WithMessage("Een Wedding reservatie moet minstens 7uur zijn.");
@@ -147,7 +144,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
         [TestMethod]
         public void AddWeddingReservation_WithNotAvailableLimousine_ShouldFail()
         {
-
+            Assert.Fail();
         }
     }
 }

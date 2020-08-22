@@ -30,18 +30,18 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests
             DateTime startTime = new DateTime(2020, 09, 22, 8, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 18, 0, 0);
             TimeSpan totalHours = endTime - startTime;
-            CategoryType category = CategoryType.geen;
-
+           
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
             Limousine limousine = limousineRepo.Find(1);
 
-            double discountPercentage = m.CalculateStaffel(customer, category);
-            Price price = PriceCalculator.WeddingPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
+            double discountPercentage = m.CalculateStaffel(customer);
+            Price price = PriceCalculator.FixedPriceWithDetailsPriceCalculator
+                (limousine, totalHours, startTime, endTime, discountPercentage, ArrangementType.Wedding);
             Reservation weddingReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price);
 
             m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
-               startTime, endTime, limousine, category);
+               startTime, endTime, limousine);
 
             Action act = () =>
             {
@@ -65,21 +65,22 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests
         [TestMethod]
         public void GetAllReservations_ShouldWork()
         {
+            Assert.Fail();
         }
         [TestMethod]
         public void GetAllReservations_ShouldWork(int customerId)
         {
-           
+            Assert.Fail();
         }
         [TestMethod]
         public void GetAllReservations_ShouldWork(DateTime date)
         {
-           
+            Assert.Fail();
         }
         [TestMethod]
         public void GetAllReservations_ShouldWork(int customerId, DateTime date)
         {
-            
+            Assert.Fail();
         }
     }
 }

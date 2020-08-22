@@ -44,8 +44,7 @@ namespace VipServices2020.EF
         public DbSet<Location> Locations { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Price> Prices { get; set; }
-        public DbSet<Staffel> Staffels { get; set; }
-        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<StaffelDiscount> StaffelDiscounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

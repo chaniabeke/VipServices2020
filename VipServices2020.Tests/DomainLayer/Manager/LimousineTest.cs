@@ -59,12 +59,20 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             Assert.AreEqual(3, m.GetAllLimousines().Count);
         }
         [TestMethod]
-        public void GetAllAvailableLimousines_AvailableLimousine_ShouldWork() { }
+        public void GetAllAvailableLimousines_AvailableLimousine_ShouldWork()
+        {
+            Assert.Fail();
+        }
         [TestMethod]
-        public void GetAllAvailableLimousines_ArrangementNotAvailable_ShouldNotShow() { }
+        public void GetAllAvailableLimousines_ArrangementNotAvailable_ShouldNotShow() 
+        { 
+            Assert.Fail(); 
+        }
         [TestMethod]
-        public void GetAllAvailableLimousines_LimousineNotAvailable_ShouldNotShow() { }
-
+        public void GetAllAvailableLimousines_LimousineNotAvailable_ShouldNotShow() 
+        {
+            Assert.Fail();
+        }
 
         [TestMethod]
         public void GetAllAvailableLimousines_ShouldWork()
@@ -85,7 +93,7 @@ namespace VipServices2020.Tests.DomainLayer.Manager
             m.AddLimousine("Chrysler", "300C Limousine", "White", 175, 800, 500, 1000);
             Limousine limousineChrysler = limousineRepo.Find(1);
             m.AddNightLifeReservation(customer, limousineExceptedAddress, locationStart, locationArrival, startTime,
-               endTime, limousineChrysler, CategoryType.geen);
+               endTime, limousineChrysler);
 
             //Niet beschikbaar - nightlifeprice 0
             m.AddLimousine("Lincoln", "Limousine", "Pink", 180, 0, 850, 1000);

@@ -38,7 +38,6 @@ namespace VipServices2020.WPF
                 cmbEndTime.ItemsSource = hours;
                 lblLimousine.Visibility = Visibility.Hidden;
                 cmbLimousine.Visibility = Visibility.Hidden;
-                cmbDiscountCategory.ItemsSource = vipServicesManager.GetAllDiscounts();
                 btnPrice.Visibility = Visibility.Hidden;
                 stpPrice.Visibility = Visibility.Hidden;
             }
@@ -109,32 +108,30 @@ namespace VipServices2020.WPF
                     DateTime startDate = GetStartDate();
                     DateTime endDate = GetEndDate();
 
-                    CategoryType discountCategory = (CategoryType)cmbDiscountCategory.SelectedItem;
-
                     if (cmbArrangement.SelectedItem.Equals(ArrangementType.NightLife))
                     {
                         vipServicesManager.AddNightLifeReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
-                        (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, discountCategory);
+                        (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem);
                     }
                     if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wedding))
                     {
                         vipServicesManager.AddWeddingReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
-                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, discountCategory);
+                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem);
                     }
                     if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wellness))
                     {
                         vipServicesManager.AddWelnessReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
-                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, discountCategory);
+                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem);
                     }
                     if (cmbArrangement.SelectedItem.Equals(ArrangementType.Business))
                     {
                         vipServicesManager.AddBusinessReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
-                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, discountCategory);
+                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem);
                     }
                     if (cmbArrangement.SelectedItem.Equals(ArrangementType.Airport))
                     {
                         vipServicesManager.AddAirportReservation((Customer)cmbCustomer.SelectedItem, address, (Location)cmbStartLocation.SelectedItem,
-                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem, discountCategory);
+                      (Location)cmbArrivalLocation.SelectedItem, startDate, endDate, (Limousine)cmbLimousine.SelectedItem);
                     }
                     MessageBox.Show("Reservatie is succesvol toegevoegd!");
                 }
@@ -170,23 +167,22 @@ namespace VipServices2020.WPF
 
                 Price price = new Price();
 
-                CategoryType discountCategory = (CategoryType)cmbDiscountCategory.SelectedItem;
                 double discountPercentage
-                    = vipServicesManager.CalculateStaffel((Customer)cmbCustomer.SelectedItem, discountCategory);
+                    = vipServicesManager.CalculateStaffel((Customer)cmbCustomer.SelectedItem);
 
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.NightLife))
                 {
-                    price = PriceCalculator.NightLifeCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
-                         startDate, endDate, discountPercentage);
+                    price = PriceCalculator.FixedPriceWithDetailsPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                         startDate, endDate, discountPercentage, ArrangementType.NightLife);
                 }
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wedding))
                 {
-                    price = PriceCalculator.WeddingPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
-                      startDate, endDate, discountPercentage);
+                    price = PriceCalculator.FixedPriceWithDetailsPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                      startDate, endDate, discountPercentage, ArrangementType.Wedding);
                 }
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wellness))
                 {
-                    price = PriceCalculator.WelnessCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                    price = PriceCalculator.FixedHourPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
                       startDate, endDate, discountPercentage);
                 }
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.Business))

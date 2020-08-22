@@ -12,8 +12,7 @@ namespace VipServices2020.Domain {
         ILocationRepository Locations { get; }
         IReservationRepository Reservations { get; }
         IPriceRepository Prices { get; }
-        IStaffelRepository Staffels { get; }
-        IDiscountRepository Discounts { get; }
+        IStaffelDiscountRepository StaffelDiscounts { get; }
         int Complete();
     }
 }

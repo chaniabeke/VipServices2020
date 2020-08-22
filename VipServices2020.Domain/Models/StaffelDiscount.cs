@@ -7,7 +7,7 @@ using VipServices2020.Domain.Repositories;
 
 namespace VipServices2020.Domain.Models
 {
-    public class Staffel
+    public class StaffelDiscount
     {
         [Key]
         public int Id { get; set; }
@@ -16,18 +16,18 @@ namespace VipServices2020.Domain.Models
         [Required]
         public double DiscountPercentage { get; set; }
         [Required]
-        public Discount Discount { get; set; }
+        public CategoryType Category { get; set; }
 
-        public Staffel(int numberOfBookedReservations, double discountPercentage)
+        public StaffelDiscount(int numberOfBookedReservations, double discountPercentage)
         {
             NumberOfBookedReservations = numberOfBookedReservations;
             DiscountPercentage = discountPercentage;
         }
-        public Staffel(int numberOfBookedReservations, double discountPercentage, Discount discount)
+        public StaffelDiscount(int numberOfBookedReservations, double discountPercentage, CategoryType category)
         {
             NumberOfBookedReservations = numberOfBookedReservations;
             DiscountPercentage = discountPercentage;
-            Discount = discount;
+            Category = category;
         }
     }
 }
