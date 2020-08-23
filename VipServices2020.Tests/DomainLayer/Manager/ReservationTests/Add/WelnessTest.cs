@@ -89,7 +89,29 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
         [TestMethod]
         public void AddWelnessReservation_WithLessThen10Hours_ShouldThrowException()
         {
-            Assert.Fail();
+            VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
+            VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
+
+            Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
+            Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
+            Customer customer = new Customer("Jan", "", addressCustomer, CategoryType.particulier);
+            Location locationStart = new Location("Gent");
+            Location locationArrival = new Location("Brussel");
+            DateTime startTime = new DateTime(2020, 09, 22, 12, 0, 0);
+            DateTime endTime = new DateTime(2020, 09, 22, 19, 0, 0);
+            TimeSpan totalHours = endTime - startTime;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
+
+            Action act = () =>
+            {
+                m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+                startTime, endTime, limousine);
+            };
+
+            act.Should().Throw<DomainException>().WithMessage("Een Welness reservatie moet altijd 10 uur zijn.");
         }
             [TestMethod]
         public void AddWelnessReservation_WithMoreThen10Hours_ShouldThrowException()
@@ -121,12 +143,58 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests.Add
         [TestMethod]
         public void AddWelnessReservation_EndDateBeforeStartDate_ShouldThrowException()
         {
-            Assert.Fail();
+            VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
+            VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
+
+            Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
+            Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
+            Customer customer = new Customer("Jan", "", addressCustomer, CategoryType.particulier);
+            Location locationStart = new Location("Gent");
+            Location locationArrival = new Location("Brussel");
+            DateTime startTime = new DateTime(2020, 09, 22, 12, 0, 0);
+            DateTime endTime = new DateTime(2020, 09, 22, 2, 0, 0);
+            TimeSpan totalHours = endTime - startTime;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
+
+            Action act = () =>
+            {
+                m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+                startTime, endTime, limousine);
+            };
+
+            act.Should().Throw<DomainException>().WithMessage("Een reservatie mag niet eindigen voor het begint.");
         }
         [TestMethod]
         public void AddWelnessReservation_WithNotAvailableLimousine_ShouldThrowException()
         {
-            Assert.Fail();
+            VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
+            VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
+
+            Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
+            Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
+            Customer customer = new Customer("Jan", "", addressCustomer, CategoryType.particulier);
+            Location locationStart = new Location("Gent");
+            Location locationArrival = new Location("Brussel");
+            DateTime startTime = new DateTime(2020, 09, 22, 12, 0, 0);
+            DateTime endTime = new DateTime(2020, 09, 22, 22, 0, 0);
+            TimeSpan totalHours = endTime - startTime;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+            Limousine limousine = limousineRepo.Find(1);
+            m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+               startTime, endTime, limousine);
+
+            Action act = () =>
+            {
+                m.AddWelnessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+                startTime, endTime, limousine);
+            };
+
+            act.Should().Throw<DomainException>().WithMessage("Limousine is niet beschikbaar.");
         }
     }
 }

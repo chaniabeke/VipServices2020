@@ -68,17 +68,17 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests
             Assert.Fail();
         }
         [TestMethod]
-        public void GetAllReservations_ShouldWork(int customerId)
+        public void GetAllReservations_CustomerId_ShouldWork()
         {
             Assert.Fail();
         }
         [TestMethod]
-        public void GetAllReservations_ShouldWork(DateTime date)
+        public void GetAllReservations_Date_ShouldWork()
         {
             Assert.Fail();
         }
         [TestMethod]
-        public void GetAllReservations_ShouldWork(int customerId, DateTime date)
+        public void GetAllReservations_CustomerIdAndDate_ShouldWork()
         {
             Assert.Fail();
         }
