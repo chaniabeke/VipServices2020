@@ -35,8 +35,8 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests
             Limousine limousine = limousineRepo.Find(1);
 
             double discountPercentage = m.CalculateStaffel(customer);
-            Price price = PriceCalculator.FixedPriceWithDetailsPriceCalculator
-                (limousine, totalHours, startTime, endTime, discountPercentage, ArrangementType.Wedding);
+            Price price = PriceCalculator.WeddingPriceCalculator
+                (limousine, totalHours, startTime, endTime, discountPercentage);
             Reservation weddingReservation = new Reservation(customer, DateTime.Now, limousineExceptedAddress, locationStart, locationArrival,
                 ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price);
 

@@ -8,7 +8,7 @@ using VipServices2020.Domain.Models;
 namespace VipServices2020.Tests.DomainLayer.PriceCalculatorTests
 {
     [TestClass]
-    public class FixedHourPriceCalculator
+    public class WelnessPriceCalculator
     {
         [TestMethod]
         public void Start7hEnd17h_ShouldBeCorrect()
@@ -19,7 +19,7 @@ namespace VipServices2020.Tests.DomainLayer.PriceCalculatorTests
             TimeSpan totalHours = endTime - startTime;
             double discountPercentage = 5;
 
-            Price price = PriceCalculator.FixedHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
+            Price price = PriceCalculator.WelnessPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Assert.AreEqual(price.FirstHourPrice, 0);
             Assert.AreEqual(price.NightHourCount, 0);
@@ -43,7 +43,7 @@ namespace VipServices2020.Tests.DomainLayer.PriceCalculatorTests
             TimeSpan totalHours = endTime - startTime;
             double discountPercentage = 5;
 
-            Price price = PriceCalculator.FixedHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
+            Price price = PriceCalculator.WelnessPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Assert.AreEqual(price.FirstHourPrice, 0);
             Assert.AreEqual(price.NightHourCount, 0);
@@ -67,7 +67,7 @@ namespace VipServices2020.Tests.DomainLayer.PriceCalculatorTests
             TimeSpan totalHours = endTime - startTime;
             double discountPercentage = 5;
 
-            Price price = PriceCalculator.FixedHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
+            Price price = PriceCalculator.WelnessPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Assert.AreEqual(price.FirstHourPrice, 0);
             Assert.AreEqual(price.NightHourCount, 0);
@@ -91,7 +91,7 @@ namespace VipServices2020.Tests.DomainLayer.PriceCalculatorTests
             TimeSpan totalHours = endTime - startTime;
             double discountPercentage = 0;
 
-            Price price = PriceCalculator.FixedHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
+            Price price = PriceCalculator.WelnessPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Assert.AreEqual(price.FirstHourPrice, 0);
             Assert.AreEqual(price.NightHourCount, 0);
@@ -115,7 +115,7 @@ namespace VipServices2020.Tests.DomainLayer.PriceCalculatorTests
             TimeSpan totalHours = endTime - startTime;
             double discountPercentage = 15;
 
-            Price price = PriceCalculator.FixedHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
+            Price price = PriceCalculator.WelnessPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Assert.AreEqual(price.FirstHourPrice, 0);
             Assert.AreEqual(price.NightHourCount, 0);

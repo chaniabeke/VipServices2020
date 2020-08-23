@@ -155,7 +155,7 @@ namespace VipServices2020.Domain
             if (!limousines.Contains(limousine)) throw new DomainException("Limousine is niet beschikbaar.");
 
             double discountPercentage = CalculateStaffel(customer);
-            Price price = PriceCalculator.FixedHourPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
+            Price price = PriceCalculator.WelnessPriceCalculator(limousine, totalHours, startTime, endTime, discountPercentage);
 
             Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Wellness, startTime, endTime, totalHours, limousine, price);
@@ -179,8 +179,8 @@ namespace VipServices2020.Domain
             if (!limousines.Contains(limousine)) throw new DomainException("Limousine is niet beschikbaar.");
 
             double discountPercentage = CalculateStaffel(customer);
-            Price price = PriceCalculator.FixedPriceWithDetailsPriceCalculator
-                (limousine, totalHours, startTime, endTime, discountPercentage, ArrangementType.NightLife);
+            Price price = PriceCalculator.NightlifePriceCalculator
+                (limousine, totalHours, startTime, endTime, discountPercentage);
 
             Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.NightLife, startTime, endTime, totalHours, limousine, price);
@@ -203,8 +203,8 @@ namespace VipServices2020.Domain
             if (!limousines.Contains(limousine)) throw new DomainException("Limousine is niet beschikbaar.");
 
             double discountPercentage = CalculateStaffel(customer);
-            Price price = PriceCalculator.FixedPriceWithDetailsPriceCalculator
-                (limousine, totalHours, startTime, endTime, discountPercentage, ArrangementType.Wedding);
+            Price price = PriceCalculator.WeddingPriceCalculator
+                (limousine, totalHours, startTime, endTime, discountPercentage);
 
             Reservation reservation = new Reservation(customer, DateTime.Now, limousineExpectedAddress, startLocation, arrivalLocation,
                 ArrangementType.Wedding, startTime, endTime, totalHours, limousine, price);

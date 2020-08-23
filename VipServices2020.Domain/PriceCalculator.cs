@@ -13,7 +13,7 @@ namespace VipServices2020.Domain
         /// <summary>
         /// Deze method berekent de netto prijs voor de arrangement die per uur moeten berekent worden. (Airport & Bussines)
         /// </summary>
-        public static Price PerHourPriceCalculator(Limousine limousine, TimeSpan totalHours,  
+        public static Price PerHourPriceCalculator(Limousine limousine, TimeSpan totalHours,
             DateTime startTime, DateTime endTime, double discountPercentage)
         {
             Price price = new Price();
@@ -28,10 +28,10 @@ namespace VipServices2020.Domain
             //Bereken het aantal nachturen
             price.NightHourCount = CalculateNightHours(totalHours, startTimeMinusStartHour, endTime);
             //Bereken op basis van het aantal nachturen, de nacht prijs in totaal, afgerond op 5
-            price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) 
+            price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0)
                 * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
-            if ((totalHours.Hours - price.NightHourCount) > 0) 
+            if ((totalHours.Hours - price.NightHourCount) > 0)
             {
                 //Bereken het aantal tweede uren minus het aantal nacht uren
                 price.SecondHourCount = totalHours.Hours - price.NightHourCount;
@@ -39,7 +39,7 @@ namespace VipServices2020.Domain
                 price.SecondHourPrice = Math.Round(((double)(price.SecondHourPercentage / 100.0)
                     * ((double)price.SecondHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
             }
-            
+
             //Bereken de subtotaalprijs op basis van de vorige bedragen
             price.SubTotal = price.FirstHourPrice + price.SecondHourPrice + price.NightHourPrice;
 
@@ -56,23 +56,16 @@ namespace VipServices2020.Domain
         /// <summary>
         /// Deze method berekent de netto prijs voor het Wedding arrangement
         /// </summary>
-        public static Price FixedPriceWithDetailsPriceCalculator(Limousine limousine, TimeSpan totalHours, 
-            DateTime startTime, DateTime endTime, double discountPercentage, ArrangementType arrangement)
+        public static Price WeddingPriceCalculator(Limousine limousine, TimeSpan totalHours,
+            DateTime startTime, DateTime endTime, double discountPercentage)
         {
             Price price = new Price();
-            //Wedding en Nightlife is minstens 7uur en heeft een vaste prijs, stel de vaste prijs in voor de gekozen limo
-            if(arrangement == ArrangementType.NightLife)
-            {
-                price.FixedPrice = limousine.NightLifePrice;
-            }
-            if (arrangement == ArrangementType.Wedding)
-            {
-                price.FixedPrice = limousine.WeddingPrice;
-            }
+            //Wedding is minstens 7uur en heeft een vaste prijs, stel de vaste prijs in voor de gekozen limo
+            price.FixedPrice = limousine.WeddingPrice;
 
             //Indien het totale uur groter is dan 7, stel de eerste uur prijs in
             if (totalHours.Hours > 7)
-            { 
+            {
                 price.FirstHourPrice = limousine.FirstHourPrice;
                 //Indien het totale uur groter is dan 8, bereken de nachtprijs en de overuren
                 if (totalHours.Hours > 8)
@@ -85,7 +78,7 @@ namespace VipServices2020.Domain
                     //Bereken het aantal nachturen
                     price.NightHourCount = CalculateNightHours(totalHours, startTimeMinusStartHour, endTime);
                     //Bereken op basis van het aantal nachturen, de nacht prijs in totaal, afgerond op 5
-                    price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0) 
+                    price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0)
                         * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
 
                     if ((totalHours.Hours - price.NightHourCount) > 0)
@@ -96,7 +89,7 @@ namespace VipServices2020.Domain
                         price.OvertimePrice = Math.Round(((double)(price.SecondHourPercentage / 100.0)
                             * ((double)price.OvertimeCount * (double)limousine.FirstHourPrice)) / 5) * 5;
                     }
-                    
+
                     //Stel totaaluur terug correct in
                     totalHours = totalHours + eightHours;
                 }
@@ -113,9 +106,40 @@ namespace VipServices2020.Domain
             return price;
         }
         /// <summary>
+        /// Deze method berekent de netto prijs voor het NightLife arrangement
+        /// </summary>
+        public static Price NightlifePriceCalculator(Limousine limousine, TimeSpan totalHours,
+            DateTime startTime, DateTime endTime, double discountPercentage)
+        {
+            Price price = new Price();
+            //NightLife is minstens 7uur en heeft een vaste prijs, stel de vaste prijs in voor de gekozen limo
+            price.FixedPrice = limousine.NightLifePrice;
+
+            //Indien het totale uur groter is dan 7, bereken het aantal overuren = nachturen
+            if (totalHours.Hours > 7)
+            {
+                //Bereken de overige uren als nachturen
+                TimeSpan sevenHours = new TimeSpan(7, 0, 0);
+                price.NightHourCount = totalHours.Hours - sevenHours.Hours;
+
+                //Bereken op basis van het aantal nachturen, de nacht prijs in totaal, afgerond op 5
+                price.NightHourPrice = Math.Round(((double)(price.NightHourPercentage / 100.0)
+                    * ((double)price.NightHourCount * (double)limousine.FirstHourPrice)) / 5) * 5;
+            }
+            //Bereken de subtotaalprijs op basis van de vorige bedragen
+            price.SubTotal = price.FixedPrice + price.NightHourPrice;
+
+            //Stel de staffelkorting in
+            price.StaffelDiscount = discountPercentage;
+            //Bereken de totaalprijs in een algemene method
+            TotalPriceCalculator(price);
+
+            return price;
+        }
+        /// <summary>
         /// Deze method berekent de netto prijs voor het Welness arrangement
         /// </summary>
-        public static Price FixedHourPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime, 
+        public static Price WelnessPriceCalculator(Limousine limousine, TimeSpan totalHours, DateTime startTime,
             DateTime endTime, double discountPercentage)
         {
             Price price = new Price();
@@ -162,9 +186,9 @@ namespace VipServices2020.Domain
         /// <summary>
         /// Deze method berekent het aantal nachturen 
         /// </summary>
-        private static int CalculateNightHours(TimeSpan totalHours, DateTime startTime, DateTime endTime )
+        private static int CalculateNightHours(TimeSpan totalHours, DateTime startTime, DateTime endTime)
         {
-           int nightHour = 0;
+            int nightHour = 0;
             DateTime NightStart = new DateTime(endTime.Year, endTime.Month, endTime.Day, 22, 0, 0);
             DateTime NightEnd = new DateTime(endTime.Year, endTime.Month, endTime.Day, 6, 59, 59);
             DateTime dateTime = startTime;

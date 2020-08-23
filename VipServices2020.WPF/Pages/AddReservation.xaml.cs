@@ -172,17 +172,17 @@ namespace VipServices2020.WPF
 
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.NightLife))
                 {
-                    price = PriceCalculator.FixedPriceWithDetailsPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
-                         startDate, endDate, discountPercentage, ArrangementType.NightLife);
+                    price = PriceCalculator.NightlifePriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                         startDate, endDate, discountPercentage);
                 }
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wedding))
                 {
-                    price = PriceCalculator.FixedPriceWithDetailsPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
-                      startDate, endDate, discountPercentage, ArrangementType.Wedding);
+                    price = PriceCalculator.WeddingPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                      startDate, endDate, discountPercentage);
                 }
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.Wellness))
                 {
-                    price = PriceCalculator.FixedHourPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
+                    price = PriceCalculator.WelnessPriceCalculator((Limousine)cmbLimousine.SelectedItem, totalHours,
                       startDate, endDate, discountPercentage);
                 }
                 if (cmbArrangement.SelectedItem.Equals(ArrangementType.Business))
