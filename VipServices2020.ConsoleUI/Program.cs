@@ -39,6 +39,33 @@ namespace VipServices2020.ConsoleUI
             //vipServicesManger.AddStaffel(staffel7);
             //vipServicesManger.AddStaffel(staffel8);
 
+            //LimousineRepository limousineRepo = new LimousineRepository(new VipServicesContext("Production"));
+
+            //Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
+            //Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
+            //Customer customer = new Customer("Jan", "", addressCustomer, CategoryType.particulier);
+            //Location locationStart = new Location("Gent");
+            //Location locationArrival = new Location("Brussel");
+            //DateTime startTime = new DateTime(2020, 09, 22, 20, 0, 0);
+            //DateTime endTime = new DateTime(2020, 09, 23, 3, 0, 0);
+
+            //Limousine limousineChrysler = limousineRepo.Find(1);
+
+            ////Eerste reservatie limousine beschikbaar
+            //vipServicesManger.AddBusinessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+            //     new DateTime(2020, 12, 22, 8, 0, 0), new DateTime(2020, 12, 22, 10, 0, 0), limousineChrysler);
+
+            //// 6 uur ervoor
+            //vipServicesManger.AddBusinessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+            //     new DateTime(2020, 12, 22, 0, 0, 0), new DateTime(2020, 12, 22, 2, 0, 0), limousineChrysler);
+
+            //// 6 uur erna
+            //vipServicesManger.AddBusinessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+            //     new DateTime(2020, 12, 22, 16, 0, 0), new DateTime(2020, 12, 22, 18, 0, 0), limousineChrysler);
+
+            //List<Limousine> limousines = vipServicesManger.GetAllAvailableLimousines(startTime, endTime, ArrangementType.NightLife);
+            //Console.WriteLine(limousines.Count);
+
             Console.WriteLine("Einde Databank");
         }
     }

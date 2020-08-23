@@ -61,53 +61,78 @@ namespace VipServices2020.Tests.DomainLayer.Manager
         [TestMethod]
         public void GetAllAvailableLimousines_AvailableLimousine_ShouldWork()
         {
-            Assert.Fail();
+            VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
+            VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
+
+            Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
+            Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
+            Customer customer = new Customer("Jan", "", addressCustomer, CategoryType.particulier);
+            Location locationStart = new Location("Gent");
+            Location locationArrival = new Location("Brussel");
+
+            m.AddLimousine("Chrysler", "300C Limousine", "White", 175, 800, 500, 1000);
+            Limousine limousineChrysler = limousineRepo.Find(1);
+
+            // 6 uur ervoor
+            m.AddBusinessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+                 new DateTime(2020, 09, 22, 0, 0, 0), new DateTime(2020, 09, 22, 2, 0, 0), limousineChrysler);
+
+            // 6 uur erna
+            m.AddBusinessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+                 new DateTime(2020, 09, 22, 16, 0, 0), new DateTime(2020, 09, 22, 18, 0, 0), limousineChrysler);
+
+            List<Limousine> limousines = m.GetAllAvailableLimousines(new DateTime(2020, 09, 22, 8, 0, 0), 
+                new DateTime(2020, 09, 22, 10, 0, 0), ArrangementType.NightLife);
+
+            Assert.AreEqual(1, contextTest.Limousines.Local.Count);
+            Assert.AreEqual(2, contextTest.Reservations.Local.Count);
+            Assert.AreEqual(limousines.Count, 1);
+
         }
         [TestMethod]
-        public void GetAllAvailableLimousines_ArrangementNotAvailable_ShouldNotShow() 
-        { 
-            Assert.Fail(); 
-        }
-        [TestMethod]
-        public void GetAllAvailableLimousines_LimousineNotAvailable_ShouldNotShow() 
+        public void GetAllAvailableLimousines_ArrangementNotAvailable_ShouldNotShow()
         {
-            Assert.Fail();
+            VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
+            VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
+
+            DateTime startTime = new DateTime(2020, 09, 22, 20, 0, 0);
+            DateTime endTime = new DateTime(2020, 09, 23, 3, 0, 0);
+
+            m.AddLimousine("Lincoln", "Limousine", "Pink", 180, 0, 850, 1000);
+
+            List<Limousine> limousines = m.GetAllAvailableLimousines(startTime, endTime, ArrangementType.NightLife);
+
+            Assert.AreEqual(1, contextTest.Limousines.Local.Count);
+            Assert.AreEqual(limousines.Count, 0);
         }
+        [TestMethod]
+        public void GetAllAvailableLimousines_LimousineNotAvailable_ShouldNotShow()
+        {
+            VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
+            VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
 
-        //[TestMethod]
-        //public void GetAllAvailableLimousines_ShouldWork()
-        //{
-        //    VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
-        //    VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
-        //    LimousineRepository limousineRepo = new LimousineRepository(contextTest);
+            Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
+            Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
+            Customer customer = new Customer("Jan", "", addressCustomer, CategoryType.particulier);
+            Location locationStart = new Location("Gent");
+            Location locationArrival = new Location("Brussel");
+            DateTime startTime = new DateTime(2020, 09, 22, 20, 0, 0);
+            DateTime endTime = new DateTime(2020, 09, 23, 3, 0, 0);
 
-        //    Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
-        //    Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
-        //    Customer customer = new Customer("Jan", "", addressCustomer, CategoryType.particulier);
-        //    Location locationStart = new Location("Gent");
-        //    Location locationArrival = new Location("Brussel");
-        //    DateTime startTime = new DateTime(2020, 09, 22, 20, 0, 0);
-        //    DateTime endTime = new DateTime(2020, 09, 23, 3, 0, 0);
+            //Niet beschikbaar - al gereserveerd
+            m.AddLimousine("Chrysler", "300C Limousine", "White", 175, 800, 500, 1000);
+            Limousine limousineChrysler = limousineRepo.Find(1);
+            m.AddNightLifeReservation(customer, limousineExceptedAddress, locationStart, locationArrival, startTime,
+               endTime, limousineChrysler);
 
-        //    //Niet beschikbaar - al gereserveerd
-        //    m.AddLimousine("Chrysler", "300C Limousine", "White", 175, 800, 500, 1000);
-        //    Limousine limousineChrysler = limousineRepo.Find(1);
-        //    m.AddNightLifeReservation(customer, limousineExceptedAddress, locationStart, locationArrival, startTime,
-        //       endTime, limousineChrysler);
+            List<Limousine> limousines = m.GetAllAvailableLimousines(startTime, endTime, ArrangementType.NightLife);
 
-        //    //Niet beschikbaar - nightlifeprice 0
-        //    m.AddLimousine("Lincoln", "Limousine", "Pink", 180, 0, 850, 1000);
-
-        //    //Beschikbaar
-        //    m.AddLimousine("Tesla", "Model S", "White", 500, 1000, 2000, 2200);
-        //    Limousine limousineTesla = limousineRepo.Find(3);
-
-        //    List<Limousine> limousines = m.GetAllAvailableLimousines(startTime, endTime, ArrangementType.NightLife);
-
-        //    Assert.AreEqual(3, contextTest.Limousines.Local.Count);
-        //    Assert.AreEqual(1, contextTest.Reservations.Local.Count);
-        //    Assert.AreEqual(limousines.Count, 1);
-        //    Assert.AreEqual(limousines.First(), limousineTesla);
-        //}
+            Assert.AreEqual(1, contextTest.Limousines.Local.Count);
+            Assert.AreEqual(1, contextTest.Reservations.Local.Count);
+            Assert.AreEqual(limousines.Count, 0);
+        }
     }
 }

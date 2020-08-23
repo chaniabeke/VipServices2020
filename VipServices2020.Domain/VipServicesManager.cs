@@ -87,7 +87,7 @@ namespace VipServices2020.Domain
             {
                 /*Indien het einduur van de reservatie plus 6 uur groter is dan het gekozen startuur 
                 of indien het startuur van de reservatie groter is dan het gekozen einduur */
-                if (r.EndTime.AddHours(6) > startTime || r.StartTime > endTime)
+                if (startTime < r.EndTime.AddHours(6) && r.StartTime < endTime)
                 {
                     //Voeg limo toe aan de lijst van niet beschikbare limousines
                     notAvailableLimousines.Add(r.Limousine);

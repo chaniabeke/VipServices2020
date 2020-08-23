@@ -65,7 +65,39 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests
         [TestMethod]
         public void GetAllReservations_ShouldWork()
         {
-            Assert.Fail();
+            VipServicesContextTest contextTest = new VipServicesContextTest(keepExistingDB: false);
+            VipServicesManager m = new VipServicesManager(new UnitOfWork(contextTest));
+            LimousineRepository limousineRepo = new LimousineRepository(contextTest);
+
+            Address addressCustomer = new Address("Groenlaan", "17", "Herzele");
+            Address limousineExceptedAddress = new Address("Nieuwstraat", "5B", "Brussel");
+            Customer customer = new Customer("Jan", "", addressCustomer, CategoryType.particulier);
+            Location locationStart = new Location("Gent");
+            Location locationArrival = new Location("Brussel");
+            DateTime startTime = new DateTime(2020, 09, 22, 8, 0, 0);
+            DateTime endTime = new DateTime(2020, 09, 22, 18, 0, 0);
+            TimeSpan totalHours = endTime - startTime;
+
+            m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
+
+            Limousine limousine1 = limousineRepo.Find(1);
+            m.AddWeddingReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+               startTime, endTime, limousine1);
+            Limousine limousine2 = limousineRepo.Find(1);
+            m.AddBusinessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+             new DateTime(2020, 09, 09, 1, 0, 0), new DateTime(2020, 09, 09, 9, 0, 0), limousine2);
+            Limousine limousine3 = limousineRepo.Find(1);
+            m.AddBusinessReservation(customer, limousineExceptedAddress, locationStart, locationArrival,
+           new DateTime(2020, 09, 30, 1, 0, 0), new DateTime(2020, 09, 30, 9, 0, 0), limousine3);
+
+            Action act = () =>
+            {
+                m.GetAllReservations();
+            };
+
+            act.Should().NotThrow<Exception>();
+            Assert.AreEqual(3, contextTest.Reservations.Local.Count);
+            Assert.AreEqual(m.GetAllReservations().Count, 3);
         }
         [TestMethod]
         public void GetAllReservations_CustomerId_ShouldWork()
