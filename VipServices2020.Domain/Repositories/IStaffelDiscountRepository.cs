@@ -9,6 +9,7 @@ namespace VipServices2020.Domain.Repositories
     {
         void AddStaffel(StaffelDiscount staffelDiscount);
         StaffelDiscount FindSmallestReservationCount(CategoryType category);
+        StaffelDiscount FindBiggestReservationCount(CategoryType category);
         IEnumerable<StaffelDiscount> FindAll(CategoryType category);
     }
 }

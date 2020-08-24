@@ -76,7 +76,6 @@ namespace VipServices2020.Tests.DomainLayer.Manager.ReservationTests
             Location locationArrival = new Location("Brussel");
             DateTime startTime = new DateTime(2020, 09, 22, 8, 0, 0);
             DateTime endTime = new DateTime(2020, 09, 22, 18, 0, 0);
-            TimeSpan totalHours = endTime - startTime;
 
             m.AddLimousine("Tesla", "Model X", "White", 600, 1500, 2500, 2700);
 

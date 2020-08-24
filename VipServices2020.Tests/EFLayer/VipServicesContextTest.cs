@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VipServices2020.EF;
 
 namespace VipServices2020.Tests.EFLayer
@@ -21,4 +22,3 @@ namespace VipServices2020.Tests.EFLayer
         }
     }
 }
-

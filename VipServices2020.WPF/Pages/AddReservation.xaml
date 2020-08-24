@@ -83,16 +83,16 @@
             <Button x:Name="btnPrice" Click="btnPrice_Click" Width="200" Height="25" Margin="0 20 0 0">Bereken prijs</Button>
             
             <StackPanel Orientation="Vertical" x:Name="stpPrice" Background="LightGray" Margin="0 20 0 0">
-                <TextBlock x:Name="txtPrice" Margin="5 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Prijs</TextBlock>
+                <TextBlock x:Name="txtPrice" Margin="15 15 0 5" FontWeight="DemiBold" TextDecorations="Underline">Prijs</TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <TextBlock Margin="5 0 5 0">Eerste uur:</TextBlock>
+                    <TextBlock Margin="15 0 5 0">Eerste uur:</TextBlock>
                     <TextBlock x:Name="txtFirstHourPrice"></TextBlock>
                     <TextBlock Margin="25 0 5 0">Tweede uur:</TextBlock>
                     <TextBlock x:Name="txtSecondHourCount"></TextBlock>
                     <TextBlock x:Name="txtSecondHourPrice"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
-                    <TextBlock Margin="5 0 5 0">Nacht uur:</TextBlock>
+                    <TextBlock Margin="15 0 5 0">Nacht uur:</TextBlock>
                     <TextBlock x:Name="txtNightHourCount"></TextBlock>
                     <TextBlock x:Name="txtNightHourPrice"></TextBlock>
                     <TextBlock Margin="25 0 5 0">Overuur:</TextBlock>
@@ -100,28 +100,28 @@
                     <TextBlock x:Name="txtOvertimePrice"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
-                    <TextBlock Margin="5 0 5 0">Vaste prijs:</TextBlock>
+                    <TextBlock Margin="15 0 5 0">Vaste prijs:</TextBlock>
                     <TextBlock x:Name="txtFixedPrice"></TextBlock>
+                    <TextBlock Margin="25 0 5 0">Subtotaal:</TextBlock>
+                    <TextBlock x:Name="txtSubTotal"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
-                    <TextBlock Margin="5 0 5 0">Subtotaal:</TextBlock>
-                    <TextBlock x:Name="txtSubTotal"></TextBlock>
-                    <TextBlock Margin="25 0 5 0">Staffelkorting:</TextBlock>
+                    <TextBlock Margin="15 0 5 0">Staffelkorting:</TextBlock>
                     <TextBlock x:Name="txtStaffelDiscount"></TextBlock>
+                    <TextBlock Margin="25 0 5 0">Prijs zonder btw:</TextBlock>
+                    <TextBlock x:Name="txtExclusiveBtw"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="5 0 5 0">Prijs zonder btw:</TextBlock>
-                    <TextBlock x:Name="txtExclusiveBtw"></TextBlock>
                     <TextBlock Margin="15 0 5 0">Btw:</TextBlock>
                     <TextBlock x:Name="txtBtw"></TextBlock>
-                    <TextBlock Margin="15 0 5 0">Btw-bedrag:</TextBlock>
+                    <TextBlock Margin="25 0 5 0">Btw-bedrag:</TextBlock>
                     <TextBlock x:Name="txtBtwPrice"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                    <TextBlock Margin="5 0 5 0" Foreground="HotPink">Totaalprijs:</TextBlock>
-                    <TextBlock x:Name="txtTotal" Foreground="HotPink"></TextBlock>
+                    <TextBlock Margin="5 0 5 0" Foreground="DarkRed">Totaalprijs:</TextBlock>
+                    <TextBlock x:Name="txtTotal" Foreground="DarkRed"></TextBlock>
                 </StackPanel>
-                <Button x:Name="btnReservation" Click="btnReservation_Click" Background="HotPink"  Width="200" Height="25" Margin="0 0 0 20">Toevoegen</Button>
+                <Button x:Name="btnReservation" Click="btnReservation_Click" Background="DarkRed" Foreground="White"  Width="200" Height="25" Margin="0 0 0 20">Toevoegen</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

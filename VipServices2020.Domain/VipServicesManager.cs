@@ -126,12 +126,23 @@ namespace VipServices2020.Domain
                 {
                     //Vind Het kleinste nummer van "NumberOfBookedReservations"
                     int smallestStaffelCount = uow.StaffelDiscounts.FindSmallestReservationCount(category).NumberOfBookedReservations;
+                    //Vind Het grootste nummer van "NumberOfBookedReservations"
+                    int biggestStaffelCount = uow.StaffelDiscounts.FindBiggestReservationCount(category).NumberOfBookedReservations;
+                    //Indien het aantal reserveringen van de klant gelijk of groter is dan de grootste nummer van "NumberOfBookedReservations"
+                    if (reservationCount >= biggestStaffelCount)
+                    {
+                        //Zoek de staffelkorting waar "NumberOfBookedReservations" gelijk is aan "biggestStaffelCount"
+                        staffelDiscount = uow.StaffelDiscounts.FindAll(category)
+                       .Where(s => s.NumberOfBookedReservations == biggestStaffelCount)
+                       .FirstOrDefault().DiscountPercentage;
+                        return staffelDiscount;
+                    }
                     //Indien het aantal reserveringen van de klant gelijk of groter is dan de kleinste nummer van "NumberOfBookedReservations"
                     if (reservationCount >= smallestStaffelCount)
                     {
                         //Zoek de staffelkortingpercentage die het dichtste bij het aantal reservering valt
                         staffelDiscount = uow.StaffelDiscounts.FindAll(category)
-                        .Where(s => reservationCount >= s.NumberOfBookedReservations)
+                        .Where(s => s.NumberOfBookedReservations >= reservationCount)
                         .FirstOrDefault().DiscountPercentage;
                         return staffelDiscount;
                     }

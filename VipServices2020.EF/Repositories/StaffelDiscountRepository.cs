@@ -24,6 +24,10 @@ namespace VipServices2020.EF.Repositories
         {
             return context.StaffelDiscounts.Where(s => s.Category == category).OrderBy(s => s.NumberOfBookedReservations).FirstOrDefault();
         }
+        public StaffelDiscount FindBiggestReservationCount(CategoryType category)
+        {
+            return context.StaffelDiscounts.Where(s => s.Category == category).OrderByDescending(s => s.NumberOfBookedReservations).FirstOrDefault();
+        }
         public IEnumerable<StaffelDiscount> FindAll(CategoryType category)
         {
             return context.StaffelDiscounts.Where(s => s.Category == category).AsEnumerable<StaffelDiscount>();
