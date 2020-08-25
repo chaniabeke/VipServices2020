@@ -10,7 +10,7 @@ using VipServices2020.EF;
 namespace VipServices2020.EF.Migrations
 {
     [DbContext(typeof(VipServicesContext))]
-    [Migration("20200822124927_initCreate")]
+    [Migration("20200825133041_initCreate")]
     partial class initCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

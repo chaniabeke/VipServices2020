@@ -118,6 +118,8 @@
     <Compile Remove="Migrations\20200814142904_initcreate.Designer.cs" />
     <Compile Remove="Migrations\20200822124656_initCreate.cs" />
     <Compile Remove="Migrations\20200822124656_initCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200822124927_initCreate.cs" />
+    <Compile Remove="Migrations\20200822124927_initCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
