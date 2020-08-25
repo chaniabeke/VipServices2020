@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VipServices2020.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="800">
+        Title="VipServices2020" Height="650" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top" FontSize="15">
             <MenuItem Header="Reserveringen" Margin="5">

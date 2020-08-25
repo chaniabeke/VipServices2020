@@ -11,7 +11,7 @@ namespace VipServices2020.Domain
     public static class PriceCalculator
     {
         /// <summary>
-        /// Deze method berekent de netto prijs voor de arrangement die per uur moeten berekent worden. (Airport & Bussines)
+        /// Deze method berekent de netto prijs voor de arrangementen die per uur moeten berekent worden. (Airport & Bussines)
         /// </summary>
         public static Price PerHourPriceCalculator(Limousine limousine, TimeSpan totalHours,
             DateTime startTime, DateTime endTime, double discountPercentage)
